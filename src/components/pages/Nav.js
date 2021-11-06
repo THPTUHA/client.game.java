@@ -7,11 +7,14 @@ import { UserContext } from "../../context/UserProvider";
 import Logout from "../authorization/Logout";
 import Game from "../game/Game";
 import GameXO from "../game/xo/GameXO";
+import Test from "../Test";
+
 export default function Nav(){
     const {user} = useContext(UserContext);
     console.log(user);
     return (
         <div>
+            <Test/>
             <div>
                 <Link to="/">Home</Link>
             </div>
