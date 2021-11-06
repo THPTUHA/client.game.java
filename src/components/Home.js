@@ -1,5 +1,5 @@
-export default function Home(){
-    return (
-        <h1>Home</h1>
-    )
+import Header from "./header/Header";
+
+export default function Home() {
+  return <Header />;
 }
