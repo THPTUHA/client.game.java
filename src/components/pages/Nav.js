@@ -9,10 +9,11 @@ import Game from "../game/Game";
 import GameXO from "../game/xo/GameXO";
 import NavBar from "../navbar/NavBar";
 import News from "../news/News";
+import Account from "../account/Account";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
-  // console.log(user);
+  console.log(user);
   return (
     <div>
       <NavBar />
@@ -49,6 +50,7 @@ export default function Nav() {
           <Switch>
             <Route path="/gameplay" component={Game}></Route>
             <Route path="/logout" component={Logout}></Route>
+            <Route path="/account" component={Account}></Route>
           </Switch>
         )}
       </Switch>
