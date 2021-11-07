@@ -1,7 +1,7 @@
 import { Link, Route, Switch } from "react-router-dom";
 import React, { useContext } from "react";
 import Register from "../authorization/Register";
-import Home from "../Home";
+import Home from "../home/Home";
 import Login from "../authorization/Login";
 import { UserContext } from "../../context/UserProvider";
 import Logout from "../authorization/Logout";
@@ -10,6 +10,7 @@ import GameXO from "../game/xo/GameXO";
 import NavBar from "../navbar/NavBar";
 import News from "../news/News";
 import Account from "../account/Account";
+import ListNews from "../news/ListNews";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
@@ -41,6 +42,7 @@ export default function Nav() {
 
       <Switch>
         <Route exact path="/" component={Home}></Route>
+        <Route path="/news" component={ListNews}></Route>
         {!user ? (
           <Switch>
             <Route path="/login" children={<Login />}></Route>

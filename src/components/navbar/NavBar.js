@@ -38,7 +38,7 @@ export default function NavBar() {
                 <Link to="/">Trang chủ</Link>
               </li>
               <li class="d-flex align-items-center">
-                <a href="/news/">Tin tức</a>
+                <Link to="/news">Tin tức</Link>
               </li>
             </ul>
           </div>
