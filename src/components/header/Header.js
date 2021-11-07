@@ -15,12 +15,13 @@ export default function Header() {
               <img class="header__img" src={headerImg} alt="" />
             </div>
           </div>
-          <div class="header__btn myBtn">
-            <i class="fas fa-gamepad"></i>
-            <Link to={!user ? "login" : "/gameplay"} class="">
+
+          <Link to={!user ? "login" : "/gameplay"} class="">
+            <div class="header__btn myBtn">
+              <i class="fas fa-gamepad"></i>
               Chơi ngay
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

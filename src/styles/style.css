@@ -56,9 +56,6 @@ body {
   /* background-color: #3e3e3f; */
   /* color: white; */
 }
-a {
-  color: white;
-}
 .padding-0 {
   padding-right: 0rem;
   padding-left: 0rem;
@@ -213,4 +210,88 @@ input:focus {
 
 .header__img {
   width: 50%;
+}
+
+/* game */
+.o {
+  border: 3px solid white;
+  width: 8rem;
+  height: 8rem;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+.o p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  margin: 0;
+  font-size: 5rem;
+}
+.grid {
+  display: grid;
+  place-items: center;
+}
+.game {
+  background-image: linear-gradient(
+      45deg,
+      rgba(2, 33, 64, 0.8) 55%,
+      rgba(45, 95, 93, 0.85)
+    ),
+    url("../assets/img/bg.jpg");
+
+  height: 700px;
+  background-size: cover;
+  color: white;
+}
+
+/* blog */
+.blogs {
+  width: 100%;
+}
+.blogs .sessionTitle {
+  font-weight: 800;
+  font-size: 1.8rem;
+  text-align: center;
+}
+.blog .title {
+  font-weight: 800;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+.blog .summary,
+.blog .author,
+.blog .date,
+.blog i {
+  color: #777777;
+}
+.blog .author,
+.blog .date {
+  font-weight: 600;
+}
+.blog i {
+  margin-right: 0.6rem;
+}
+.blog img {
+  width: 100%;
+}
+.blog .title:hover {
+  color: #ffba00;
+}
+.blog .author,
+.blog .date {
+  margin: 0;
+}
+.blog i {
+  color: #ffba00;
+}
+.smallBlog .title {
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: unset;
+}
+.smallBlogs .sessionTitle {
+  font-weight: 500;
 }

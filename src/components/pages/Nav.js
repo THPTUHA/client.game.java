@@ -8,6 +8,7 @@ import Logout from "../authorization/Logout";
 import Game from "../game/Game";
 import GameXO from "../game/xo/GameXO";
 import NavBar from "../navbar/NavBar";
+import News from "../news/News";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
