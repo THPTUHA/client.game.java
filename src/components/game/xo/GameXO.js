@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
-
+import { Redirect } from "react-router-dom";
 let stompClient;
 let id_game = 1;
 let ans;
@@ -119,6 +119,9 @@ function GameXO({ user }) {
       console.log(err);
     }
   };
+  // const { user } = useContext(UserContext);
+  // console.log(user);
+  // if (!user) return <Redirect to="/login" />;
   return (
     <div className="">
       <div class="row">

@@ -49,8 +49,39 @@ export default function Register() {
     } else setRWarning("");
     return true;
   };
+  const checkFirstName = () => {
+    if (firstName === "") {
+      setFWarning("*Bắt buộc");
+      return false;
+    }
+    setFWarning("");
+    return true;
+  };
+  const checkLastName = () => {
+    if (lastName === "") {
+      setLWarning("*Bắt buộc");
+      return false;
+    }
+    setLWarning("");
+    return true;
+  };
+  const checkPassword = () => {
+    if (password === "") {
+      setPWarning("*Bắt buộc");
+      return false;
+    }
+    setPWarning("");
+    return true;
+  };
   const submit = async () => {
-    if (!checkEmail(email) && !checkRePassword(rePassword)) return;
+    if (
+      !checkEmail(email) &&
+      !checkRePassword(rePassword) &&
+      !checkFirstName() &&
+      !checkPassword() &&
+      !checkLastName()
+    )
+      return;
     const data = {
       email: email,
       password: password,
@@ -95,25 +126,38 @@ export default function Register() {
                     setEmail(e.target.value);
                   }}
                 />
-                <br />
+
                 <p className="text-danger">{eWarning}</p>
-                <input
+                <StyledInput
+                  theme={{
+                    main: fWarning !== "" ? "red" : "gray",
+                    bg: fWarning !== "" ? "#F9ADA0" : "white",
+                  }}
                   className="mb-3"
                   type="text"
                   placeholder="Nhập tên"
                   onChange={(e) => {
                     setFirstName(e.target.value);
                   }}
+                  onBlur={() => checkFirstName()}
                 />
-                <br />
-                <input
+                <p className="text-danger">{fWarning}</p>
+
+                <StyledInput
+                  theme={{
+                    main: lWarning !== "" ? "red" : "gray",
+                    bg: lWarning !== "" ? "#F9ADA0" : "white",
+                  }}
                   className="mb-3"
                   type="text"
                   placeholder="Nhập họ"
                   onChange={(e) => {
                     setLastName(e.target.value);
                   }}
+                  onBlur={() => checkLastName()}
                 />
+                <p className="text-danger">{lWarning}</p>
+
                 <div
                   onChange={(e) => {
                     if (e.target.defaultValue === "nam") {
@@ -153,15 +197,21 @@ export default function Register() {
                   </div>
                 </div>
 
-                <input
+                <StyledInput
+                  theme={{
+                    main: pWarning !== "" ? "red" : "gray",
+                    bg: pWarning !== "" ? "#F9ADA0" : "white",
+                  }}
                   type="password"
                   className="mb-3"
                   placeholder="Nhập mật khẩu"
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
+                  onBlur={() => checkPassword()}
                 />
                 <br />
+                <p className="text-danger">{pWarning}</p>
 
                 <StyledInput
                   theme={{
@@ -179,7 +229,6 @@ export default function Register() {
                   }}
                 />
                 <p className="text-danger">{rWarning}</p>
-                <br />
                 <button
                   type="button"
                   className="Form__btn btn btn-warning"
