@@ -41,38 +41,40 @@ export default function Login() {
           style={{ position: "relative", height: "100vh" }}
           class="col-sm-12"
         >
-          <div class="form">
-            <form action="Login">
-              <p class="form__title">Đăng nhập</p>
-              <input
-                className="mb-3"
-                type="text"
-                placeholder="Enter your email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-              <br />
-              <input
-                type="password"
-                className="mb-3"
-                placeholder="Enter your password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-              <br />
-              <button
-                type="button"
-                className="Form__btn btn btn-warning"
-                onClick={submit}
-              >
-                Submit
-              </button>
-              <Link to="/register" class="form__signUp">
-                Tạo tài khoản
-              </Link>
-            </form>
+          <div style={{ height: "100vh" }} className="grid">
+            <div class="form">
+              <form action="Login">
+                <p class="form__title">Đăng nhập</p>
+                <input
+                  className="mb-3"
+                  type="text"
+                  placeholder="Enter your email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+                <br />
+                <input
+                  type="password"
+                  className="mb-3"
+                  placeholder="Enter your password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+                <br />
+                <button
+                  type="button"
+                  className="Form__btn btn btn-warning"
+                  onClick={submit}
+                >
+                  Submit
+                </button>
+                <Link to="/register" class="form__signUp">
+                  Tạo tài khoản
+                </Link>
+              </form>
+            </div>
           </div>
         </div>
       </div>

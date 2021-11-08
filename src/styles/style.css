@@ -1,8 +1,8 @@
 .form {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   width: 50%;
 }
 .form__title {
@@ -294,4 +294,24 @@ input:focus {
 }
 .smallBlogs .sessionTitle {
   font-weight: 500;
+}
+
+/* account */
+.accountAvatar {
+  border-radius: 50%;
+}
+.info {
+  width: 50%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.info .accountAvatar {
+  width: 100%;
+  text-align: center;
+}
+.info .name {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.3rem;
 }

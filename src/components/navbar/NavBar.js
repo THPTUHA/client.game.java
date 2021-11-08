@@ -38,7 +38,7 @@ export default function NavBar() {
                 <Link to="/">Trang chủ</Link>
               </li>
               <li class="d-flex align-items-center">
-                <a href="/news/">Tin tức</a>
+                <Link to="/news">Tin tức</Link>
               </li>
             </ul>
           </div>
@@ -51,7 +51,7 @@ export default function NavBar() {
                   <Link to="/login/">Đăng nhập</Link>
                 ) : (
                   <>
-                    <Link to="account">
+                    <Link to="/account">
                       <div style={{ marginRight: "2rem" }} class="bg">
                         <i class="far fa-user"></i>
                       </div>
