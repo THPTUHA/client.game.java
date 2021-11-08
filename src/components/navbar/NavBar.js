@@ -51,7 +51,7 @@ export default function NavBar() {
                   <Link to="/login/">Đăng nhập</Link>
                 ) : (
                   <>
-                    <Link to="account">
+                    <Link to="/account">
                       <div style={{ marginRight: "2rem" }} class="bg">
                         <i class="far fa-user"></i>
                       </div>

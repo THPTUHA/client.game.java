@@ -11,6 +11,7 @@ import NavBar from "../navbar/NavBar";
 import News from "../news/News";
 import Account from "../account/Account";
 import ListNews from "../news/ListNews";
+import GoToTop from "../GoToTop";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
@@ -56,6 +57,7 @@ export default function Nav() {
           </Switch>
         )}
       </Switch>
+      <GoToTop />
     </div>
   );
 }
