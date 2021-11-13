@@ -15,6 +15,9 @@
   .game {
     height: 62rem;
   }
+  .info {
+    width: 100%;
+  }
 }
 @media (min-width: 350px) and (max-width: 575.99px) {
   html {
@@ -32,6 +35,9 @@
   }
   .game {
     height: 61rem;
+  }
+  .info {
+    width: 100%;
   }
 }
 
@@ -55,6 +61,9 @@
   .game {
     height: 61rem;
   }
+  .info {
+    width: 100%;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -76,6 +85,9 @@
   }
   .game {
     height: 61rem;
+  }
+  .info {
+    width: 100%;
   }
 }
 

@@ -5,7 +5,7 @@ export default function Account() {
   const { user } = useContext(UserContext);
   console.log(user);
   return (
-    <div class="container-fluid">
+    <div class="container-fluid padding-2">
       {user && (
         <div class="row pt-3">
           <div class="col-sm-4">

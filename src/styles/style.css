@@ -61,7 +61,10 @@ body {
   padding-right: 0rem;
   padding-left: 0rem;
 }
-
+.padding-2 {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
 .myNavbar li {
   color: white;
   cursor: pointer;

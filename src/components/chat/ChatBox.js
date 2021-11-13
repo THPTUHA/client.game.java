@@ -5,7 +5,7 @@ export default function ChatBox() {
   return (
     <div className="chatBox mt-lg-4">
       <h3>Chat Box</h3>
-      <div className="content">
+      <div className="content mt-1 mb-2">
         <Message />
         <Message />
         <Message />
