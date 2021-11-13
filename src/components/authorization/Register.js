@@ -231,7 +231,7 @@ export default function Register() {
                 <p className="text-danger">{rWarning}</p>
                 <button
                   type="button"
-                  className="Form__btn btn btn-warning"
+                  className="Form__btn btn btn-warning shadow-none"
                   onClick={submit}
                 >
                   Submit

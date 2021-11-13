@@ -5,6 +5,7 @@
   transform: translate(-50%, -50%); */
   width: 50%;
 }
+
 .form__title {
   font-size: 2rem;
   font-weight: 900;
@@ -242,7 +243,7 @@ input:focus {
     ),
     url("../assets/img/bg.jpg");
 
-  height: 700px;
+  height: 100vh;
   background-size: cover;
   color: white;
 }
@@ -301,7 +302,7 @@ input:focus {
   border-radius: 50%;
 }
 .info {
-  width: 50%;
+  width: 60%;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -314,4 +315,12 @@ input:focus {
   text-align: center;
   font-weight: 700;
   font-size: 1.3rem;
+}
+
+/* Chat */
+.chatBox {
+  border: 2px solid gray;
+  height: 100%;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
 }

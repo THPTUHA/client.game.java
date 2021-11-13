@@ -16,6 +16,7 @@ import NotFound from "./NotFound";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
+
   console.log(user);
   return (
     <div>

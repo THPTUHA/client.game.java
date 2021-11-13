@@ -46,7 +46,7 @@ function GameXO({ user }) {
   return (
     <div className="">
       <div class="row">
-        <div class="col-12 col-lg-6">
+        <div class="col-12">
           <div className=" mb-4">
             {!data ? (
               <button className="btn btn-info " onClick={requestStart}>
