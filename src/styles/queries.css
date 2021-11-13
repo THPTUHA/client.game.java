@@ -10,10 +10,10 @@
     display: block;
   }
   .chatBox {
-    height: 20rem;
+    height: 25rem;
   }
   .game {
-    height: 60rem;
+    height: 62rem;
   }
 }
 @media (min-width: 350px) and (max-width: 575.99px) {
@@ -28,10 +28,10 @@
     display: block;
   }
   .chatBox {
-    height: 20rem;
+    height: 25rem;
   }
   .game {
-    height: 60rem;
+    height: 61rem;
   }
 }
 
@@ -47,13 +47,13 @@
     display: block;
   }
   .chatBox {
-    height: 20rem;
+    height: 25rem;
     width: 50%;
     position: relative;
     transform: translateX(50%);
   }
   .game {
-    height: 60rem;
+    height: 61rem;
   }
 }
 
@@ -69,13 +69,13 @@
     padding: 1rem 2rem;
   }
   .chatBox {
-    height: 20rem;
+    height: 25rem;
     width: 50%;
     position: relative;
     transform: translateX(50%);
   }
   .game {
-    height: 60rem;
+    height: 61rem;
   }
 }
 
