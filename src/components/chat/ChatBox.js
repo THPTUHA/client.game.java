@@ -4,7 +4,7 @@ import Message from "./Message";
 export default function ChatBox() {
   return (
     <div className="chatBox mt-lg-4">
-      <h3>Chat</h3>
+      <h3>Chat Box</h3>
       <div className="content">
         <Message />
         <Message />
