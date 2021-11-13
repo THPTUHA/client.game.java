@@ -247,6 +247,19 @@ input:focus {
   background-size: cover;
   color: white;
 }
+@keyframes mymove {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.fa-spinner-third {
+  /* trng */
+  margin-left: 1rem;
+  animation: mymove 1s linear infinite;
+}
 
 /* blog */
 .blogs {
@@ -319,24 +332,24 @@ input:focus {
 
 /* Chat */
 .chatBox {
-  border: 2px solid gray;
-  border-radius: 2rem;
+  border: 2px solid white;
+  border-radius: 1rem;
   padding: 1rem 0.1rem 1rem 2rem;
   position: relative;
   height: 25rem;
 }
 .chatBox .content {
   overflow-y: scroll;
-  height: 20rem;
+  height: 18rem;
 }
 .chatBox .content::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   /* box-shadow: inset 0 0 5px grey; */
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 /* Handle */
@@ -355,9 +368,21 @@ input:focus {
   height: 1rem;
   bottom: 0;
   width: 80%;
+  border: 2px solid white;
 }
 .chatBox i {
   font-size: 2.2rem;
-  color: gray;
+  color: white;
   margin-left: 5px;
+}
+.content h5 {
+  margin: 0;
+}
+
+.content img {
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: white;
+  margin-right: 1rem;
 }

@@ -1,23 +1,21 @@
 import React from "react";
+import Message from "./Message";
 
 export default function ChatBox() {
   return (
-    <div className="chatBox">
+    <div className="chatBox mt-lg-4">
+      <h3>Chat</h3>
       <div className="content">
-        hello chat
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
-        <p>helo</p>
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
+        <Message />
       </div>
       <div className="d-flex">
         <input type="text" />

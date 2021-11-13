@@ -71,7 +71,7 @@ const Play = ({ data }) => {
                 <div className="d-flex align-items-center">
                   <img
                     // class="accountAvatar"
-                    style={{ width: 50 }}
+                    style={{ width: 40 }}
                     src={`https://avatars.dicebear.com/api/micah/${
                       player[data.type - 1].name
                     }.svg`}
@@ -107,16 +107,7 @@ const Play = ({ data }) => {
                     {player[2 - data.type].exp}
                   </h5>
                 </div>
-                {winner ? (
-                  <h1>
-                    Winner:
-                    {() => {
-                      userWinner(winner);
-                    }}
-                  </h1>
-                ) : (
-                  <></>
-                )}
+                {winner ? <h1>Winner: {userWinner(winner)}</h1> : <></>}
               </div>
             </div>
             <div className="col-12 col-lg-6">
@@ -124,7 +115,10 @@ const Play = ({ data }) => {
             </div>
           </>
         ) : (
-          <h1>Wating....</h1>
+          <div className="d-flex align-items-center">
+            <h3>Đang tìm trận</h3>
+            <i className="fad fa-spinner-third"></i>
+          </div>
         )}
       </div>
     </div>

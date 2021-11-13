@@ -44,13 +44,13 @@ function GameXO({ user }) {
   // console.log(user);
   // if (!user) return <Redirect to="/login" />;
   return (
-    <div className="">
+    <>
       <div class="row">
         <div class="col-12">
           <div className=" mb-4">
             {!data ? (
               <button className="btn btn-info " onClick={requestStart}>
-                Start
+                Tìm trận
               </button>
             ) : (
               <Play data={data} />
@@ -61,7 +61,7 @@ function GameXO({ user }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
