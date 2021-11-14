@@ -33,7 +33,11 @@ export default function Account() {
                 <p className="content">
                   <strong>Exp:</strong> {user.exp}
                 </p>
-                <a href="#" class="btn btn-primary active" role="button">
+                <a
+                  href="account/edit"
+                  class="btn btn-primary active"
+                  role="button"
+                >
                   Cập nhật thông tin
                 </a>
               </div>

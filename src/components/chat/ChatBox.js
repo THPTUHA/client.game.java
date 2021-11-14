@@ -18,7 +18,7 @@ export default function ChatBox() {
         <Message />
       </div>
       <div className="d-flex">
-        <input type="text" />
+        <input placeholder="Aa" type="text" />
         <i className="far fa-arrow-circle-right "></i>
       </div>
     </div>
