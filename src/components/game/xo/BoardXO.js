@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 
 const id_game = 1;
 const BoardXO = ({data})=>{
@@ -18,11 +17,11 @@ const BoardXO = ({data})=>{
         return (
           <div style={{ height: "8rem" }} key={index}>
             {row.map((ele, index1) => {
-              return ele == 1 ? (
+              return ele === 1 ? (
                 <div className="o" key={index1}>
                   <p>X</p>
                 </div>
-              ) : ele == 2 ? (
+              ) : ele === 2 ? (
                 <div className="o" key={index1}>
                   <p>O</p>
                 </div>

@@ -101,15 +101,15 @@ export default function Register() {
   if (ok) return <Redirect to="/login" />;
   return (
     <div className="container">
-      <div class="row">
+      <div className="row">
         <div
           style={{ position: "relative", height: "100vh" }}
-          class="col-sm-12"
+          className="col-sm-12"
         >
-          <div class="grid">
+          <div className="grid">
             <div className="form pt-5 pb-5">
               <form action="Login">
-                <p class="form__title">Đăng ký</p>
+                <p className="form__title">Đăng ký</p>
 
                 <StyledInput
                   theme={{
@@ -236,7 +236,7 @@ export default function Register() {
                 >
                   Submit
                 </button>
-                <Link to="/login" class="form__signUp">
+                <Link to="/login" className="form__signUp">
                   Đăng nhập
                 </Link>
               </form>

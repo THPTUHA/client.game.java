@@ -5,7 +5,7 @@ import { UserContext } from "../../context/UserProvider";
 import logo from "../../assets/img/logo.png";
 export default function NavBar() {
   const { user } = useContext(UserContext);
-
+ 
   return (
     <div className="container-fluid padding-0">
       <div class="row myNavbar padding-lg">

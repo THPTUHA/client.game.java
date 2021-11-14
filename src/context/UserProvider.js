@@ -6,13 +6,14 @@ export const UserContext=createContext();
 
 
 const UserProvider=({children})=>{
+    console.log("oooo............");
     const[user,setUser]=useState();
     useEffect(()=>{
         const email = JSON.parse(localStorage.getItem("email"));
         (async()=>{
             try{
                 const auth = authorization({params: email});
-                if(auth!="NO")
+                if(auth!=="NO")
                 {
                     const user = await axios.get("/user",auth);
                     console.log("Goi lai");

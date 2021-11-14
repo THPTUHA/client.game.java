@@ -17,7 +17,7 @@ export default function Login() {
   const submit = async () => {
     const data = { email: email, password: password };
     try {
-      const response = await axios.post("http://localhost:8080/login", data);
+      const response = await axios.post(`${process.env.REACT_APP_SERVER}/login`, data);
       localStorage.setItem("user", JSON.stringify(response.data));
       localStorage.setItem("email", JSON.stringify({ email: email }));
       try {
@@ -36,15 +36,15 @@ export default function Login() {
 
   return !data ? (
     <div className="container">
-      <div class="row">
+      <div className="row">
         <div
           style={{ position: "relative", height: "100vh" }}
-          class="col-sm-12"
+          className="col-sm-12"
         >
           <div style={{ height: "100vh" }} className="grid">
-            <div class="form">
+            <div className="form">
               <form action="Login">
-                <p class="form__title">Đăng nhập</p>
+                <p className="form__title">Đăng nhập</p>
                 <input
                   className="mb-3"
                   type="text"
@@ -70,7 +70,7 @@ export default function Login() {
                 >
                   Submit
                 </button>
-                <Link to="/register" class="form__signUp">
+                <Link to="/register" className="form__signUp">
                   Tạo tài khoản
                 </Link>
               </form>

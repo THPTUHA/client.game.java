@@ -3,7 +3,7 @@ import React from "react";
 export default function News() {
   return (
     <div class="blog">
-      <a href="">
+      <a href="/">
         <img
           src="https://kenh14cdn.com/2020/2/24/photo-1-15825282172301099647419.jpg"
           alt=""

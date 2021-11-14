@@ -5,19 +5,19 @@ export default function Account() {
   const { user } = useContext(UserContext);
   console.log(user);
   return (
-    <div class="container-fluid">
-      <div class="row pt-3">
-        <div class="col-sm-4">
+    <div className="container-fluid">
+      <div className="row pt-3">
+        <div className="col-sm-4">
           <div className="position-relative">
-            <div class="info d-flex flex-column">
-              <div class="d-flex justify-content-center">
+            <div className="info d-flex flex-column">
+              <div className="d-flex justify-content-center">
                 <img
-                  class="accountAvatar"
+                  className="accountAvatar"
                   src={`https://avatars.dicebear.com/api/bottts/${user.email}.svg?background=%23FFBA08`}
                   alt=""
                 />
               </div>
-              <p class="name">Nguyen Phuc Tinh</p>
+              <p className="name">Nguyen Phuc Tinh</p>
               <p className="content">
                 <strong>Email:</strong> {user.email}
               </p>
@@ -30,18 +30,18 @@ export default function Account() {
               <p className="content">
                 <strong>Exp:</strong> {user.exp}
               </p>
-              <a href="#" class="btn btn-primary active" role="button">
+              <a href="#" className="btn btn-primary active" role="button">
                 Cập nhật thông tin
               </a>
             </div>
           </div>
         </div>
-        <div class="col-sm-8">
-          <div class="row">
+        <div className="col-sm-8">
+          <div className="row">
             <strong>Lịch sử đấu</strong>
           </div>
-          <div class="row pt-3">
-            <table class="table">
+          <div className="row pt-3">
+            <table className="table">
               <thead>
                 <tr>
                   <th>Đối thủ</th>

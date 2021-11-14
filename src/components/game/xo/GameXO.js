@@ -1,37 +1,24 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import SockJS from "sockjs-client";
-import Stomp from "stompjs";
+import React, {  useState } from "react";
 import Play from "./Play";
-import BoardXO from "./BoardXO";
-
-const id_game = 1;
-let ans;
-let stompClient;
 
 function GameXO({ user }) {
-  const [status, setStatus] = useState(0);
-  const [map, setMap] = useState();
-  const [winner, setWinner] = useState();
   const [data, setData] = useState();
+  console.log("GameXO");
 
-  function waiting() {
-    return <h1>Chờ đối thủ....</h1>;
-  }
+  // function connect(id_match, start) {}
 
-  function connect(id_match, start) {}
+  // function disconnect() {
+  //   if (stompClient !== null) {
+  //     stompClient.disconnect();
+  //   }
 
-  function disconnect() {
-    if (stompClient !== null) {
-      stompClient.disconnect();
-    }
-
-    console.log("Disconnected");
-  }
+  //   console.log("Disconnected");
+  // }
 
   const requestStart = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/xo/start", {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/xo/start`, {
         id_user: user.id,
       });
       console.log(res.data);
@@ -45,8 +32,8 @@ function GameXO({ user }) {
   // if (!user) return <Redirect to="/login" />;
   return (
     <div className="">
-      <div class="row">
-        <div class="col-12 col-lg-6">
+      <div className="row">
+        <div className="col-12 col-lg-6">
           <div className=" mb-4">
             {!data ? (
               <button className="btn btn-info " onClick={requestStart}>

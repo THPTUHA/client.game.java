@@ -6,6 +6,7 @@ import BoardXO from "./BoardXO";
 const id_game = 1;
 
 const Play=({data})=>{
+    console.log("Play");
     const [player,setPlayer]=useState();
     const [winner,setWinner]=useState();
     const [board,setBoard] =useState([
@@ -13,10 +14,14 @@ const Play=({data})=>{
         [0, 0, 0],
         [0, 0, 0],
       ]);
+      window.onload=function(e) {
+        console.log(e);
+       alert("lllll");
+     }
     const [stompClient,setstompClient] =useState();
 
     useEffect(()=>{
-        const socket = new SockJS("http://localhost:8080/gameplay");
+        const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
         const stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
         console.log("Connected: " + frame);
@@ -40,21 +45,12 @@ const Play=({data})=>{
             const req={id_match:data.id_match,status:1};
             stompClient.send(`/app/xo/${id_game}/${data.id_match}`,{}, JSON.stringify(req));
         }
+       
         setstompClient(stompClient);
     });
-    },[]);
+       
+    },[data]);
 
-    function userWinner(winner) {
-        console.log("/////",winner);
-        switch(winner){
-            case 1:
-                return player[0].name;
-            case 2:
-                return player[1].name;
-            default:
-                return "Hoà";
-        }
-    }
     return (
         <div>
             {
@@ -72,8 +68,8 @@ const Play=({data})=>{
                             }
                         }/>
                        {
-                         (winner)?(
-                            <h1>Winner:{()=>{userWinner(winner)}}</h1>
+                         (winner>0)?(
+                            <h1>Winner:{player[winner-1].name}</h1>
                          ):(
                              <></>
                          )

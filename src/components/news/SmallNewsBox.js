@@ -4,7 +4,7 @@ export default function SmallNewsBox() {
   return (
     <div>
       <div class="col-sm-5">
-        <a href="">
+        <a href="/">
           <img
             src="https://kenh14cdn.com/2020/2/24/photo-1-15825282172301099647419.jpg"
             alt=""
@@ -13,7 +13,7 @@ export default function SmallNewsBox() {
       </div>
       <div class="col-sm-7">
         <div>
-          <a href="">
+          <a href="/">
             {" "}
             <p class="title">Những game hot năm 2021</p>
           </a>
