@@ -9,6 +9,15 @@
   .installment {
     display: block;
   }
+  .chatBox {
+    height: 25rem;
+  }
+  .game {
+    height: 62rem;
+  }
+  .info {
+    width: 100%;
+  }
 }
 @media (min-width: 350px) and (max-width: 575.99px) {
   html {
@@ -20,6 +29,15 @@
   .addtocart,
   .installment {
     display: block;
+  }
+  .chatBox {
+    height: 25rem;
+  }
+  .game {
+    height: 61rem;
+  }
+  .info {
+    width: 100%;
   }
 }
 
@@ -34,6 +52,18 @@
   .installment {
     display: block;
   }
+  .chatBox {
+    height: 25rem;
+    width: 50%;
+    position: relative;
+    transform: translateX(50%);
+  }
+  .game {
+    height: 61rem;
+  }
+  .info {
+    width: 100%;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -46,6 +76,18 @@
   .addtocart,
   .installment {
     padding: 1rem 2rem;
+  }
+  .chatBox {
+    height: 25rem;
+    width: 50%;
+    position: relative;
+    transform: translateX(50%);
+  }
+  .game {
+    height: 61rem;
+  }
+  .info {
+    width: 100%;
   }
 }
 

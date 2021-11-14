@@ -2,7 +2,7 @@ import React from "react";
 
 export default function SmallNewsBox() {
   return (
-    <div>
+    <>
       <div class="col-sm-5">
         <a href="/">
           <img
@@ -26,6 +26,6 @@ export default function SmallNewsBox() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

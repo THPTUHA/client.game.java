@@ -10,7 +10,7 @@ function Game() {
   return (
     <div className="container-fluid game">
       <h1>Game </h1>
-      <Link to={`${match.url}/xo`}>GameXO</Link>
+      <Link to={`${match.url}/xo`}>Cờ Caro</Link>
       <Route
         path={`${match.url}/xo`}
         component={() => <GameXO user={user} />}

@@ -64,7 +64,8 @@ export default function Account() {
             </table>
           </div>
         </div>
-      </div>
+    </div>
     </div>
   );
 }
+
