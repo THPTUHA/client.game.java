@@ -8,7 +8,7 @@ import Logout from "../authorization/Logout";
 import Game from "../game/Game";
 import NavBar from "../navbar/NavBar";
 import Account from "../account/Account";
-import ListNews from "../news/ListNews";
+import NewsList from "../news/NewsList";
 import GoToTop from "../GoToTop";
 import NotFound from "./NotFound";
 import Loading from "../../loading/Loading";
@@ -26,7 +26,7 @@ export default function Nav() {
           <NavBar />
           <Switch>
             <Route exact path="/" component={Home}></Route>
-            <Route path="/news" component={ListNews}></Route>
+            <Route path="/news" component={NewsList}></Route>
             <Route path="/login">
               {user ? <Redirect to="/" /> : <Login />}
             </Route>
