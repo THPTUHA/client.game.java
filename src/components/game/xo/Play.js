@@ -20,7 +20,7 @@ const Play = ({ data }) => {
   const [stompClient, setstompClient] = useState();
 
   useEffect(() => {
-    const socket = new SockJS("http://localhost:8080/gameplay");
+    const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
       console.log("Connected: " + frame);
@@ -42,10 +42,13 @@ const Play = ({ data }) => {
             setStatus(res);
           }
           if(res.message){
-            console.log("Mes")
-            setMessages([res.message]);
+            const mes= JSON.parse(localStorage.getItem("messages"))||[];
+            console.log(mes);
+            const messages=[...mes,res.message];
+            console.log(messages);
+            localStorage.setItem("messages",JSON.stringify(messages));
+            setMessages(messages);
           }
-          console.log(res.message);
         }
       );
       if (data.status) {
@@ -58,10 +61,14 @@ const Play = ({ data }) => {
       }
       setstompClient(stompClient);
     });
+    return ()=>{
+      console.log("Unmouted");
+    }
   }, []);
 
   useEffect(() => {
     if (status && status.player1.id == player[data.type - 1].id) {
+      localStorage.removeItem("messages");
       stompClient.disconnect();
     }
   }, [status]);

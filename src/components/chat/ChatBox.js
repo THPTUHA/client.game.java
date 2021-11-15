@@ -15,9 +15,9 @@ export default function ChatBox({data}) {
       <h3>Chat Box</h3>
       <div className="content mt-1 mb-2">
         {
-            data.messages.map((e,index)=>{
-            <Message key={index} message={e}/>
-          })
+            data.messages.map((e,index)=>
+             <Message key={index} message={e}/>
+          )
         }
       </div>
       <div className="d-flex">

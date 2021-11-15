@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function Message({message}) {
+ function Message({message}) {
   return (
     <div className="d-flex  align-items-center mb-2">
       <img
@@ -14,3 +14,5 @@ export default function Message({message}) {
     </div>
   );
 }
+
+export default memo(Message);
