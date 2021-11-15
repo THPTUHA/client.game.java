@@ -10,7 +10,7 @@ const id_game = 1;
 const Play = ({ data }) => {
   const [player, setPlayer] = useState();
   const [winner, setWinner] = useState();
-  const [status,setStatus] = useState();
+  const [status, setStatus] = useState();
   const [board, setBoard] = useState([
     [0, 0, 0],
     [0, 0, 0],
@@ -37,8 +37,8 @@ const Play = ({ data }) => {
             console.log("SET Winner.................//////");
             setWinner(res.winner);
           }
-          if(res.status==2){
-             setStatus(res);
+          if (res.status == 2) {
+            setStatus(res);
           }
           console.log(res);
         }
@@ -54,20 +54,24 @@ const Play = ({ data }) => {
       setstompClient(stompClient);
     });
   }, []);
- 
-  useEffect(()=>{
-    if(status&&status.player1.id==player[data.type - 1].id){
+
+  useEffect(() => {
+    if (status && status.player1.id == player[data.type - 1].id) {
       stompClient.disconnect();
     }
-  },[status]);
-   const handleCannerMatch=()=>{
-      try{
-        const req = { id_match: data.id_match, status: 2 };
-        stompClient.send(`/app/xo/${id_game}/${data.id_match}`,{},JSON.stringify(req));
-      }catch(err){
-        console.log(err);
-      }
-   }
+  }, [status]);
+  const handleCannerMatch = () => {
+    try {
+      const req = { id_match: data.id_match, status: 2, type: data.type };
+      stompClient.send(
+        `/app/xo/${id_game}/${data.id_match}`,
+        {},
+        JSON.stringify(req)
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   function userWinner(winner) {
     console.log("/////", winner);
     switch (winner) {
@@ -90,16 +94,24 @@ const Play = ({ data }) => {
                   <img
                     // class="accountAvatar"
                     style={{ width: 40 }}
-                    src={`https://avatars.dicebear.com/api/micah/${
-                      (player[data.type - 1].name.split(' ')).join('')
-                    }.svg`}
+                    src={`https://avatars.dicebear.com/api/micah/${player[
+                      data.type - 1
+                    ].name
+                      .split(" ")
+                      .join("")}.svg`}
                     alt=""
                   />
                   <h5>
                     {player[data.type - 1].name} EXP:{" "}
                     {player[data.type - 1].exp}
                   </h5>
-                  <button style={{marginLeft:'1rem'}} className='btn btn-danger' onClick={handleCannerMatch}>Thoát trận</button>
+                  <button
+                    style={{ marginLeft: "1rem" }}
+                    className="btn btn-danger"
+                    onClick={handleCannerMatch}
+                  >
+                    Thoát trận
+                  </button>
                 </div>
 
                 <BoardXO
@@ -116,18 +128,24 @@ const Play = ({ data }) => {
                   <img
                     // class="accountAvatar"
                     style={{ width: 50 }}
-                    src={`https://avatars.dicebear.com/api/micah/${
-                      (player[2 - data.type].name.split(' ')).join('')
-                    }.svg`}
+                    src={`https://avatars.dicebear.com/api/micah/${player[
+                      2 - data.type
+                    ].name
+                      .split(" ")
+                      .join("")}.svg`}
                     alt=""
                   />
                   <h5>
                     {player[2 - data.type].name} EXP:{" "}
                     {player[2 - data.type].exp}
                   </h5>
-                  {status&&status.player1.id!=player[data.type - 1].id
-                  ?<h1>{status.player1.name+" đã rời trận"}</h1>
-                  :status?<Redirect to="/gameplay"/>:""}
+                  {status && status.player1.id == player[data.type - 1].id ? (
+                    <Redirect to="/gameplay" />
+                  ) : status ? (
+                    <h1>{status.player1.name + " đã rời trận"}</h1>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 {winner ? <h1>Winner: {userWinner(winner)}</h1> : <></>}
               </div>
