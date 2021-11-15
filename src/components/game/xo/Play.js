@@ -11,6 +11,7 @@ const Play = ({ data }) => {
   const [player, setPlayer] = useState();
   const [winner, setWinner] = useState();
   const [status, setStatus] = useState();
+  const [messages, setMessages] = useState([]);
   const [board, setBoard] = useState([
     [0, 0, 0],
     [0, 0, 0],
@@ -40,7 +41,11 @@ const Play = ({ data }) => {
           if (res.status == 2) {
             setStatus(res);
           }
-          console.log(res);
+          if(res.message){
+            console.log("Mes")
+            setMessages([res.message]);
+          }
+          console.log(res.message);
         }
       );
       if (data.status) {
@@ -73,7 +78,6 @@ const Play = ({ data }) => {
     }
   };
   function userWinner(winner) {
-    console.log("/////", winner);
     switch (winner) {
       case 1:
         return player[0].name;
@@ -151,7 +155,13 @@ const Play = ({ data }) => {
               </div>
             </div>
             <div className="col-12 col-lg-6">
-              <ChatBox />
+              <ChatBox data={{
+                    stompClient: stompClient,
+                    type: data.type,
+                    id_match: data.id_match,
+                    winner: winner,
+                    messages:messages
+                  }}/>
             </div>
           </>
         ) : (

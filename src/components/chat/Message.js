@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Message() {
+export default function Message({message}) {
   return (
     <div className="d-flex  align-items-center mb-2">
       <img
@@ -9,9 +9,7 @@ export default function Message() {
         alt=""
       />
       <h5>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque corrupti
-        vel repellat itaque sunt molestias velit, quibusdam, in, quia illo
-        soluta consequatur minima ea veritatis modi possimus ipsa sed delectus.
+        {message}
       </h5>
     </div>
   );
