@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Redirect } from "react-router";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import ChatBox from "../../chat/ChatBox";
@@ -9,6 +10,7 @@ const id_game = 1;
 const Play = ({ data }) => {
   const [player, setPlayer] = useState();
   const [winner, setWinner] = useState();
+  const [status,setStatus] = useState();
   const [board, setBoard] = useState([
     [0, 0, 0],
     [0, 0, 0],
@@ -35,6 +37,9 @@ const Play = ({ data }) => {
             console.log("SET Winner.................//////");
             setWinner(res.winner);
           }
+          if(res.status==2){
+             setStatus(res);
+          }
           console.log(res);
         }
       );
@@ -49,7 +54,20 @@ const Play = ({ data }) => {
       setstompClient(stompClient);
     });
   }, []);
-
+ 
+  useEffect(()=>{
+    if(status&&status.player1.id==player[data.type - 1].id){
+      stompClient.disconnect();
+    }
+  },[status]);
+   const handleCannerMatch=()=>{
+      try{
+        const req = { id_match: data.id_match, status: 2 };
+        stompClient.send(`/app/xo/${id_game}/${data.id_match}`,{},JSON.stringify(req));
+      }catch(err){
+        console.log(err);
+      }
+   }
   function userWinner(winner) {
     console.log("/////", winner);
     switch (winner) {
@@ -81,6 +99,7 @@ const Play = ({ data }) => {
                     {player[data.type - 1].name} EXP:{" "}
                     {player[data.type - 1].exp}
                   </h5>
+                  <button onClick={handleCannerMatch}>Thoát trận</button>
                 </div>
 
                 <BoardXO
@@ -106,6 +125,9 @@ const Play = ({ data }) => {
                     {player[2 - data.type].name} EXP:{" "}
                     {player[2 - data.type].exp}
                   </h5>
+                  {status&&status.player1.id!=player[data.type - 1].id
+                  ?<h1>{status.player1.name+" đã rời trận"}</h1>
+                  :status?<Redirect to="/gameplay"/>:""}
                 </div>
                 {winner ? <h1>Winner: {userWinner(winner)}</h1> : <></>}
               </div>
