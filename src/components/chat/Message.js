@@ -5,7 +5,7 @@ export default function Message() {
     <div className="d-flex  align-items-center mb-2">
       <img
         // class="accountAvatar"
-        src={`https://avatars.dicebear.com/api/micah/${"nghia nguyen"}.svg`}
+        src={`https://avatars.dicebear.com/api/micah/${"nghianguyen"}.svg`}
         alt=""
       />
       <h5>

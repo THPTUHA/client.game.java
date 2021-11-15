@@ -86,12 +86,12 @@ const Play = ({ data }) => {
           <>
             <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
               <div>
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center mb-1">
                   <img
                     // class="accountAvatar"
                     style={{ width: 40 }}
                     src={`https://avatars.dicebear.com/api/micah/${
-                      player[data.type - 1].name
+                      (player[data.type - 1].name.split(' ')).join('')
                     }.svg`}
                     alt=""
                   />
@@ -99,7 +99,7 @@ const Play = ({ data }) => {
                     {player[data.type - 1].name} EXP:{" "}
                     {player[data.type - 1].exp}
                   </h5>
-                  <button onClick={handleCannerMatch}>Thoát trận</button>
+                  <button style={{marginLeft:'1rem'}} className='btn btn-danger' onClick={handleCannerMatch}>Thoát trận</button>
                 </div>
 
                 <BoardXO
@@ -117,7 +117,7 @@ const Play = ({ data }) => {
                     // class="accountAvatar"
                     style={{ width: 50 }}
                     src={`https://avatars.dicebear.com/api/micah/${
-                      player[2 - data.type].name
+                      (player[2 - data.type].name.split(' ')).join('')
                     }.svg`}
                     alt=""
                   />

@@ -13,11 +13,11 @@ export default function Account() {
               <div className="d-flex justify-content-center">
                 <img
                   className="accountAvatar"
-                  src={`https://avatars.dicebear.com/api/bottts/${user.email}.svg?background=%23FFBA08`}
+                  src={`https://avatars.dicebear.com/api/micah/${user.first_name+ user.last_name}.svg`}
                   alt=""
                 />
               </div>
-              <p className="name">Nguyen Phuc Tinh</p>
+              <p className="name">{user.first_name+" "+ user.last_name}</p>
               <p className="content">
                 <strong>Email:</strong> {user.email}
               </p>
