@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Redirect } from "react-router";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
@@ -11,12 +11,13 @@ const Play = ({ data }) => {
   const [player, setPlayer] = useState();
   const [winner, setWinner] = useState();
   const [status, setStatus] = useState();
-  const [messages, setMessages] = useState([]);
+  const [messages,setMessages] = useState([]);
   const [board, setBoard] = useState([
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0],
   ]);
+
   const [stompClient, setstompClient] = useState();
 
   useEffect(() => {
@@ -42,12 +43,11 @@ const Play = ({ data }) => {
             setStatus(res);
           }
           if(res.message){
-            const mes= JSON.parse(localStorage.getItem("messages"))||[];
-            console.log(mes);
-            const messages=[...mes,res.message];
-            console.log(messages);
-            localStorage.setItem("messages",JSON.stringify(messages));
-            setMessages(messages);
+            const mess= JSON.parse(localStorage.getItem("messages"))||[];
+            mess.push({message:res.message,name:res.player1.name,type:res.player1.type});
+            console.log(mess);
+            localStorage.setItem("messages",JSON.stringify(mess));
+            setMessages(mess);
           }
         }
       );
@@ -96,14 +96,14 @@ const Play = ({ data }) => {
   }
   return (
     <div className="container-fluid padding-0">
-      <div class="row">
+      <div className="row">
         {player ? (
           <>
             <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
               <div>
                 <div className="d-flex align-items-center mb-1">
                   <img
-                    // class="accountAvatar"
+                    // className="accountAvatar"
                     style={{ width: 40 }}
                     src={`https://avatars.dicebear.com/api/micah/${player[
                       data.type - 1
@@ -137,7 +137,7 @@ const Play = ({ data }) => {
 
                 <div className="d-flex align-items-center">
                   <img
-                    // class="accountAvatar"
+                    // className="accountAvatar"
                     style={{ width: 50 }}
                     src={`https://avatars.dicebear.com/api/micah/${player[
                       2 - data.type

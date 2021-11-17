@@ -8,17 +8,17 @@ export default function Header() {
 
   return (
     <div className="container-fluid">
-      <div class="row">
-        <div class="header">
-          <div class="container">
-            <div class="row">
-              <img class="header__img" src={headerImg} alt="" />
+      <div className="row">
+        <div className="header">
+          <div className="container">
+            <div className="row">
+              <img className="header__img" src={headerImg} alt="" />
             </div>
           </div>
 
-          <Link to={!user ? "login" : "/gameplay"} class="">
-            <div class="header__btn myBtn">
-              <i class="fas fa-gamepad"></i>
+          <Link to={!user ? "login" : "/gameplay"} className="">
+            <div className="header__btn myBtn">
+              <i className="fas fa-gamepad"></i>
               Chơi ngay
             </div>
           </Link>

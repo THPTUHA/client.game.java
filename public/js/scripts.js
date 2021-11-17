@@ -16,9 +16,9 @@ window.addEventListener('DOMContentLoaded', event => {
             return;
         }
         if (window.scrollY === 0) {
-            navbarCollapsible.classList.remove('navbar-shrink')
+            navbarCollapsible.classNameList.remove('navbar-shrink')
         } else {
-            navbarCollapsible.classList.add('navbar-shrink')
+            navbarCollapsible.classNameList.add('navbar-shrink')
         }
 
     };

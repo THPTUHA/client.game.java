@@ -242,7 +242,7 @@ a:hover {
   color: #15967d;
 }
 
-a:not([href]):not([class]), a:not([href]):not([class]):hover {
+a:not([href]):not([className]), a:not([href]):not([className]):hover {
   color: inherit;
   text-decoration: none;
 }
@@ -11494,3 +11494,4 @@ html {
 .copyright {
   background-color: #1a252f;
 }
+

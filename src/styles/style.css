@@ -390,3 +390,12 @@ input:focus {
   background-color: white;
   margin-right: 1rem;
 }
+
+.messages{
+  padding-top:10px;
+  padding-bottom:10px;
+}
+.float-right{
+  position: inherit;
+  right:10px
+}

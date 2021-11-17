@@ -13,7 +13,7 @@ export default function Account() {
               <div className="d-flex justify-content-center">
                 <img
                   className="accountAvatar"
-                  src={`https://avatars.dicebear.com/api/micah/${user.first_name+ user.last_name}.svg`}
+                  src={`https://avatars.dicebear.com/api/micah/${user.first_name+" "+ user.last_name}.svg`}
                   alt=""
                 />
               </div>
