@@ -1,3 +1,4 @@
+import { memo } from "react";
 
 const id_game = 1;
 const BoardXO = ({data})=>{
@@ -41,4 +42,4 @@ const BoardXO = ({data})=>{
       });
 }
 
-export default BoardXO;
+export default memo(BoardXO);
