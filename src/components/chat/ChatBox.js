@@ -4,14 +4,16 @@ import Message from "./Message";
 const id_game = 1;
 function ChatBox({ data }) {
   const [mes, setMes] = useState("");
-  const handleMessage = () => {
-    console.log(mes);
+  const handleMessage = (e) => {
+    console.log(e);
+   if(e.key==="Enter"||e.type==="click"){
     data.stompClient.send(
       `/app/xo/${id_game}/${data.id_match}`,
       {},
       JSON.stringify({ id_match: data.id_match, type: data.type, message: mes })
     );
     setMes("");
+   }
   };
 
   return (
@@ -19,15 +21,12 @@ function ChatBox({ data }) {
       <h3>Trò chuyện</h3>
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
-          {
-            console.log(e);
-          }
           return (
             <Message key={index} message={e} is_chat={data.type == e.type} />
           );
         })}
       </div>
-      <div className="d-flex">
+      <div className="d-flex" onKeyPress={handleMessage}>
         <input
           placeholder="Aa"
           type="text"

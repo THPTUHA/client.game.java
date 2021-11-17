@@ -63,6 +63,7 @@ const Play = ({ data }) => {
           JSON.stringify(req)
         );
       }
+      console.log("connect...///");
       setstompClient(stompClient);
     });
     return () => {
