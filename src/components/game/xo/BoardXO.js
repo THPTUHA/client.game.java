@@ -1,4 +1,5 @@
 import { memo } from "react";
+import Contrast from "../../../Contrast";
 
 const id_game = 1;
 const BoardXO = ({data})=>{
@@ -9,6 +10,7 @@ const BoardXO = ({data})=>{
         coordinateY: y,
         type: data.type,
         id_match: data.id_match,
+        status:Contrast.PLAY
       };
       data.stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, JSON.stringify(play) );
       

@@ -4,7 +4,7 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import ChatBox from "../../chat/ChatBox";
 import BoardXO from "./BoardXO";
-
+import Contrast from "../../../Contrast"
 const id_game = 1;
 
 const Play = ({ data }) => {
@@ -17,7 +17,6 @@ const Play = ({ data }) => {
     [0, 0, 0],
     [0, 0, 0],
   ]);
-
   const [stompClient, setstompClient] = useState();
 
   useEffect(() => {
@@ -28,35 +27,50 @@ const Play = ({ data }) => {
       stompClient.subscribe(
         `/topic/xo/${id_game}/${data.id_match}`,
         function (response) {
-          let res = JSON.parse(response.body);
-          if (res.player1 && res.player2) {
-            setPlayer([res.player1, res.player2]);
+          const res = JSON.parse(response.body);
+
+          switch (res.status){
+            case Contrast.START_GAME:
+              setStatus(res);
+              setPlayer([res.player1, res.player2]);
+              // setBoard(res.board);
+              break;
+
+            case Contrast.PLAY:
+              setBoard(res.board);
+              if(res.winner){
+                setWinner(res.winner);
+                setPlayer([res.player1, res.player2]);
+              }
+              break;
+
+            case Contrast.MESSAGE:
+              const mess = JSON.parse(localStorage.getItem("messages")) || [];
+              mess.push({
+                message: res.message,
+                name: res.player1.name,
+                type: res.player1.type,
+              });
+              console.log(mess);
+              localStorage.setItem("messages", JSON.stringify(mess));
+              setMessages(mess);
+              break;
+
+            case Contrast.CANCEL_GAME:
+              setStatus(res);
+              break;
+
+            case Contrast.PLAY_AGAIN:
+              setStatus(res);
+              break;
+           
           }
-          if (res.board) {
-            setBoard(res.board);
-          }
-          if (res.winner) {
-            console.log("SET Winner.................//////");
-            setWinner(res.winner);
-          }
-          if (res.status) {
-            setStatus(res);
-          }
-          if (res.message) {
-            const mess = JSON.parse(localStorage.getItem("messages")) || [];
-            mess.push({
-              message: res.message,
-              name: res.player1.name,
-              type: res.player1.type,
-            });
-            console.log(mess);
-            localStorage.setItem("messages", JSON.stringify(mess));
-            setMessages(mess);
-          }
+          
         }
       );
-      if (data.status) {
-        const req = { id_match: data.id_match, status: 1 };
+
+      if (data.status== Contrast.START_GAME) {
+        const req = { id_match: data.id_match, status: Contrast.START_GAME };
         stompClient.send(
           `/app/xo/${id_game}/${data.id_match}`,
           {},
@@ -72,20 +86,24 @@ const Play = ({ data }) => {
   }, []);
 
   useEffect(() => {
-    if (status &&status.status==2&& status.player1.id == player[data.type - 1].id) {
-      localStorage.removeItem("messages");
-      stompClient.disconnect();
+    if (status) {
+      if( status.status==Contrast.CANCEL_GAME && status.player1.id == player[data.type - 1].id)
+      {
+        localStorage.removeItem("messages");
+        stompClient.disconnect();
+      }
     }
   }, [status]);
 
-  const handleCannerMatch = () => {
+  const handleCancelMatch = () => {
     try {
-      const req = { id_match: data.id_match, status: 2, type: data.type };
+      const req = { id_match: data.id_match, status: Contrast.CANCEL_GAME, type: data.type };
       stompClient.send(
         `/app/xo/${id_game}/${data.id_match}`,
         {},
         JSON.stringify(req)
       );
+
     } catch (err) {
       console.log(err);
     }
@@ -104,7 +122,7 @@ const Play = ({ data }) => {
 
   function playAgain(){
     try{
-      const req = { id_match: data.id_match, status: 3, type: data.type };
+      const req = { id_match: data.id_match, status: Contrast.PLAY_AGAIN, type: data.type };
       stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, JSON.stringify(req) );
       setWinner(0);
     }catch(err){
@@ -114,14 +132,16 @@ const Play = ({ data }) => {
 
   const handleStatus=(status,player)=>{
     if(status){
-      if(status.status==2){
+      console.log(status)
+      if(status.status== Contrast.CANCEL_GAME){
         if(status.player1.id == player[data.type - 1].id)
           return <Redirect to="/gameplay" />;
         return <h1>{status.player1.name + " đã rời trận"}</h1>;
       }
 
-      if(status.status==3){
-        return <h1>{status.player1.name + " đã sắn sàng"}</h1>;
+      if(status.status== Contrast.PLAY_AGAIN){
+        if(status.player1.id != player[data.type - 1].id)
+        return <h1>{status.player1.name + " đã sẵn sàng"}</h1>;
       }
     }
   } 
@@ -148,7 +168,7 @@ const Play = ({ data }) => {
                   <button
                     style={{ marginLeft: "1rem" }}
                     className="btn btn-danger"
-                    onClick={handleCannerMatch}
+                    onClick={handleCancelMatch}
                   >
                     Thoát trận
                   </button>

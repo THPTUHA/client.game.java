@@ -6,16 +6,6 @@ function GameXO({ user }) {
   const [data, setData] = useState();
   console.log("GameXO");
 
-  // function connect(id_match, start) {}
-
-  // function disconnect() {
-  //   if (stompClient !== null) {
-  //     stompClient.disconnect();
-  //   }
-
-  //   console.log("Disconnected");
-  // }
-
   const requestStart = async () => {
     try {
       const res = await axios.post(`${process.env.REACT_APP_SERVER}/xo/start`, {

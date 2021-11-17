@@ -1,11 +1,11 @@
 import React, { memo, useState, useEffect, useRef } from "react";
 import Message from "./Message";
+import Contrast from "../../Contrast";
 
 const id_game = 1;
 function ChatBox({ data }) {
   const [mes, setMes] = useState("");
   const handleMessage = (e) => {
-    console.log(e);
     if (e.key === "Enter" || e.type === "click") {
       data.stompClient.send(
         `/app/xo/${id_game}/${data.id_match}`,
@@ -14,15 +14,18 @@ function ChatBox({ data }) {
           id_match: data.id_match,
           type: data.type,
           message: mes,
+          status:Contrast.MESSAGE
         })
       );
       setMes("");
     }
   };
+
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
   useEffect(() => {
     scrollToBottom();
   }, [data.messages]);
@@ -33,9 +36,7 @@ function ChatBox({ data }) {
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
           return (
-            <>
               <Message key={index} message={e} is_chat={data.type == e.type} />
-            </>
           );
         })}
         <div ref={messagesEndRef} />
