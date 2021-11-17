@@ -28,12 +28,12 @@ export default function UpdatePassword() {
   return (
     <div>
       <div className="container">
-        <div class="row">
-          <div style={{ position: "relative" }} class="col-sm-12">
-            <div class="">
+        <div className="row">
+          <div style={{ position: "relative" }} className="col-sm-12">
+            <div className="">
               <div className="form w-75 w-lg-50 pt-2 pb-5">
                 <form action="">
-                  <p class="form__title">Đổi mật khẩu</p>
+                  <p className="form__title">Đổi mật khẩu</p>
                   <StyledInput
                     theme={{
                       main: pWarning !== "" ? "red" : "gray",

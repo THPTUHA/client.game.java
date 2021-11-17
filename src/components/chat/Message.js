@@ -1,16 +1,25 @@
 import React, { memo } from "react";
 
- function Message({message}) {
+function Message({ message, is_chat }) {
   return (
-    <div className="d-flex  align-items-center mb-2">
-      <img
-        // class="accountAvatar"
-        src={`https://avatars.dicebear.com/api/micah/${"nghianguyen"}.svg`}
-        alt=""
-      />
-      <h5>
-        {message}
-      </h5>
+    <div className="">
+      {!is_chat ? (
+        <div className="d-flex  justify-content-start align-items-center mb-2 ">
+          <img
+            src={`https://avatars.dicebear.com/api/micah/${message.name}.svg`}
+            alt=""
+          />
+          <p className="message--received">{message.message}</p>
+        </div>
+      ) : (
+        <div className="d-flex  justify-content-end align-items-center mb-2">
+          <p className="message--sent">{message.message}</p>
+          <img
+            src={`https://avatars.dicebear.com/api/micah/${message.name}.svg`}
+            alt=""
+          />
+        </div>
+      )}
     </div>
   );
 }

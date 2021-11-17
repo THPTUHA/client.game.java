@@ -344,6 +344,8 @@ input:focus {
 .chatBox .content {
   overflow-y: scroll;
   height: 18rem;
+  padding-right: 1rem;
+  overflow-x: hidden;
 }
 .chatBox .content::-webkit-scrollbar {
   width: 5px;
@@ -388,19 +390,26 @@ input:focus {
   border-radius: 50%;
   border: 1px solid black;
   background-color: white;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 
-.message--sent{
+.message--sent {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   background-color: tomato;
-
 }
-.message--received{
-
+.message--received {
   background-color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   color: black;
 }
+/* .messages {
+  padding-top: 10px;
+  padding-bottom: 10px;
+} */
+/* .float-right {
+  position: inherit;
+  right: 10px;
+} */

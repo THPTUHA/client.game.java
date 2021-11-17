@@ -6,12 +6,12 @@ export default function EditingAccount() {
   const [option, setOption] = useState(1);
   return (
     <div className="container-fluid">
-      <div class="row pt-5">
-        <div class="col-4">
+      <div className="row pt-5">
+        <div className="col-4">
           <button
             onClick={() => setOption(1)}
             type="button"
-            class="btn btn-primary shadow-none"
+            className="btn btn-primary shadow-none"
           >
             Sửa thông tin
           </button>
@@ -19,12 +19,12 @@ export default function EditingAccount() {
           <button
             onClick={() => setOption(2)}
             type="button"
-            class="btn btn-success shadow-none mt-2"
+            className="btn btn-success shadow-none mt-2"
           >
             Đổi mật khẩu
           </button>
         </div>
-        <div class="col-8">
+        <div className="col-8">
           {option == 1 ? <UpdateInfo /> : <UpdatePassword />}
         </div>
       </div>

@@ -8,57 +8,57 @@ export default function NavBar() {
  
   return (
     <div className="container-fluid padding-0">
-      <div class="row myNavbar padding-lg">
-        <div class="col-3 d-flex align-items-center">
-          <div class="">
+      <div className="row myNavbar padding-lg">
+        <div className="col-3 d-flex align-items-center">
+          <div className="">
             <Link to="/">
               <img src={logo} alt="" />
             </Link>
           </div>
         </div>
-        <div class="col-6 padding-0" style={{ textAlign: "center" }}>
-          {/* <div class="searchForm">
-            <form class="" action="/search/" method="get">
+        <div className="col-6 padding-0" style={{ textAlign: "center" }}>
+          {/* <div className="searchForm">
+            <form className="" action="/search/" method="get">
               <input
                 id="search"
                 autocomplete="off"
                 name="q"
-                class="searchInput"
+                className="searchInput"
                 type="search"
                 placeholder="Bạn tìm gì..."
                 aria-label="Search"
                 onblur="document.getElementById('closeSearch').click();"
               />
             </form>
-            <i id="closeSearch" class="fal fa-times"></i>
+            <i id="closeSearch" className="fal fa-times"></i>
           </div> */}
-          <div class="main">
-            <ul class="d-flex">
-              <li class="d-flex align-items-center">
+          <div className="main">
+            <ul className="d-flex">
+              <li className="d-flex align-items-center">
                 <Link to="/">Trang chủ</Link>
               </li>
-              <li class="d-flex align-items-center">
+              <li className="d-flex align-items-center">
                 <Link to="/news">Tin tức</Link>
               </li>
             </ul>
           </div>
         </div>
-        <div class="col-3 padding-0">
-          <div class="menu pl-5 pr-5">
-            <ul class="d-flex justify-content-end">
-              <li class="d-flex align-items-center ">
+        <div className="col-3 padding-0">
+          <div className="menu pl-5 pr-5">
+            <ul className="d-flex justify-content-end">
+              <li className="d-flex align-items-center ">
                 {!user ? (
                   <Link to="/login/">Đăng nhập</Link>
                 ) : (
                   <>
                     <Link to="/account">
-                      <div style={{ marginRight: "2rem" }} class="bg">
-                        <i class="far fa-user"></i>
+                      <div style={{ marginRight: "2rem" }} className="bg">
+                        <i className="far fa-user"></i>
                       </div>
                     </Link>
                     <Link to="/logout">
-                      <div class="bg">
-                        <i class="fal fa-sign-out-alt"></i>
+                      <div className="bg">
+                        <i className="fal fa-sign-out-alt"></i>
                       </div>
                     </Link>
                   </>
