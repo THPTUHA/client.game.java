@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Play from "./Play";
 
 function GameXO({ user }) {
   const [data, setData] = useState();
-  // console.log("GameXO");
+  console.log(user);
 
   const requestStart = async () => {
     try {
@@ -17,6 +17,11 @@ function GameXO({ user }) {
       console.log(err);
     }
   };
+
+  useEffect(()=>{
+
+
+  },[]);
   // const { user } = useContext(UserContext);
   // console.log(user);
   // if (!user) return <Redirect to="/login" />;

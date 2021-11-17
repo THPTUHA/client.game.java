@@ -5,6 +5,7 @@ import Stomp from "stompjs";
 import ChatBox from "../../chat/ChatBox";
 import BoardXO from "./BoardXO";
 import Contrast from "../../../Contrast"
+import CountDown from "../../util/CountDown";
 const id_game = 1;
 
 const Play = ({ data }) => {
@@ -29,19 +30,17 @@ const Play = ({ data }) => {
         function (response) {
           const res = JSON.parse(response.body);
 
+          
           switch (res.status){
             case Contrast.START_GAME:
               setStatus(res);
+              setBoard(res.board);
               setPlayer([res.player1, res.player2]);
-              // setBoard(res.board);
               break;
 
             case Contrast.PLAY:
-              setBoard(res.board);
-              if(res.winner){
-                setWinner(res.winner);
-                setPlayer([res.player1, res.player2]);
-              }
+              if(res.board) setBoard(res.board);
+              setStatus(res);
               break;
 
             case Contrast.MESSAGE:
@@ -51,7 +50,6 @@ const Play = ({ data }) => {
                 name: res.player1.name,
                 type: res.player1.type,
               });
-              console.log(mess);
               localStorage.setItem("messages", JSON.stringify(mess));
               setMessages(mess);
               break;
@@ -63,9 +61,20 @@ const Play = ({ data }) => {
             case Contrast.PLAY_AGAIN:
               setStatus(res);
               break;
-           
+            
+            case Contrast.READY:
+              console.log(data);
+              setStatus(res);
+              break;
+
+            case Contrast.END_GAME:
+              setBoard(res.board);
+              setWinner(res.winner);
+              setPlayer([res.player1, res.player2]);
+              setStatus(res);
           }
           
+          console.log(res);
         }
       );
 
@@ -77,7 +86,7 @@ const Play = ({ data }) => {
           JSON.stringify(req)
         );
       }
-      console.log("connect...///");
+
       setstompClient(stompClient);
     });
     return () => {
@@ -130,9 +139,9 @@ const Play = ({ data }) => {
     }
   }
 
+
   const handleStatus=(status,player)=>{
     if(status){
-      console.log(status)
       if(status.status== Contrast.CANCEL_GAME){
         if(status.player1.id == player[data.type - 1].id)
           return <Redirect to="/gameplay" />;
@@ -143,8 +152,19 @@ const Play = ({ data }) => {
         if(status.player1.id != player[data.type - 1].id)
         return <h1>{status.player1.name + " đã sẵn sàng"}</h1>;
       }
+
+      
     }
   };
+
+  const ready = ()=>{
+    try{
+      const req = { id_match: data.id_match, status: Contrast.READY, type: data.type };
+      stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, JSON.stringify(req) );
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="container-fluid padding-0">
       <div className="row">
@@ -165,6 +185,23 @@ const Play = ({ data }) => {
                     {player[data.type - 1].name} EXP:{" "}
                     {player[data.type - 1].exp}
                   </h5>
+                  {
+                    status.status===Contrast.PLAY && player[data.type - 1].type === status.type?(
+                      <CountDown data={
+                       { 
+                        time :2,
+                        type:data.type,
+                        stompClient:stompClient,
+                        id_match:data.id_match
+                       }
+                      }/>
+                    ):""
+                  }
+                  {
+                    (status.status===Contrast.START_GAME ||
+                    (status.status===Contrast.READY&& player[data.type - 1].type !== status.player1.type ))
+                    ?(<button onClick={ready}>Sẵn sàng</button>):""
+                  }
                   <button
                     style={{ marginLeft: "1rem" }}
                     className="btn btn-danger"
@@ -180,7 +217,7 @@ const Play = ({ data }) => {
                     type: data.type,
                     id_match: data.id_match,
                     board: board,
-                    winner: winner,
+                    status: status.status
                   }}
                 />
 
@@ -196,6 +233,23 @@ const Play = ({ data }) => {
                     {player[2 - data.type].name} EXP:{" "}
                     {player[2 - data.type].exp}
                   </h5>
+                  {
+                    status.status===Contrast.PLAY && player[2 - data.type ].type === status.type?(
+                      <CountDown data={
+                       { 
+                        time :2,
+                        type:data.type,
+                        stompClient:stompClient,
+                        id_match:data.id_match
+                       }
+                      }/>
+                    ):""
+                  }
+                  {
+                    status.status===Contrast.READY && status.player1.id != player[data.type - 1].id?(
+                      <h1>{status.player1.name + " đã sẵn sàng"}</h1>
+                    ):""
+                  }
                   {handleStatus(status, player)}
                 </div>
                 {winner ? (

@@ -32,7 +32,8 @@ const BoardXO = ({data})=>{
                 <div
                   className="o"
                   onClick={() => {
-                    if(!data.winner)sendAction(index,index1) }}
+                    if(data.status===Contrast.PLAY)
+                    sendAction(index,index1) }}
                   key={index1}
                 >
                   <p> </p>
