@@ -46,6 +46,13 @@ input {
   width: 100%;
   margin-bottom: 2rem;
 }
+#file {
+  padding: 0;
+  background-color: unset;
+  border: unset;
+  width: 100%;
+  margin-bottom: 2rem;
+}
 a:hover,
 a {
   text-decoration: none;
@@ -406,12 +413,15 @@ input:focus {
 .message--sent {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  border-bottom-right-radius: 2px;
   background-color: tomato;
 }
 .message--received {
   background-color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  border-bottom-left-radius: 2px;
+
   color: black;
 }
 /* .messages {

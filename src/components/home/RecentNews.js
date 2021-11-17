@@ -10,10 +10,10 @@ export default function RecentNews() {
         </div>
       </div>
       <div className="row">
-        <div className="col-sm-4">
+        <div className="col-sm-6 col-lg-4">
           <News />
         </div>
-        <div className="col-sm-4">
+        <div className="col-sm-6 col-lg-4">
           <News />
         </div>
       </div>

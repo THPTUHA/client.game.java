@@ -4,21 +4,26 @@ import GameXO from "./xo/GameXO";
 import { UserContext } from "../../context/UserProvider";
 import { useContext } from "react";
 import NavBar from "../navbar/NavBar";
+import { Switch } from "react-router";
 
 function Game() {
   const match = useRouteMatch();
   const { user } = useContext(UserContext);
   return (
     <>
-      <NavBar />
-      <div className="container-fluid game">
-        <h1>Game </h1>
-        <Link to={`${match.url}/xo`}>Cờ Caro</Link>
+      <Switch>
         <Route
           path={`${match.url}/xo`}
           component={() => <GameXO user={user} />}
         />
-      </div>
+        <Route path="/gameplay">
+          <NavBar />
+          <div className="container-fluid game">
+            <h1>Game </h1>
+            <Link to={`${match.url}/xo`}>Cờ Caro</Link>
+          </div>
+        </Route>
+      </Switch>
     </>
   );
 }
