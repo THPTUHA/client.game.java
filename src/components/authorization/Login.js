@@ -4,6 +4,7 @@ import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { authorization } from "../../service/authorization";
+import NavBar from "../navbar/NavBar";
 
 export default function Login() {
   const { updateDataUser } = useContext(UserContext);
@@ -17,7 +18,10 @@ export default function Login() {
   const submit = async () => {
     const data = { email: email, password: password };
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER}/login`, data);
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER}/login`,
+        data
+      );
       localStorage.setItem("user", JSON.stringify(response.data));
       localStorage.setItem("email", JSON.stringify({ email: email }));
       try {
@@ -35,50 +39,53 @@ export default function Login() {
   };
 
   return !data ? (
-    <div className="container">
-      <div className="row">
-        <div
-          style={{ position: "relative", height: "100vh" }}
-          className="col-sm-12"
-        >
-          <div style={{ height: "100vh" }} className="grid">
-            <div className="form">
-              <form action="Login">
-                <p className="form__title">Đăng nhập</p>
-                <input
-                  className="mb-3"
-                  type="text"
-                  placeholder="Enter your email"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-                <br />
-                <input
-                  type="password"
-                  className="mb-3"
-                  placeholder="Enter your password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                />
-                <br />
-                <button
-                  type="button"
-                  className="Form__btn btn btn-warning"
-                  onClick={submit}
-                >
-                  Submit
-                </button>
-                <Link to="/register" className="form__signUp">
-                  Tạo tài khoản
-                </Link>
-              </form>
+    <>
+      <NavBar />
+      <div className="container">
+        <div className="row">
+          <div
+            style={{ position: "relative", height: "100vh" }}
+            className="col-sm-12"
+          >
+            <div style={{ height: "100vh" }} className="grid">
+              <div className="form">
+                <form action="Login">
+                  <p className="form__title">Đăng nhập</p>
+                  <input
+                    className="mb-3"
+                    type="text"
+                    placeholder="Enter your email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
+                  <br />
+                  <input
+                    type="password"
+                    className="mb-3"
+                    placeholder="Enter your password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                  <br />
+                  <button
+                    type="button"
+                    className="Form__btn btn btn-warning"
+                    onClick={submit}
+                  >
+                    Submit
+                  </button>
+                  <Link to="/register" className="form__signUp">
+                    Tạo tài khoản
+                  </Link>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   ) : (
     <Redirect to="/"></Redirect>
   );

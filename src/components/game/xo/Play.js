@@ -39,7 +39,7 @@ const Play = ({ data }) => {
             console.log("SET Winner.................//////");
             setWinner(res.winner);
           }
-          if (res.status == 2) {
+          if (res.status) {
             setStatus(res);
           }
           if (res.message) {
@@ -63,6 +63,7 @@ const Play = ({ data }) => {
           JSON.stringify(req)
         );
       }
+      console.log("connect...///");
       setstompClient(stompClient);
     });
     return () => {
@@ -71,11 +72,12 @@ const Play = ({ data }) => {
   }, []);
 
   useEffect(() => {
-    if (status && status.player1.id == player[data.type - 1].id) {
+    if (status &&status.status==2&& status.player1.id == player[data.type - 1].id) {
       localStorage.removeItem("messages");
       stompClient.disconnect();
     }
   }, [status]);
+
   const handleCannerMatch = () => {
     try {
       const req = { id_match: data.id_match, status: 2, type: data.type };
@@ -88,6 +90,7 @@ const Play = ({ data }) => {
       console.log(err);
     }
   };
+
   function userWinner(winner) {
     switch (winner) {
       case 1:
@@ -98,6 +101,30 @@ const Play = ({ data }) => {
         return "Hoà";
     }
   }
+
+  function playAgain(){
+    try{
+      const req = { id_match: data.id_match, status: 3, type: data.type };
+      stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, JSON.stringify(req) );
+      setWinner(0);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  const handleStatus=(status,player)=>{
+    if(status){
+      if(status.status==2){
+        if(status.player1.id == player[data.type - 1].id)
+          return <Redirect to="/gameplay" />;
+        return <h1>{status.player1.name + " đã rời trận"}</h1>;
+      }
+
+      if(status.status==3){
+        return <h1>{status.player1.name + " đã sắn sàng"}</h1>;
+      }
+    }
+  } 
   return (
     <div className="container-fluid padding-0">
       <div className="row">
@@ -146,21 +173,18 @@ const Play = ({ data }) => {
                     }.svg`}
                     alt=""
                   />
-
-                  {status && status.player1.id == player[data.type - 1].id ? (
-                    <Redirect to="/gameplay" />
-                  ) : status ? (
-                    <h5 className="text-danger">
-                      {status.player1.name + " đã rời trận"}
-                    </h5>
-                  ) : (
-                    <h5>
-                      {player[2 - data.type].name} EXP:{" "}
-                      {player[2 - data.type].exp}
-                    </h5>
-                  )}
+                  <h5>
+                    {player[2 - data.type].name} EXP:{" "}
+                    {player[2 - data.type].exp}
+                  </h5>
+                  {handleStatus(status,player)}
                 </div>
-                {winner ? <h1>Winner: {userWinner(winner)}</h1> : <></>}
+                {winner ? (
+                  <div>
+                    <button onClick={playAgain}>Chơi lại</button>
+                    <h1>Winner: {userWinner(winner)}</h1>
+                  </div>
+                ) : <></>}
               </div>
             </div>
             <div className="col-12 col-lg-6">

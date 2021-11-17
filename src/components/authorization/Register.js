@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
+import NavBar from "../navbar/NavBar";
 import StyledInput from "../styledComponents/StyledInput";
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -100,150 +101,153 @@ export default function Register() {
   };
   if (ok) return <Redirect to="/login" />;
   return (
-    <div className="container">
-      <div className="row">
-        <div
-          style={{ position: "relative", height: "100vh" }}
-          className="col-sm-12"
-        >
-          <div className="grid">
-            <div className="form pt-5 pb-5">
-              <form action="Login">
-                <p className="form__title">Đăng ký</p>
+    <>
+      <NavBar />
+      <div className="container">
+        <div className="row">
+          <div
+            style={{ position: "relative", height: "100vh" }}
+            className="col-sm-12"
+          >
+            <div className="grid">
+              <div className="form pt-5 pb-5">
+                <form action="Login">
+                  <p className="form__title">Đăng ký</p>
 
-                <StyledInput
-                  theme={{
-                    main: eWarning !== "" ? "red" : "gray",
-                    bg: eWarning !== "" ? "#F9ADA0" : "white",
-                  }}
-                  onBlur={(e) => {
-                    checkEmail(e.target.value);
-                  }}
-                  className="mb-3"
-                  type="email"
-                  placeholder="Nhập email"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
+                  <StyledInput
+                    theme={{
+                      main: eWarning !== "" ? "red" : "gray",
+                      bg: eWarning !== "" ? "#F9ADA0" : "white",
+                    }}
+                    onBlur={(e) => {
+                      checkEmail(e.target.value);
+                    }}
+                    className="mb-3"
+                    type="email"
+                    placeholder="Nhập email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
 
-                <p className="text-danger">{eWarning}</p>
-                <StyledInput
-                  theme={{
-                    main: fWarning !== "" ? "red" : "gray",
-                    bg: fWarning !== "" ? "#F9ADA0" : "white",
-                  }}
-                  className="mb-3"
-                  type="text"
-                  placeholder="Nhập tên"
-                  onChange={(e) => {
-                    setFirstName(e.target.value);
-                  }}
-                  onBlur={() => checkFirstName()}
-                />
-                <p className="text-danger">{fWarning}</p>
+                  <p className="text-danger">{eWarning}</p>
+                  <StyledInput
+                    theme={{
+                      main: fWarning !== "" ? "red" : "gray",
+                      bg: fWarning !== "" ? "#F9ADA0" : "white",
+                    }}
+                    className="mb-3"
+                    type="text"
+                    placeholder="Nhập tên"
+                    onChange={(e) => {
+                      setFirstName(e.target.value);
+                    }}
+                    onBlur={() => checkFirstName()}
+                  />
+                  <p className="text-danger">{fWarning}</p>
 
-                <StyledInput
-                  theme={{
-                    main: lWarning !== "" ? "red" : "gray",
-                    bg: lWarning !== "" ? "#F9ADA0" : "white",
-                  }}
-                  className="mb-3"
-                  type="text"
-                  placeholder="Nhập họ"
-                  onChange={(e) => {
-                    setLastName(e.target.value);
-                  }}
-                  onBlur={() => checkLastName()}
-                />
-                <p className="text-danger">{lWarning}</p>
+                  <StyledInput
+                    theme={{
+                      main: lWarning !== "" ? "red" : "gray",
+                      bg: lWarning !== "" ? "#F9ADA0" : "white",
+                    }}
+                    className="mb-3"
+                    type="text"
+                    placeholder="Nhập họ"
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                    }}
+                    onBlur={() => checkLastName()}
+                  />
+                  <p className="text-danger">{lWarning}</p>
 
-                <div
-                  onChange={(e) => {
-                    if (e.target.defaultValue === "nam") {
-                      setSex("1");
-                    } else {
-                      setSex("0");
-                    }
-                  }}
-                >
-                  <div className="d-flex mb-2">
-                    <div className="d-flex align-items-center ">
-                      <input
-                        style={{ margin: "0", width: "unset" }}
-                        id="nam"
-                        type="radio"
-                        name="sex"
-                        checked={sex === "1"}
-                        value="nam"
-                      />
-                      <label className="p-2" for="nam">
-                        Nam
-                      </label>
-                    </div>
-                    <div className="d-flex align-items-center">
-                      <input
-                        style={{ margin: "0", width: "unset" }}
-                        id="nu"
-                        type="radio"
-                        name="sex"
-                        value="nu"
-                        checked={sex === "0"}
-                      />
-                      <label className="p-2" for="nu">
-                        Nữ
-                      </label>
+                  <div
+                    onChange={(e) => {
+                      if (e.target.defaultValue === "nam") {
+                        setSex("1");
+                      } else {
+                        setSex("0");
+                      }
+                    }}
+                  >
+                    <div className="d-flex mb-2">
+                      <div className="d-flex align-items-center ">
+                        <input
+                          style={{ margin: "0", width: "unset" }}
+                          id="nam"
+                          type="radio"
+                          name="sex"
+                          checked={sex === "1"}
+                          value="nam"
+                        />
+                        <label className="p-2" for="nam">
+                          Nam
+                        </label>
+                      </div>
+                      <div className="d-flex align-items-center">
+                        <input
+                          style={{ margin: "0", width: "unset" }}
+                          id="nu"
+                          type="radio"
+                          name="sex"
+                          value="nu"
+                          checked={sex === "0"}
+                        />
+                        <label className="p-2" for="nu">
+                          Nữ
+                        </label>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <StyledInput
-                  theme={{
-                    main: pWarning !== "" ? "red" : "gray",
-                    bg: pWarning !== "" ? "#F9ADA0" : "white",
-                  }}
-                  type="password"
-                  className="mb-3"
-                  placeholder="Nhập mật khẩu"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  onBlur={() => checkPassword()}
-                />
-                <br />
-                <p className="text-danger">{pWarning}</p>
+                  <StyledInput
+                    theme={{
+                      main: pWarning !== "" ? "red" : "gray",
+                      bg: pWarning !== "" ? "#F9ADA0" : "white",
+                    }}
+                    type="password"
+                    className="mb-3"
+                    placeholder="Nhập mật khẩu"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    onBlur={() => checkPassword()}
+                  />
+                  <br />
+                  <p className="text-danger">{pWarning}</p>
 
-                <StyledInput
-                  theme={{
-                    main: rWarning !== "" ? "red" : "gray",
-                    bg: rWarning !== "" ? "#F9ADA0" : "white",
-                  }}
-                  type="password"
-                  className="mb-3"
-                  placeholder="Nhập lại mật khẩu"
-                  onChange={(e) => {
-                    setRePassword(e.target.value);
-                  }}
-                  onBlur={(e) => {
-                    checkRePassword(e.target.value);
-                  }}
-                />
-                <p className="text-danger">{rWarning}</p>
-                <button
-                  type="button"
-                  className="Form__btn btn btn-warning shadow-none"
-                  onClick={submit}
-                >
-                  Submit
-                </button>
-                <Link to="/login" className="form__signUp">
-                  Đăng nhập
-                </Link>
-              </form>
+                  <StyledInput
+                    theme={{
+                      main: rWarning !== "" ? "red" : "gray",
+                      bg: rWarning !== "" ? "#F9ADA0" : "white",
+                    }}
+                    type="password"
+                    className="mb-3"
+                    placeholder="Nhập lại mật khẩu"
+                    onChange={(e) => {
+                      setRePassword(e.target.value);
+                    }}
+                    onBlur={(e) => {
+                      checkRePassword(e.target.value);
+                    }}
+                  />
+                  <p className="text-danger">{rWarning}</p>
+                  <button
+                    type="button"
+                    className="Form__btn btn btn-warning shadow-none"
+                    onClick={submit}
+                  >
+                    Submit
+                  </button>
+                  <Link to="/login" className="form__signUp">
+                    Đăng nhập
+                  </Link>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

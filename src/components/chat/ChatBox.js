@@ -4,13 +4,20 @@ import Message from "./Message";
 const id_game = 1;
 function ChatBox({ data }) {
   const [mes, setMes] = useState("");
-  const handleMessage = () => {
-    data.stompClient.send(
-      `/app/xo/${id_game}/${data.id_match}`,
-      {},
-      JSON.stringify({ id_match: data.id_match, type: data.type, message: mes })
-    );
-    setMes("");
+  const handleMessage = (e) => {
+    console.log(e);
+    if (e.key === "Enter" || e.type === "click") {
+      data.stompClient.send(
+        `/app/xo/${id_game}/${data.id_match}`,
+        {},
+        JSON.stringify({
+          id_match: data.id_match,
+          type: data.type,
+          message: mes,
+        })
+      );
+      setMes("");
+    }
   };
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
@@ -18,7 +25,7 @@ function ChatBox({ data }) {
   };
   useEffect(() => {
     scrollToBottom();
-  }, [data]);
+  }, [data.messages]);
 
   return (
     <div className="chatBox mt-lg-4 ">
@@ -27,15 +34,13 @@ function ChatBox({ data }) {
         {data.messages.map((e, index) => {
           return (
             <>
-              {" "}
               <Message key={index} message={e} is_chat={data.type == e.type} />
             </>
           );
         })}
         <div ref={messagesEndRef} />
       </div>
-
-      <div className="d-flex">
+      <div className="d-flex" onKeyPress={handleMessage}>
         <input
           placeholder="Aa"
           type="text"

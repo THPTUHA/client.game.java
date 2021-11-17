@@ -1,5 +1,5 @@
-import {  Route, Switch, Redirect } from "react-router-dom";
-import React, { useContext,lazy } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import React, { useContext, lazy } from "react";
 import Register from "../authorization/Register";
 import Home from "../home/Home";
 import Login from "../authorization/Login";
@@ -16,7 +16,6 @@ import EditingAccount from "../account/EditingAccount";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
- 
 
   return (
     <div>
@@ -24,7 +23,6 @@ export default function Nav() {
         <Loading />
       ) : (
         <>
-          <NavBar />
           <Switch>
             <Route exact path="/" component={Home}></Route>
             <Route path="/news" component={NewsList}></Route>
@@ -37,6 +35,7 @@ export default function Nav() {
             <Route path="/gameplay">
               {!user ? <Redirect to="/" /> : <Game />}
             </Route>
+
             <Route path="/logout">
               <Logout />
             </Route>
