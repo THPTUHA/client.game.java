@@ -22,7 +22,7 @@ export default function ListNews() {
                 <div className="col-sm-12">
                   <a
                     className="btn btn-primary"
-                    href="/dangBaiViet.jsp"
+                    href="/news/post"
                     role="button"
                   >
                     Đăng bài

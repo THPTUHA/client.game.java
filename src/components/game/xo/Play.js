@@ -72,7 +72,11 @@ const Play = ({ data }) => {
   }, []);
 
   useEffect(() => {
-    if (status &&status.status==2&& status.player1.id == player[data.type - 1].id) {
+    if (
+      status &&
+      status.status == 2 &&
+      status.player1.id == player[data.type - 1].id
+    ) {
       localStorage.removeItem("messages");
       stompClient.disconnect();
     }
@@ -102,29 +106,33 @@ const Play = ({ data }) => {
     }
   }
 
-  function playAgain(){
-    try{
+  function playAgain() {
+    try {
       const req = { id_match: data.id_match, status: 3, type: data.type };
-      stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, JSON.stringify(req) );
+      stompClient.send(
+        `/app/xo/${id_game}/${data.id_match}`,
+        {},
+        JSON.stringify(req)
+      );
       setWinner(0);
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   }
 
-  const handleStatus=(status,player)=>{
-    if(status){
-      if(status.status==2){
-        if(status.player1.id == player[data.type - 1].id)
+  const handleStatus = (status, player) => {
+    if (status) {
+      if (status.status == 2) {
+        if (status.player1.id == player[data.type - 1].id)
           return <Redirect to="/gameplay" />;
-        return <h1>{status.player1.name + " đã rời trận"}</h1>;
+        return <h5 className="text-danger">{" đã rời trận"}</h5>;
       }
 
-      if(status.status==3){
+      if (status.status == 3) {
         return <h1>{status.player1.name + " đã sắn sàng"}</h1>;
       }
     }
-  } 
+  };
   return (
     <div className="container-fluid padding-0">
       <div className="row">
@@ -166,7 +174,6 @@ const Play = ({ data }) => {
 
                 <div className="d-flex align-items-center">
                   <img
-                    // className="accountAvatar"
                     style={{ width: 50 }}
                     src={`https://avatars.dicebear.com/api/micah/${
                       player[2 - data.type].name
@@ -177,14 +184,20 @@ const Play = ({ data }) => {
                     {player[2 - data.type].name} EXP:{" "}
                     {player[2 - data.type].exp}
                   </h5>
-                  {handleStatus(status,player)}
+                  {handleStatus(status, player)}
                 </div>
                 {winner ? (
                   <div>
-                    <button onClick={playAgain}>Chơi lại</button>
-                    <h1>Winner: {userWinner(winner)}</h1>
+                    <button className="btn btn-success" onClick={playAgain}>
+                      Chơi lại
+                    </button>
+                    <h5 className="d-inline-block p-2">
+                      {userWinner(winner)} chiến thắng
+                    </h5>
                   </div>
-                ) : <></>}
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="col-12 col-lg-6">

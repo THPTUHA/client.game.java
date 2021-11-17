@@ -13,6 +13,7 @@ import GoToTop from "../GoToTop";
 import NotFound from "./NotFound";
 import Loading from "../../loading/Loading";
 import EditingAccount from "../account/EditingAccount";
+import PostNews from "../news/PostNews";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
@@ -25,7 +26,7 @@ export default function Nav() {
         <>
           <Switch>
             <Route exact path="/" component={Home}></Route>
-            <Route path="/news" component={NewsList}></Route>
+            <Route exact path="/news" component={NewsList}></Route>
             <Route path="/login">
               {user ? <Redirect to="/" /> : <Login />}
             </Route>
@@ -44,6 +45,9 @@ export default function Nav() {
             </Route>
             <Route path="/account/edit">
               {!user ? <Redirect to="/" /> : <EditingAccount />}
+            </Route>
+            <Route path="/news/post">
+              {!user ? <Redirect to="/" /> : <PostNews />}
             </Route>
             <Route component={NotFound} />
           </Switch>
