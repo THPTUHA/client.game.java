@@ -4,6 +4,7 @@ import Message from "./Message";
 const id_game = 1;
 export default function ChatBox({data}) {
   const [mes,setMes] = useState();
+  console.log(data);
   const handleMessage=()=>{
     console.log(mes);
     data.stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, 

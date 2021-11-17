@@ -390,3 +390,17 @@ input:focus {
   background-color: white;
   margin-right: 1rem;
 }
+
+.message--sent{
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: tomato;
+
+}
+.message--received{
+
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: black;
+}

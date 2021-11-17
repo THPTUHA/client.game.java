@@ -124,3 +124,67 @@ function App(){
   )
 }
 export default App;
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.molded;
+
+import com.Connection.ConnectionDTB;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Asus
+ */
+public class NVSDT {
+    public static ArrayList<NVSDT> layTatCaNVSDT(int maNV) throws ClassNotFoundException, IOException, FileNotFoundException, SQLException {
+        Connection con = ConnectionDTB.getConnection();
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM nv_sdt where ma_nv=?");
+        statement.setInt(1, maNV);
+        ResultSet result = statement.executeQuery();
+        ArrayList<NVSDT> dsNVSDT = new ArrayList<>();
+        while (result.next()) {
+            dsNVSDT.add(new NVSDT(maNV, result.getString("sdt")));
+        }
+        return dsNVSDT;
+    }
+
+    public static void themNVSDT(int maNV, String sdt) throws ClassNotFoundException, IOException, FileNotFoundException, SQLException {
+        Connection con = ConnectionDTB.getConnection();
+        PreparedStatement statement = con.prepareStatement("insert into nv_sdt\n"
+                + "values(\n"
+                + "?,?\n"
+                + ")");
+        statement.setInt(1, maNV);
+        statement.setString(2, sdt);
+        statement.executeUpdate();
+    }
+
+    public static void capNhatNVSDT(int maNV, String sdtHT, String sdtMoi) throws ClassNotFoundException, IOException, FileNotFoundException, SQLException {
+        Connection con = ConnectionDTB.getConnection();
+        PreparedStatement statement = con.prepareStatement("update nv_sdt\n"
+                + "set sdt=?\n"
+                + "where ma_nv=? and sdt=?");
+        statement.setInt(2, maNV);
+        statement.setString(3, sdtHT);
+        statement.setString(1, sdtMoi);
+        statement.executeUpdate();
+    }
+
+    public static void xoaNVSDT(int maNV, String sdt) throws ClassNotFoundException, IOException, FileNotFoundException, SQLException {
+        Connection con = ConnectionDTB.getConnection();
+        PreparedStatement statement = con.prepareStatement("delete from nv_sdt\n"
+                + "where ma_nv=? and sdt=?");
+        statement.setInt(1, maNV);
+        statement.setString(2, sdt);
+        statement.executeUpdate();
+    }
+}
