@@ -192,7 +192,8 @@ const Play = ({ data }) => {
                         time :2,
                         type:data.type,
                         stompClient:stompClient,
-                        id_match:data.id_match
+                        id_match:data.id_match,
+                        is_send : true
                        }
                       }/>
                     ):""
@@ -240,7 +241,8 @@ const Play = ({ data }) => {
                         time :2,
                         type:data.type,
                         stompClient:stompClient,
-                        id_match:data.id_match
+                        id_match:data.id_match,
+                        is_send : false
                        }
                       }/>
                     ):""

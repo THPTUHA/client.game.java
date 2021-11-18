@@ -8,7 +8,7 @@ const CountDown= ({data})=>{
     const [time,setTime]=useState(data.time);
 
     useEffect(()=>{
-    if(time===0){
+    if(time===0&& data.is_send){
         const play = {
             random:true,
             type: data.type,
