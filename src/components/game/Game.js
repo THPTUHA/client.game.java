@@ -22,12 +22,9 @@ function Game() {
 
           <div className="container-fluid game">
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-12 col-lg-6">
                 <h1>Game </h1>
-                <Link to={`${match.url}/xo`}>
-                  <img src={caroGame} alt="" />
-                  <h3>Cờ Caro</h3>
-                </Link>
+                <Link to={`${match.url}/xo`}>Cờ Caro</Link>
               </div>
               <div class="col-lg-6 mt-5">
                 <ChatBox
