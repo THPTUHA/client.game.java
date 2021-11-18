@@ -4,8 +4,11 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import ChatBox from "../../chat/ChatBox";
 import BoardXO from "./BoardXO";
-import Contrast from "../../../Contrast"
+import Contrast from "../../../Contrast";
 import CountDown from "../../util/CountDown";
+import nhac from "../../../assets/mp3/lmht.mp3";
+import nhacGame from "../../../assets/mp3/startedGame.mp3"
+
 const id_game = 1;
 
 const Play = ({ data }) => {
@@ -171,7 +174,7 @@ const Play = ({ data }) => {
       console.log(err);
     }
   }
-  const test =(a)=>{console.log(a)}
+ 
   return (
     <div className="container-fluid padding-0">
       <div className="row">
@@ -180,9 +183,6 @@ const Play = ({ data }) => {
             <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
               <div>
                 <div className="d-flex align-items-center mb-1">
-                {
-                  test(player)
-                }
                   <img
                     // className="accountAvatar"
                     style={{ width: 40 }}
@@ -292,6 +292,10 @@ const Play = ({ data }) => {
           </>
         ) : (
           <div className="d-flex align-items-center">
+            <audio playsInline loop autoPlay>
+              <source src={nhac} type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
             <h3>Đang tìm trận</h3>
             <i className="fad fa-spinner-third"></i>
           </div>

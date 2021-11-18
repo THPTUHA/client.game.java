@@ -35,6 +35,9 @@ export default function Account() {
                 <p className="content">
                   <strong>Exp:</strong> {user.exp}
                 </p>
+                <p className="content">
+                  <strong>Status:</strong> {user.status}
+                </p>
                 <a
                   href="/account/edit"
                   className="btn btn-primary active"
