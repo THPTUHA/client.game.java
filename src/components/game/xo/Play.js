@@ -165,12 +165,12 @@ const Play = ({ data }) => {
       if (status.status == Contrast.CANCEL_GAME) {
         if (status.player1.id == player[data.type - 1].id)
           return <Redirect to="/gameplay" />;
-        return <h5 className="text-danger">{" đã rời trận"}</h5>;
+        return <h6 className="text-danger">{" đã rời trận"}</h6>;
       }
 
       if (status.status == Contrast.PLAY_AGAIN) {
         if (status.player1.id != player[data.type - 1].id)
-          return <h5 className="text-success">{" đã sẵn sàng"}</h5>;
+          return <h6 className="text-warning ss">{" đã sẵn sàng"}</h6>;
       }
     }
   };
@@ -208,7 +208,7 @@ const Play = ({ data }) => {
                     }.svg`}
                     alt=""
                   />
-                  <h5
+                  <h6
                     className={
                       status.status === Contrast.PLAY &&
                       player[data.type - 1].type === status.type
@@ -218,12 +218,12 @@ const Play = ({ data }) => {
                   >
                     {player[data.type - 1].name} EXP:{" "}
                     {player[data.type - 1].exp}
-                  </h5>
+                  </h6>
                   {status.status === Contrast.PLAY &&
                   player[data.type - 1].type === status.type ? (
                     <CountDown
                       data={{
-                        time: 2,
+                        time: 30,
                         type: data.type,
                         stompClient: stompClient,
                         id_match: data.id_match,
@@ -236,7 +236,7 @@ const Play = ({ data }) => {
                   {status.status === Contrast.START_GAME ||
                   (status.status === Contrast.READY &&
                     player[data.type - 1].type !== status.player1.type) ? (
-                    <button className="btn btn-success" onClick={ready}>
+                    <button className="btn btn-warning" onClick={ready}>
                       Sẵn sàng
                     </button>
                   ) : (
@@ -269,7 +269,7 @@ const Play = ({ data }) => {
                     }.svg`}
                     alt=""
                   />
-                  <h5
+                  <h6
                     className={
                       status.status === Contrast.PLAY &&
                       player[2 - data.type].type === status.type
@@ -279,12 +279,12 @@ const Play = ({ data }) => {
                   >
                     {player[2 - data.type].name} EXP:{" "}
                     {player[2 - data.type].exp}
-                  </h5>
+                  </h6>
                   {status.status === Contrast.PLAY &&
                   player[2 - data.type].type === status.type ? (
                     <CountDown
                       data={{
-                        time: 2,
+                        time: 30,
                         type: data.type,
                         stompClient: stompClient,
                         id_match: data.id_match,
@@ -296,7 +296,7 @@ const Play = ({ data }) => {
                   )}
                   {status.status === Contrast.READY &&
                   status.player1.id != player[data.type - 1].id ? (
-                    <h5 className="text-success">{" đã sẵn sàng"}</h5>
+                    <h6 className="text-warning ss">{" đã sẵn sàng"}</h6>
                   ) : (
                     ""
                   )}
@@ -307,7 +307,7 @@ const Play = ({ data }) => {
                     <button className="btn btn-success" onClick={playAgain}>
                       Chơi lại
                     </button>
-                    <h5 className="d-inline-block p-2">{userWinner(winner)}</h5>
+                    <h6 className="d-inline-block p-2">{userWinner(winner)}</h6>
                   </div>
                 ) : (
                   <></>

@@ -9,7 +9,9 @@ export default function UpdateInfo() {
   const [sdtWarning, setSdtWarning] = useState("");
   const [sdt, setSdt] = useState(user.phone);
   const [moTa, setMoTa] = useState(user.discription);
-
+  const submit = () => {
+    if (!checkSdt()) return;
+  };
   const checkInput = (str) => {
     if (!str) {
       return false;
@@ -17,8 +19,12 @@ export default function UpdateInfo() {
     return true;
   };
   const checkSdt = () => {
-    if (parseInt(sdt) == sdt) setSdtWarning("");
-    else setSdtWarning("Không đúng định dạng");
+    if (!sdt) return true;
+    if (parseInt(sdt) == sdt) {
+      setSdtWarning("");
+      return true;
+    } else setSdtWarning("Không đúng định dạng");
+    return false;
   };
   return (
     <div>
@@ -65,7 +71,7 @@ export default function UpdateInfo() {
                   <button
                     type="button"
                     className="Form__btn btn btn-warning shadow-none"
-                    // onClick={submit}
+                    onClick={submit}
                   >
                     Cập nhật
                   </button>

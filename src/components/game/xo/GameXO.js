@@ -18,20 +18,25 @@ function GameXO({ user }) {
     }
   };
 
-  useEffect(async ()=>{
-    if(user.status){
+  useEffect(async () => {
+    if (user.status) {
       console.log("FUCK");
       try {
-        const res = await axios.post(`${process.env.REACT_APP_SERVER}/xo/start`, {
-          id_match:user.status,loading: true, id_user: user.id
-        });
+        const res = await axios.post(
+          `${process.env.REACT_APP_SERVER}/xo/start`,
+          {
+            id_match: user.status,
+            loading: true,
+            id_user: user.id,
+          }
+        );
         console.log(res.data);
         setData(res.data);
       } catch (err) {
         console.log(err);
       }
     }
-  },[]);
+  }, []);
   // const { user } = useContext(UserContext);
   // console.log(user);
   // if (!user) return <Redirect to="/login" />;

@@ -56,6 +56,7 @@ input {
 .btn {
   border-radius: 1rem;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 a:hover,
 a {
@@ -271,6 +272,9 @@ input:focus {
 .turn {
   animation: flicker 1s linear infinite;
   color: #ffba00;
+}
+.ss {
+  animation: flicker 1s linear infinite;
 }
 .game {
   background-image: linear-gradient(
