@@ -7,7 +7,7 @@ import BoardXO from "./BoardXO";
 import Contrast from "../../../Contrast";
 import CountDown from "../../util/CountDown";
 import nhac from "../../../assets/mp3/lmht.mp3";
-import nhacGame from "../../../assets/mp3/startedGame.mp3"
+import nhacGame from "../../../assets/mp3/startedGame.mp3";
 
 const id_game = 1;
 
@@ -33,7 +33,7 @@ const Play = ({ data }) => {
         function (response) {
           const res = JSON.parse(response.body);
 
-          switch (res.status){
+          switch (res.status) {
             case Contrast.START_GAME:
               setStatus(res);
               setBoard(res.board);
@@ -41,7 +41,7 @@ const Play = ({ data }) => {
               break;
 
             case Contrast.PLAY:
-              if(res.board) setBoard(res.board);
+              if (res.board) setBoard(res.board);
               setStatus(res);
               break;
 
@@ -63,7 +63,7 @@ const Play = ({ data }) => {
             case Contrast.PLAY_AGAIN:
               setStatus(res);
               break;
-            
+
             case Contrast.READY:
               console.log(data);
               setStatus(res);
@@ -75,18 +75,17 @@ const Play = ({ data }) => {
               setPlayer([res.player1, res.player2]);
               setStatus(res);
           }
-          
+
           console.log(res);
         }
       );
 
-      if(data.loading){
-          console.log(data);
-          setStatus(data);
-          setBoard(data.board);
-          setPlayer([data.player1, data.player2]);
-      }else
-      if (data.status== Contrast.START_GAME) {
+      if (data.loading) {
+        console.log(data);
+        setStatus(data);
+        setBoard(data.board);
+        setPlayer([data.player1, data.player2]);
+      } else if (data.status == Contrast.START_GAME) {
         const req = { id_match: data.id_match, status: Contrast.START_GAME };
         stompClient.send(
           `/app/xo/${id_game}/${data.id_match}`,
@@ -105,8 +104,10 @@ const Play = ({ data }) => {
 
   useEffect(() => {
     if (status) {
-      if( status.status==Contrast.CANCEL_GAME && status.player1.id == player[data.type - 1].id)
-      {
+      if (
+        status.status == Contrast.CANCEL_GAME &&
+        status.player1.id == player[data.type - 1].id
+      ) {
         localStorage.removeItem("messages");
         stompClient.disconnect();
       }
@@ -115,13 +116,16 @@ const Play = ({ data }) => {
 
   const handleCancelMatch = () => {
     try {
-      const req = { id_match: data.id_match, status: Contrast.CANCEL_GAME, type: data.type };
+      const req = {
+        id_match: data.id_match,
+        status: Contrast.CANCEL_GAME,
+        type: data.type,
+      };
       stompClient.send(
         `/app/xo/${id_game}/${data.id_match}`,
         {},
         JSON.stringify(req)
       );
-
     } catch (err) {
       console.log(err);
     }
@@ -130,55 +134,68 @@ const Play = ({ data }) => {
   function userWinner(winner) {
     switch (winner) {
       case 1:
-        return player[0].name;
+        return player[0].name + " chiến thắng";
       case 2:
-        return player[1].name;
+        return player[1].name + " chiến thắng";
       default:
         return "Hoà";
     }
   }
 
-  function playAgain(){
-    try{
-      const req = { id_match: data.id_match, status: Contrast.PLAY_AGAIN, type: data.type };
-      stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, JSON.stringify(req) );
+  function playAgain() {
+    try {
+      const req = {
+        id_match: data.id_match,
+        status: Contrast.PLAY_AGAIN,
+        type: data.type,
+      };
+      stompClient.send(
+        `/app/xo/${id_game}/${data.id_match}`,
+        {},
+        JSON.stringify(req)
+      );
       setWinner(0);
     } catch (err) {
       console.log(err);
     }
   }
 
-
-  const handleStatus=(status,player)=>{
-    if(status){
-      if(status.status== Contrast.CANCEL_GAME){
-        if(status.player1.id == player[data.type - 1].id)
+  const handleStatus = (status, player) => {
+    if (status) {
+      if (status.status == Contrast.CANCEL_GAME) {
+        if (status.player1.id == player[data.type - 1].id)
           return <Redirect to="/gameplay" />;
         return <h5 className="text-danger">{" đã rời trận"}</h5>;
       }
 
-      if(status.status== Contrast.PLAY_AGAIN){
-        if(status.player1.id != player[data.type - 1].id)
-        return <h1>{status.player1.name + " đã sẵn sàng"}</h1>;
+      if (status.status == Contrast.PLAY_AGAIN) {
+        if (status.player1.id != player[data.type - 1].id)
+          return <h5 className="text-success">{" đã sẵn sàng"}</h5>;
       }
-
-      
     }
   };
 
-  const ready = ()=>{
-    try{
-      const req = { id_match: data.id_match, status: Contrast.READY, type: data.type };
-      stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, JSON.stringify(req) );
+  const ready = () => {
+    try {
+      const req = {
+        id_match: data.id_match,
+        status: Contrast.READY,
+        type: data.type,
+      };
+      stompClient.send(
+        `/app/xo/${id_game}/${data.id_match}`,
+        {},
+        JSON.stringify(req)
+      );
     } catch (err) {
       console.log(err);
     }
-  }
- 
+  };
+
   return (
     <div className="container-fluid padding-0">
       <div className="row">
-        {player ? ( 
+        {player ? (
           <>
             <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
               <div>
@@ -191,28 +208,40 @@ const Play = ({ data }) => {
                     }.svg`}
                     alt=""
                   />
-                  <h5>
+                  <h5
+                    className={
+                      status.status === Contrast.PLAY &&
+                      player[data.type - 1].type === status.type
+                        ? "turn"
+                        : ""
+                    }
+                  >
                     {player[data.type - 1].name} EXP:{" "}
                     {player[data.type - 1].exp}
                   </h5>
-                  {
-                    status.status===Contrast.PLAY && player[data.type - 1].type === status.type?(
-                      <CountDown data={
-                       { 
-                        time :2,
-                        type:data.type,
-                        stompClient:stompClient,
+                  {status.status === Contrast.PLAY &&
+                  player[data.type - 1].type === status.type ? (
+                    <CountDown
+                      data={{
+                        time: 2,
+                        type: data.type,
+                        stompClient: stompClient,
                         id_match: data.id_match,
-                        is_send : true
-                       }
-                      }/>
-                    ):""
-                  }
-                  {
-                    (status.status===Contrast.START_GAME ||
-                    (status.status===Contrast.READY&& player[data.type - 1].type !== status.player1.type ))
-                    ?(<button onClick={ready}>Sẵn sàng</button>):""
-                  }
+                        is_send: true,
+                      }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {status.status === Contrast.START_GAME ||
+                  (status.status === Contrast.READY &&
+                    player[data.type - 1].type !== status.player1.type) ? (
+                    <button className="btn btn-success" onClick={ready}>
+                      Sẵn sàng
+                    </button>
+                  ) : (
+                    ""
+                  )}
                   <button
                     style={{ marginLeft: "1rem" }}
                     className="btn btn-danger"
@@ -228,7 +257,7 @@ const Play = ({ data }) => {
                     type: data.type,
                     id_match: data.id_match,
                     board: board,
-                    status: status.status
+                    status: status.status,
                   }}
                 />
 
@@ -240,28 +269,37 @@ const Play = ({ data }) => {
                     }.svg`}
                     alt=""
                   />
-                  <h5>
+                  <h5
+                    className={
+                      status.status === Contrast.PLAY &&
+                      player[2 - data.type].type === status.type
+                        ? "turn"
+                        : ""
+                    }
+                  >
                     {player[2 - data.type].name} EXP:{" "}
                     {player[2 - data.type].exp}
                   </h5>
-                  {
-                    status.status===Contrast.PLAY && player[2 - data.type ].type === status.type?(
-                      <CountDown data={
-                       { 
-                        time :2,
-                        type:data.type,
-                        stompClient:stompClient,
-                        id_match:data.id_match,
-                        is_send : false
-                       }
-                      }/>
-                    ):""
-                  }
-                  {
-                    status.status===Contrast.READY && status.player1.id != player[data.type - 1].id?(
-                      <h1>{status.player1.name + " đã sẵn sàng"}</h1>
-                    ):""
-                  }
+                  {status.status === Contrast.PLAY &&
+                  player[2 - data.type].type === status.type ? (
+                    <CountDown
+                      data={{
+                        time: 2,
+                        type: data.type,
+                        stompClient: stompClient,
+                        id_match: data.id_match,
+                        is_send: false,
+                      }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {status.status === Contrast.READY &&
+                  status.player1.id != player[data.type - 1].id ? (
+                    <h5 className="text-success">{" đã sẵn sàng"}</h5>
+                  ) : (
+                    ""
+                  )}
                   {handleStatus(status, player)}
                 </div>
                 {winner ? (
@@ -269,9 +307,7 @@ const Play = ({ data }) => {
                     <button className="btn btn-success" onClick={playAgain}>
                       Chơi lại
                     </button>
-                    <h5 className="d-inline-block p-2">
-                      {userWinner(winner)} chiến thắng
-                    </h5>
+                    <h5 className="d-inline-block p-2">{userWinner(winner)}</h5>
                   </div>
                 ) : (
                   <></>

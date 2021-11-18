@@ -1,5 +1,5 @@
 import { Route, Switch, Redirect } from "react-router-dom";
-import React, { useContext, lazy } from "react";
+import React, { useContext, useEffect } from "react";
 import Register from "../authorization/Register";
 import Home from "../home/Home";
 import Login from "../authorization/Login";
