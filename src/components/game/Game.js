@@ -6,6 +6,7 @@ import { useContext } from "react";
 import NavBar from "../navbar/NavBar";
 import { Switch } from "react-router";
 import ChatBox from "../chat/ChatBox";
+import caroGame from "../../assets/img/caroGame.png";
 function Game() {
   const match = useRouteMatch();
   const { user } = useContext(UserContext);
@@ -23,7 +24,10 @@ function Game() {
             <div class="row">
               <div class="col-sm-6">
                 <h1>Game </h1>
-                <Link to={`${match.url}/xo`}>Cờ Caro</Link>
+                <Link to={`${match.url}/xo`}>
+                  <img src={caroGame} alt="" />
+                  <h3>Cờ Caro</h3>
+                </Link>
               </div>
               <div class="col-lg-6 mt-5">
                 <ChatBox

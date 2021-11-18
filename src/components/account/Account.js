@@ -63,12 +63,12 @@ export default function Account() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td scope="row">Nghia</td>
+                    <td>Nghia</td>
                     <td>11-11-2021</td>
                     <td>Thắng</td>
                   </tr>
                   <tr>
-                    <td scope="row">Nghia</td>
+                    <td>Nghia</td>
                     <td>11-11-2021</td>
                     <td>Thua</td>
                   </tr>

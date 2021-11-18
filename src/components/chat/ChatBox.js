@@ -49,7 +49,7 @@ function ChatBox({ data }) {
           onChange={(e) => setMes(e.target.value)}
           value={mes}
         />
-        <i className="far fa-arrow-circle-right " onClick={handleMessage}></i>
+        <i className="fas fa-arrow-circle-right " onClick={handleMessage}></i>
       </div>
     </div>
   );
