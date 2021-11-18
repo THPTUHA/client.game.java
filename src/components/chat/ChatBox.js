@@ -6,6 +6,7 @@ const id_game = 1;
 function ChatBox({ data }) {
   const [mes, setMes] = useState("");
   const handleMessage = (e) => {
+    if (mes === "") return;
     if (e.key === "Enter" || e.type === "click") {
       data.stompClient.send(
         `/app/xo/${id_game}/${data.id_match}`,
@@ -14,7 +15,7 @@ function ChatBox({ data }) {
           id_match: data.id_match,
           type: data.type,
           message: mes,
-          status:Contrast.MESSAGE
+          status: Contrast.MESSAGE,
         })
       );
       setMes("");
@@ -36,7 +37,7 @@ function ChatBox({ data }) {
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
           return (
-              <Message key={index} message={e} is_chat={data.type == e.type} />
+            <Message key={index} message={e} is_chat={data.type == e.type} />
           );
         })}
         <div ref={messagesEndRef} />
