@@ -30,7 +30,6 @@ const Play = ({ data }) => {
         function (response) {
           const res = JSON.parse(response.body);
 
-          
           switch (res.status){
             case Contrast.START_GAME:
               setStatus(res);
@@ -78,6 +77,12 @@ const Play = ({ data }) => {
         }
       );
 
+      if(data.loading){
+          console.log(data);
+          setStatus(data);
+          setBoard(data.board);
+          setPlayer([data.player1, data.player2]);
+      }else
       if (data.status== Contrast.START_GAME) {
         const req = { id_match: data.id_match, status: Contrast.START_GAME };
         stompClient.send(
@@ -90,6 +95,7 @@ const Play = ({ data }) => {
       setstompClient(stompClient);
     });
     return () => {
+      stompClient.disconnect();
       console.log("Unmouted");
     };
   }, []);
@@ -165,14 +171,18 @@ const Play = ({ data }) => {
       console.log(err);
     }
   }
+  const test =(a)=>{console.log(a)}
   return (
     <div className="container-fluid padding-0">
       <div className="row">
-        {player ? (
+        {player ? ( 
           <>
             <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
               <div>
                 <div className="d-flex align-items-center mb-1">
+                {
+                  test(player)
+                }
                   <img
                     // className="accountAvatar"
                     style={{ width: 40 }}
@@ -192,7 +202,7 @@ const Play = ({ data }) => {
                         time :2,
                         type:data.type,
                         stompClient:stompClient,
-                        id_match:data.id_match,
+                        id_match: data.id_match,
                         is_send : true
                        }
                       }/>
