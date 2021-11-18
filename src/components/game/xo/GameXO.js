@@ -18,10 +18,7 @@ function GameXO({ user }) {
     }
   };
 
-  useEffect(()=>{
-
-
-  },[]);
+  useEffect(() => {}, []);
   // const { user } = useContext(UserContext);
   // console.log(user);
   // if (!user) return <Redirect to="/login" />;

@@ -6,7 +6,6 @@ import { useContext } from "react";
 import NavBar from "../navbar/NavBar";
 import { Switch } from "react-router";
 import ChatBox from "../chat/ChatBox";
-
 function Game() {
   const match = useRouteMatch();
   const { user } = useContext(UserContext);
@@ -19,6 +18,7 @@ function Game() {
         />
         <Route path="/gameplay">
           <NavBar />
+
           <div className="container-fluid game">
             <div class="row">
               <div class="col-sm-6">

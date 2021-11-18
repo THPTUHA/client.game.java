@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-
+import chatSound from "../../assets/mp3/discord.mp3";
 function Message({ message, is_chat }) {
   return (
     <div className="">
@@ -10,6 +10,9 @@ function Message({ message, is_chat }) {
             alt=""
           />
           <p className="message--received">{message.message}</p>
+          <audio playsInline autoPlay>
+            <source src={chatSound} type="audio/mpeg" />
+          </audio>
         </div>
       ) : (
         <div className="d-flex  justify-content-end align-items-end mb-2">
