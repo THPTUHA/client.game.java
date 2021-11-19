@@ -27,6 +27,15 @@ const Play = ({ data }) => {
     setOpponent(getPlayer(data, 3- type));
   }
 
+  const handleMessage = (res)=>{
+    const mess = JSON.parse(localStorage.getItem("messages")) || [];
+    if(res!="") mess.push({
+        message: res.message,
+        type: res.player.type,
+      });
+      localStorage.setItem("messages", JSON.stringify(mess));
+    return mess;
+  }
   useEffect(() => {
     const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
     const stompClient = Stomp.over(socket);
@@ -53,13 +62,7 @@ const Play = ({ data }) => {
               break;
 
             case Contrast.MESSAGE:
-              const mess = JSON.parse(localStorage.getItem("messages")) || [];
-              mess.push({
-                message: res.message,
-                type: res.player.type,
-              });
-              localStorage.setItem("messages", JSON.stringify(mess));
-              setMessages(mess);
+              setMessages(handleMessage(res));
               break;
 
             case Contrast.CANCEL_GAME:
@@ -91,6 +94,7 @@ const Play = ({ data }) => {
         console.log(data);
         setStatus(data.status);
         setBoard(data.board);
+        setMessages(handleMessage(""));
         player(data,data.type);
       } 
 
