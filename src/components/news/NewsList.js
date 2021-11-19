@@ -20,13 +20,7 @@ export default function ListNews() {
             <div className="container-fluid smallBlogs padding-0">
               <div className="row">
                 <div className="col-sm-12">
-                  <a
-                    className="btn btn-primary"
-                    href="/news/post"
-                    role="button"
-                  >
-                    Đăng bài
-                  </a>
+                
                   <p className="sessionTitle">BÀI VIẾT NỔI BẬT</p>
                 </div>
               </div>
