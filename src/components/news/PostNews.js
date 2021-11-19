@@ -7,10 +7,10 @@ export default function PostNews() {
       <NavBar />
 
       <div className="grid pt-5">
-        <form class="form-group" enctype="multipart/form-data">
+        <form className="form-group" enctype="multipart/form-data">
           <label for="tieuDeBaiViet"> Tiêu đề:</label>
           <textarea
-            class="form-control"
+            className="form-control"
             name="tieuDeBaiViet"
             id=""
             rows="3"
@@ -18,7 +18,7 @@ export default function PostNews() {
           ></textarea>
           <label for="moTaBaiViet"> Mô tả:</label>
           <textarea
-            class="form-control"
+            className="form-control"
             name="moTaBaiViet"
             id=""
             rows="3"
@@ -26,7 +26,7 @@ export default function PostNews() {
           ></textarea>
           <label for="noiDung"> Nội dung:</label>
           <textarea
-            class="form-control"
+            className="form-control"
             name="noiDung"
             id=""
             rows="3"

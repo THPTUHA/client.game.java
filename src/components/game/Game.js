@@ -20,12 +20,12 @@ function Game() {
           <NavBar />
 
           <div className="container-fluid game">
-            <div class="row">
-              <div class="col-sm-6">
+            <div className="row">
+              <div className="col-sm-6">
                 <h1>Game </h1>
                 <Link to={`${match.url}/xo`}>Cờ Caro</Link>
               </div>
-              <div class="col-sm-6">
+              <div className="col-sm-6">
                 <ChatBox
                   data={{
                     stompClient: 1,

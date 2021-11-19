@@ -144,8 +144,8 @@ import java.util.ArrayList;
  *
  * @author Asus
  */
-public class NVSDT {
-    public static ArrayList<NVSDT> layTatCaNVSDT(int maNV) throws ClassNotFoundException, IOException, FileNotFoundException, SQLException {
+public className NVSDT {
+    public static ArrayList<NVSDT> layTatCaNVSDT(int maNV) throws classNameNotFoundException, IOException, FileNotFoundException, SQLException {
         Connection con = ConnectionDTB.getConnection();
         PreparedStatement statement = con.prepareStatement("SELECT * FROM nv_sdt where ma_nv=?");
         statement.setInt(1, maNV);
@@ -157,7 +157,7 @@ public class NVSDT {
         return dsNVSDT;
     }
 
-    public static void themNVSDT(int maNV, String sdt) throws ClassNotFoundException, IOException, FileNotFoundException, SQLException {
+    public static void themNVSDT(int maNV, String sdt) throws classNameNotFoundException, IOException, FileNotFoundException, SQLException {
         Connection con = ConnectionDTB.getConnection();
         PreparedStatement statement = con.prepareStatement("insert into nv_sdt\n"
                 + "values(\n"
@@ -168,7 +168,7 @@ public class NVSDT {
         statement.executeUpdate();
     }
 
-    public static void capNhatNVSDT(int maNV, String sdtHT, String sdtMoi) throws ClassNotFoundException, IOException, FileNotFoundException, SQLException {
+    public static void capNhatNVSDT(int maNV, String sdtHT, String sdtMoi) throws classNameNotFoundException, IOException, FileNotFoundException, SQLException {
         Connection con = ConnectionDTB.getConnection();
         PreparedStatement statement = con.prepareStatement("update nv_sdt\n"
                 + "set sdt=?\n"
@@ -179,7 +179,7 @@ public class NVSDT {
         statement.executeUpdate();
     }
 
-    public static void xoaNVSDT(int maNV, String sdt) throws ClassNotFoundException, IOException, FileNotFoundException, SQLException {
+    public static void xoaNVSDT(int maNV, String sdt) throws classNameNotFoundException, IOException, FileNotFoundException, SQLException {
         Connection con = ConnectionDTB.getConnection();
         PreparedStatement statement = con.prepareStatement("delete from nv_sdt\n"
                 + "where ma_nv=? and sdt=?");
