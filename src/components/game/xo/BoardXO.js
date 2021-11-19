@@ -1,7 +1,6 @@
 import { memo } from "react";
 import Contrast from "../../../Contrast";
 
-const id_game = 1;
 const BoardXO = ({data})=>{
     function sendAction(x, y) {
       console.log("send to:", data.id_match);
@@ -12,7 +11,7 @@ const BoardXO = ({data})=>{
         id_match: data.id_match,
         status:Contrast.PLAY
       };
-      data.stompClient.send( `/app/xo/${id_game}/${data.id_match}`, {}, JSON.stringify(play) );
+      data.stompClient.send( `/app/xo/${Contrast.ID_GAMEXO}/${data.id_match}`, {}, JSON.stringify(play) );
       
     }
 

@@ -6,6 +6,7 @@ import { useContext } from "react";
 import NavBar from "../navbar/NavBar";
 import { Switch } from "react-router";
 import ChatBox from "../chat/ChatBox";
+import caroGame from "../../assets/img/caroGame.png";
 function Game() {
   const match = useRouteMatch();
   const { user } = useContext(UserContext);

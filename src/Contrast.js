@@ -5,7 +5,11 @@
     PLAY : 4,
     MESSAGE : 5,
     READY: 6,
-    END_GAME: 7
+    END_GAME: 7,
+    RELOAD: 8,
+    WINNER : 9,
+    DRAW : 10,
+    ID_GAMEXO : 1
  }
 
  export default Contrast;
