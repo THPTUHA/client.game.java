@@ -99,7 +99,7 @@ const Player = ({player ,id_match, stompClient ,you  , turn})=>{
                   }
                   {
                       player.status === Contrast.CANCEL_GAME && you ?(
-                          <Redirect to="/gameplay/xo" />
+                          <Redirect to="/gameplay" />
                       ):""
                   }
 
