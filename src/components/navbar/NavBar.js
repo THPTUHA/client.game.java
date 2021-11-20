@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import logo from "../../assets/img/logo.png";
 export default function NavBar() {
   const { user } = useContext(UserContext);
-  console.log(user);
   return (
     <div className="container-fluid padding-0">
       <div className="row myNavbar padding-lg">

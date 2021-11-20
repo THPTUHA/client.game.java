@@ -7,10 +7,9 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState("unload");
   useEffect(() => {
-    const email = JSON.parse(localStorage.getItem("email"));
     (async () => {
       try {
-        const auth = authorization({ params: email });
+        const auth = authorization();
         // console.log(auth);
         if (auth != "NO") {
           const user = await axios.get("/user", auth);
@@ -20,9 +19,7 @@ const UserProvider = ({ children }) => {
           setUser(null);
         }
       } catch (err) {
-        console.log("errors");
-
-        // alert("Vui lòng đăng nhập");
+        console.log(err);
       }
     })();
   }, []);

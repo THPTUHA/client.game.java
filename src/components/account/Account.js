@@ -1,10 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext ,useState } from "react";
+import axios from "axios";
 import { UserContext } from "../../context/UserProvider";
 import NavBar from "../navbar/NavBar";
 
+const FormData = require('form-data');
 export default function Account() {
   const { user } = useContext(UserContext);
+  const [avatar, setAvatar] = useState(`https://avatars.dicebear.com/api/micah/${
+    user.first_name + " " + user.last_name
+  }.svg`);
+  const [new_avatar, setNewAvatar] = useState();
+
   console.log(user);
+  const submit = async()=>{
+    console.log(new_avatar[0]);
+    const formData = new FormData();
+    formData.append("new_avatar",new_avatar[0]);
+    try{
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/update`, formData);
+      console.log(res);
+      setAvatar(res.data);
+    }catch(err){
+      console.log(err);
+    }
+  }
   return (
     <>
       <NavBar />
@@ -16,12 +35,15 @@ export default function Account() {
                 <div className="d-flex justify-content-center">
                   <img
                     className="accountAvatar"
-                    src={`https://avatars.dicebear.com/api/micah/${
-                      user.first_name + " " + user.last_name
-                    }.svg`}
+                    src={avatar}
                     alt=""
                   />
                 </div>
+                <div>
+                    Upload Avatar
+                    <input type="file" onChange={(e)=>{setNewAvatar(e.target.files)}}/>
+                    <button onClick={submit}>Save</button>
+                  </div>
                 <p className="name">{user.first_name + " " + user.last_name}</p>
                 <p className="content">
                   <strong>Email:</strong> {user.email}

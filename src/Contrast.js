@@ -11,5 +11,10 @@
     DRAW : 10,
     ID_GAMEXO : 1
  }
-
+export const Err = {
+   ERR_TITLE :1,
+   ERR_CONTENT: 2,
+   ERR_DESCRIBES : 3,
+   SUCCESS :0
+}
  export default Contrast;

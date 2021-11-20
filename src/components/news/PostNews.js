@@ -7,7 +7,7 @@ export default function PostNews() {
       <NavBar />
 
       <div className="grid pt-5">
-        <form className="form-group" enctype="multipart/form-data">
+        <form className="form-group" action={`${process.env.REACT_APP_SERVER}/news/create`} method="post" enctype="multipart/form-data">
           <label for="tieuDeBaiViet"> Tiêu đề:</label>
           <textarea
             className="form-control"
@@ -32,7 +32,7 @@ export default function PostNews() {
             rows="3"
             required
           ></textarea>
-          <input type="file" id="file" name="file" required /> <br />
+          <input type="file" id="file" name="image" required /> <br />
           <button className="btn btn-warning" type="submit">
             Đăng
           </button>

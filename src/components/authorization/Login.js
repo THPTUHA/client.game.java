@@ -11,6 +11,7 @@ export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [data, setData] = useState();
+  const [error, setError] = useState();
   useEffect(() => {
     updateDataUser(data);
   }, [data]);
@@ -22,18 +23,15 @@ export default function Login() {
         `${process.env.REACT_APP_SERVER}/login`,
         data
       );
-      localStorage.setItem("user", JSON.stringify(response.data));
-      localStorage.setItem("email", JSON.stringify({ email: email }));
+      localStorage.setItem("token", JSON.stringify(response.data));
       try {
-        const user = await axios.get(
-          "/user",
-          authorization({ params: { email: email } })
-        );
+        const user = await axios.get("/user", authorization());
         setData(user.data);
       } catch (err) {
         console.log(err);
       }
     } catch (err) {
+      setError("Sai email hoặc password");
       console.log(err);
     }
   };
@@ -44,11 +42,12 @@ export default function Login() {
       <div className="container">
         <div className="row">
           <div
-            style={{ position: "relative", height: "100vh" }}
+            style={{ position: "relative", height: "90vh" }}
             className="col-sm-12"
           >
             <div style={{ height: "100vh" }} className="grid">
               <div className="form">
+              <div>{error}</div>
                 <form action="Login">
                   <p className="form__title">Đăng nhập</p>
                   <input
