@@ -69,6 +69,10 @@ export default function NavBar() {
           </div>
         </div>
       </div>
+
+      <div className="col-12">
+        <div className="space"></div>
+      </div>
     </div>
   );
 }

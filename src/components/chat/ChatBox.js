@@ -28,7 +28,7 @@ function ChatBox({ data }) {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    if (data.messages.length !== 0) scrollToBottom();
   }, [data.messages]);
 
   return (

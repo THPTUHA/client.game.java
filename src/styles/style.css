@@ -87,7 +87,7 @@ ul {
 }
 .myNavbar {
   background-color: black;
-  /* position: fixed; */
+  position: fixed;
   z-index: 1;
   width: 100%;
   margin: 0;
@@ -275,6 +275,7 @@ input:focus {
 }
 .ss {
   animation: flicker 1s linear infinite;
+  color: #ffba00;
 }
 .game {
   background-image: linear-gradient(
