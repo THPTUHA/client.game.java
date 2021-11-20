@@ -1,23 +1,18 @@
 import React from "react";
 import NavBar from "../navbar/NavBar";
+import { Link } from "react-router-dom";
 
 export default function News() {
   return (
     <div>
       <NavBar />
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <a
-              className="btn btn-primary"
-              href="/admin/news/post"
-              role="button"
-            >
-              Đăng bài
-            </a>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
+            <Link to="/admin/news/post">Đăng bài</Link>
           </div>
-          <div class="col-sm-12">
-            <table class="table">
+          <div className="col-sm-12">
+            <table className="table">
               <thead>
                 <tr>
                   <th>Tiêu đề</th>
@@ -39,7 +34,7 @@ export default function News() {
                     <a
                       name=""
                       id=""
-                      class="btn btn-primary"
+                      className="btn btn-primary"
                       href="/admin/news/update"
                       role="button"
                     >
@@ -54,15 +49,7 @@ export default function News() {
                   <td>test</td>
                   <td>test</td>
                   <td>
-                    <a
-                      name=""
-                      id=""
-                      class="btn btn-primary"
-                      href="/admin/news/update"
-                      role="button"
-                    >
-                      Sửa
-                    </a>
+                    <Link to="/admin/news/update">Sửa</Link>
                   </td>
                 </tr>
               </tbody>

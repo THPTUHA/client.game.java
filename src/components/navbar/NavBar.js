@@ -3,6 +3,7 @@ import React, { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import logo from "../../assets/img/logo.png";
+
 export default function NavBar() {
   const { user } = useContext(UserContext);
   return (
@@ -24,6 +25,13 @@ export default function NavBar() {
               <li className="d-flex align-items-center">
                 <Link to="/news">Tin tức</Link>
               </li>
+              {
+                user.role === "ROLE_ADMIN"?(
+                  <li className="d-flex align-items-center">
+                  <Link to="/admin">ADMIN</Link>
+                </li>
+                ):""
+              }
             </ul>
           </div>
         </div>
@@ -48,9 +56,7 @@ export default function NavBar() {
                               backgroundColor: "white",
                               marginRight: "3px",
                             }}
-                            src={`https://avatars.dicebear.com/api/micah/${
-                              user.first_name + " " + user.last_name
-                            }.svg`}
+                            src={user.avatar}
                             alt=""
                           />
                           <p className="m-0">{user.first_name}</p>

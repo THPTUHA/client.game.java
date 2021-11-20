@@ -5,10 +5,10 @@ export default function User() {
   return (
     <div>
       <NavBar />
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <table class="table">
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
+            <table className="table">
               <thead>
                 <tr>
                   <th>Email</th>
@@ -40,8 +40,8 @@ export default function User() {
               </tbody>
             </table>
           </div>
-          <div class="col-sm-12">
-            <button type="button" class="btn btn-primary">
+          <div className="col-sm-12">
+            <button type="button" className="btn btn-primary">
               Lưu
             </button>
           </div>

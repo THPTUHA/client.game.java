@@ -37,34 +37,35 @@ export default function Nav() {
             <Route path="/register">
               {user ? <Redirect to="/" /> : <Register />}
             </Route>
+
             <Route path="/gameplay">
-              {!user ? <Redirect to="/" /> : <Game />}
+              {!user ? <Redirect to="/login" /> : <Game />}
             </Route>
 
             <Route path="/logout">
               <Logout />
             </Route>
             <Route exact path="/account">
-              {!user ? <Redirect to="/" /> : <Account />}
+              {!user ? <Redirect to="/login" /> : <Account />}
             </Route>
             <Route path="/account/edit">
-              {!user ? <Redirect to="/" /> : <EditingAccount />}
+              {!user ? <Redirect to="/login" /> : <EditingAccount />}
             </Route>
 
             <Route exact path="/admin">
-              {!user ? <Redirect to="/" /> : <Admin />}
+              {!user ? <Redirect to="/login" /> : <Admin />}
             </Route>
             <Route exact path="/admin/news">
-              {!user ? <Redirect to="/" /> : <News />}
+              {!user ? <Redirect to="/login" /> : <News />}
             </Route>
             <Route path="/admin/news/post">
-              {!user ? <Redirect to="/" /> : <PostNews />}
+              {!user ? <Redirect to="/login" /> : <PostNews />}
             </Route>
             <Route path="/admin/news/update">
-              {!user ? <Redirect to="/" /> : <UpdateNews />}
+              {!user ? <Redirect to="/login" /> : <UpdateNews />}
             </Route>
             <Route exact path="/admin/user">
-              {!user ? <Redirect to="/" /> : <User />}
+              {!user ? <Redirect to="/login" /> : <User />}
             </Route>
             <Route component={NotFound} />
           </Switch>

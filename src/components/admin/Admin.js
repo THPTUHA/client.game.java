@@ -1,21 +1,21 @@
 import React from "react";
 import NavBar from "../navbar/NavBar";
-
+import { Link } from "react-router-dom";
 export default function Admin() {
   return (
     <div>
       <NavBar />
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
             <div className="mb-2">
-              <a className="btn btn-primary" href="/admin/user" role="button">
-                Quản lý người dùng
-              </a>
+              <Link to="/admin/user">
+                  Quản lý người dùng
+              </Link>
             </div>
-            <a className="btn btn-primary" href="/admin/news" role="button">
-              Quản lý bài viết
-            </a>
+            <Link to="/admin/news">
+                  Quản lý news
+              </Link>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ export default function UpdateNews() {
       <NavBar />
 
       <div className="grid pt-5">
-        <form className="form-group" enctype="multipart/form-data">
+        <form className="form-group" encType="multipart/form-data">
           <label for="tieuDeBaiViet"> Tiêu đề:</label>
           <textarea
             className="form-control"

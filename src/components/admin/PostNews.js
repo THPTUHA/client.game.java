@@ -7,7 +7,7 @@ export default function PostNews() {
       <NavBar />
 
       <div className="grid pt-5">
-        <form className="form-group" action={`${process.env.REACT_APP_SERVER}/news/create`} method="post" enctype="multipart/form-data">
+        <form className="form-group" action={`${process.env.REACT_APP_SERVER}/news/create`} method="post" encType="multipart/form-data">
           <label for="tieuDeBaiViet"> Tiêu đề:</label>
           <textarea
             className="form-control"

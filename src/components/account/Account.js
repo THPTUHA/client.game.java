@@ -2,13 +2,14 @@ import React, { useContext ,useState } from "react";
 import axios from "axios";
 import { UserContext } from "../../context/UserProvider";
 import NavBar from "../navbar/NavBar";
+import { Link } from "react-router-dom";
+import FormData from "form-data";
+import { authorization } from "../../service/authorization";
+// const FormData = require('form-data');
 
-const FormData = require('form-data');
 export default function Account() {
   const { user } = useContext(UserContext);
-  const [avatar, setAvatar] = useState(`https://avatars.dicebear.com/api/micah/${
-    user.first_name + " " + user.last_name
-  }.svg`);
+  const [avatar, setAvatar] = useState(user.avatar);
   const [new_avatar, setNewAvatar] = useState();
 
   console.log(user);
@@ -17,7 +18,7 @@ export default function Account() {
     const formData = new FormData();
     formData.append("new_avatar",new_avatar[0]);
     try{
-      const res = await axios.post(`${process.env.REACT_APP_SERVER}/update`, formData);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/user/update_avatar`, formData,authorization());
       console.log(res);
       setAvatar(res.data);
     }catch(err){
@@ -40,7 +41,7 @@ export default function Account() {
                   />
                 </div>
                 <div>
-                    Upload Avatar
+                    Update Avatar
                     <input type="file" onChange={(e)=>{setNewAvatar(e.target.files)}}/>
                     <button onClick={submit}>Save</button>
                   </div>
@@ -60,13 +61,9 @@ export default function Account() {
                 <p className="content">
                   <strong>Status:</strong> {user.status}
                 </p>
-                <a
-                  href="/account/edit"
-                  className="btn btn-primary active"
-                  role="button"
-                >
-                  Cập nhật thông tin
-                </a>
+                <Link to="/account/edit">
+                   Cập nhật thông tin
+                </Link>
               </div>
             </div>
           </div>

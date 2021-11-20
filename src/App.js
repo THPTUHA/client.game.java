@@ -1,14 +1,15 @@
 import React from "react";
-import Main from "./components/Main";
 import UserProvider from "./context/UserProvider";
 import { BrowserRouter as Router } from "react-router-dom";
+import Nav from "./components/pages/Nav";
 
 function App(){
   console.log("App");
   return (
     <UserProvider>
       <Router>
-        <Main/>
+        <Nav>
+        </Nav>
       </Router>
     </UserProvider>
   );
