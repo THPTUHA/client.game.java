@@ -1,4 +1,4 @@
-import React, { useContext ,useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../../context/UserProvider";
 import NavBar from "../navbar/NavBar";
@@ -13,18 +13,22 @@ export default function Account() {
   const [new_avatar, setNewAvatar] = useState();
 
   console.log(user);
-  const submit = async()=>{
+  const submit = async () => {
     console.log(new_avatar[0]);
     const formData = new FormData();
-    formData.append("new_avatar",new_avatar[0]);
-    try{
-      const res = await axios.post(`${process.env.REACT_APP_SERVER}/user/update_avatar`, formData,authorization());
+    formData.append("new_avatar", new_avatar[0]);
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER}/user/update_avatar`,
+        formData,
+        authorization()
+      );
       console.log(res);
       setAvatar(res.data);
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
   return (
     <>
       <NavBar />
@@ -33,18 +37,26 @@ export default function Account() {
           <div className="col-sm-4">
             <div className="position-relative">
               <div className="info d-flex flex-column">
-                <div className="d-flex justify-content-center">
-                  <img
-                    className="accountAvatar"
-                    src={avatar}
-                    alt=""
-                  />
+                <div className="d-flex justify-content-center align-items-center">
+                  <div
+                    style={{ backgroundImage: `url(${avatar}` }}
+                    className="accountAvtContainer"
+                  >
+                    {/* <img className="accountAvatar" src={avatar} alt="" /> */}
+                  </div>
                 </div>
                 <div>
-                    Update Avatar
-                    <input type="file" onChange={(e)=>{setNewAvatar(e.target.files)}}/>
-                    <button onClick={submit}>Save</button>
-                  </div>
+                  <input
+                    type="file"
+                    id="file"
+                    onChange={(e) => {
+                      setNewAvatar(e.target.files);
+                    }}
+                  />
+                  <button className="btn btn-warning" onClick={submit}>
+                    Save
+                  </button>
+                </div>
                 <p className="name">{user.first_name + " " + user.last_name}</p>
                 <p className="content">
                   <strong>Email:</strong> {user.email}
@@ -62,7 +74,10 @@ export default function Account() {
                   <strong>Status:</strong> {user.status}
                 </p>
                 <Link to="/account/edit">
-                   Cập nhật thông tin
+                  <button type="button" class="btn btn-primary">
+                    {" "}
+                    Cập nhật thông tin
+                  </button>
                 </Link>
               </div>
             </div>

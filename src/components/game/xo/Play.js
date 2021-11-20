@@ -9,33 +9,34 @@ import CountDown from "../../util/CountDown";
 import nhac from "../../../assets/mp3/lmht.mp3";
 import nhacGame from "../../../assets/mp3/startedGame.mp3";
 
-const getPlayer = (data, type)=>{
-  if(type == 1)return data.player1;
+const getPlayer = (data, type) => {
+  if (type == 1) return data.player1;
   return data.player2;
-}
+};
 const Play = ({ data }) => {
   const [you, setYou] = useState();
   const [opponent, setOpponent] = useState();
   const [status, setStatus] = useState();
-  const [turn,setTurn] = useState();
+  const [turn, setTurn] = useState();
   const [messages, setMessages] = useState([]);
   const [board, setBoard] = useState([]);
   const [stompClient, setstompClient] = useState();
 
-  const player =(data,type)=>{
-    setYou(getPlayer(data,type));
-    setOpponent(getPlayer(data, 3- type));
-  }
+  const player = (data, type) => {
+    setYou(getPlayer(data, type));
+    setOpponent(getPlayer(data, 3 - type));
+  };
 
-  const handleMessage = (res)=>{
+  const handleMessage = (res) => {
     const mess = JSON.parse(localStorage.getItem("messages")) || [];
-    if(res!="") mess.push({
+    if (res != "")
+      mess.push({
         message: res.message,
         type: res.player.type,
       });
-      localStorage.setItem("messages", JSON.stringify(mess));
+    localStorage.setItem("messages", JSON.stringify(mess));
     return mess;
-  }
+  };
   useEffect(() => {
     const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
     const stompClient = Stomp.over(socket);
@@ -51,14 +52,14 @@ const Play = ({ data }) => {
               setStatus(res.status);
               setBoard(res.board);
               setTurn(res.turn);
-              player(res,data.type);
+              player(res, data.type);
               break;
 
             case Contrast.PLAY:
               setBoard(res.board);
               setStatus(res.status);
               setTurn(res.turn);
-              player(res,data.type);
+              player(res, data.type);
               break;
 
             case Contrast.MESSAGE:
@@ -67,23 +68,23 @@ const Play = ({ data }) => {
 
             case Contrast.CANCEL_GAME:
               setStatus(res.status);
-              player(res,data.type);
+              player(res, data.type);
               break;
 
             case Contrast.PLAY_AGAIN:
               setStatus(res.status);
-              player(res,data.type);
+              player(res, data.type);
               break;
 
             case Contrast.READY:
               setStatus(res.status);
-              player(res,data.type);
+              player(res, data.type);
               break;
 
             case Contrast.END_GAME:
               setBoard(res.board);
               setStatus(res.status);
-              player(res,data.type);
+              player(res, data.type);
           }
 
           console.log(res);
@@ -95,8 +96,8 @@ const Play = ({ data }) => {
         setStatus(data.status);
         setBoard(data.board);
         setMessages(handleMessage(""));
-        player(data,data.type);
-      } 
+        player(data, data.type);
+      }
 
       if (data.status == Contrast.START_GAME) {
         const req = { id_match: data.id_match, status: Contrast.START_GAME };
@@ -131,7 +132,13 @@ const Play = ({ data }) => {
           <>
             <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
               <div>
-               <Player player={you} id_match={data.id_match} stompClient={stompClient} you ={1} turn={turn}/>
+                <Player
+                  player={you}
+                  id_match={data.id_match}
+                  stompClient={stompClient}
+                  you={1}
+                  turn={turn}
+                />
                 <BoardXO
                   data={{
                     stompClient: stompClient,
@@ -141,7 +148,13 @@ const Play = ({ data }) => {
                     status: status,
                   }}
                 />
-                <Player player={opponent} id_match={data.id_match} stompClient={stompClient} you={0} turn={turn} />
+                <Player
+                  player={opponent}
+                  id_match={data.id_match}
+                  stompClient={stompClient}
+                  you={0}
+                  turn={turn}
+                />
               </div>
             </div>
             <div className="col-12 col-lg-6">

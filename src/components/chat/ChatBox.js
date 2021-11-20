@@ -4,6 +4,7 @@ import Contrast from "../../Contrast";
 
 const id_game = 1;
 function ChatBox({ data }) {
+  console.log(data);
   const [mes, setMes] = useState("");
   const handleMessage = (e) => {
     if (mes === "") return;

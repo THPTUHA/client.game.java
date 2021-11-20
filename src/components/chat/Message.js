@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import chatSound from "../../assets/mp3/discord.mp3";
 function Message({ message, is_chat }) {
+  // console.log(message);
   return (
     <div className="">
       {!is_chat ? (
