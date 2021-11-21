@@ -4,15 +4,18 @@ import { authorization } from "../service/authorization";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState("unload");
+  const [user, setUser] = useState("");
   useEffect(() => {
      (async()=>{
           try {
-            const user = await axios.get("/user", authorization());
-            console.log("Goi lai");
-            user.data.avatar = user.data.avatar?user.data.avatar:`https://avatars.dicebear.com/api/micah/${user.first_name + " " + user.last_name}.svg`;
-            console.log(user.data);
-            setUser(user.data);
+            const athu = authorization();
+            if(athu){
+              console.log(athu);
+              const user = await axios.get("/user", athu);
+              console.log("Goi lai");
+              user.data.avatar = user.data.avatar?user.data.avatar:`https://avatars.dicebear.com/api/micah/${user.first_name + " " + user.last_name}.svg`;
+              setUser(user.data);
+            }
         } catch (err) {
           setUser("");
           console.log(err);

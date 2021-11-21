@@ -93,8 +93,8 @@ export default function Register() {
     try {
       const res = await axios.post("http://localhost:8080/register", data);
       console.log(res.data);
-      setOk(true);
-      alert("Đăng ký thành công!");
+      if(res.data === "Success") setOk(true);
+      alert(`${res.data}!!`);
     } catch (err) {
       console.log(err);
     }
@@ -180,7 +180,7 @@ export default function Register() {
                           checked={sex === "1"}
                           value="nam"
                         />
-                        <label className="p-2" for="nam">
+                        <label className="p-2" htmlFor ="nam">
                           Nam
                         </label>
                       </div>
@@ -193,7 +193,7 @@ export default function Register() {
                           value="nu"
                           checked={sex === "0"}
                         />
-                        <label className="p-2" for="nu">
+                        <label className="p-2" htmlFor="nu">
                           Nữ
                         </label>
                       </div>

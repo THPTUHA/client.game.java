@@ -28,7 +28,7 @@ export default function EditingAccount() {
             </button>
           </div>
           <div className="col-8">
-            {option == 1 ? <UpdateInfo /> : <UpdatePassword />}
+            {option === 1 ? <UpdateInfo /> : <UpdatePassword />}
           </div>
         </div>
       </div>

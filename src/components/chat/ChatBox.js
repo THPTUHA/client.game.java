@@ -4,6 +4,7 @@ import Contrast from "../../Contrast";
 
 const id_game = 1;
 function ChatBox({ data }) {
+  console.log(data);
   const [mes, setMes] = useState("");
   const handleMessage = (e) => {
     if (mes === "") return;
@@ -37,7 +38,7 @@ function ChatBox({ data }) {
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
           return (
-            <Message key={index} message={e} is_chat={data.type == e.type} />
+            <Message key={index} message={e} is_chat={data.type === e.type} />
           );
         })}
         <div ref={messagesEndRef} />

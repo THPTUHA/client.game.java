@@ -20,7 +20,7 @@ export default function UpdateInfo() {
   };
   const checkSdt = () => {
     if (!sdt) return true;
-    if (parseInt(sdt) == sdt) {
+    if (parseInt(sdt) === sdt) {
       setSdtWarning("");
       return true;
     } else setSdtWarning("Không đúng định dạng");

@@ -24,7 +24,7 @@ export default function Nav() {
 
   return (
     <div>
-      {user == "unload" ? (
+      {user === "unload" ? (
         <Loading />
       ) : (
         <>
@@ -40,10 +40,6 @@ export default function Nav() {
 
             <Route path="/gameplay">
               {!user ? <Redirect to="/login" /> : <Game />}
-            </Route>
-
-            <Route path="/logout">
-              <Logout />
             </Route>
             <Route exact path="/account">
               {!user ? <Redirect to="/login" /> : <Account />}

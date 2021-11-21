@@ -23,15 +23,15 @@
 //       }}
 //     >
 //       <Form>
-//         <label htmlFor="firstName">First Name</label>
+//         <label for="firstName">First Name</label>
 //         <Field name="firstName" type="text" />
 //         <ErrorMessage name="firstName" />
 
-//         <label htmlFor="lastName">Last Name</label>
+//         <label for="lastName">Last Name</label>
 //         <Field name="lastName" type="text" />
 //         <ErrorMessage name="lastName" />
 
-//         <label htmlFor="email">Email Address</label>
+//         <label for="email">Email Address</label>
 //         <Field name="email" type="email" />
 //         <ErrorMessage name="email" />
 

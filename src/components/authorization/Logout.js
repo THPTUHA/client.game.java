@@ -3,8 +3,14 @@ import { Redirect } from "react-router";
 import { UserContext } from "../../context/UserProvider";
 
 export default function Logout(){
-    localStorage.removeItem("token");
-    const {updateDataUser} = useContext(UserContext);
-    updateDataUser("");
-    return <Redirect to="/"/>;
+    const {updateDataUser } = useContext(UserContext);
+    const logout = ()=>{
+        localStorage.removeItem("token");
+        updateDataUser("");
+    }
+    return (
+        <div className="bg" onClick={logout}>
+            <i className="fal fa-sign-out-alt"></i>
+        </div>
+    )
 }

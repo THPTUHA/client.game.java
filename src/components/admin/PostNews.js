@@ -8,7 +8,7 @@ export default function PostNews() {
 
       <div className="grid pt-5">
         <form className="form-group" action={`${process.env.REACT_APP_SERVER}/news/create`} method="post" encType="multipart/form-data">
-          <label htmlFor="tieuDeBaiViet"> Tiêu đề:</label>
+          <label for="tieuDeBaiViet"> Tiêu đề:</label>
           <textarea
             className="form-control"
             name="tieuDeBaiViet"
@@ -16,7 +16,7 @@ export default function PostNews() {
             rows="3"
             required
           ></textarea>
-          <label htmlFor="moTaBaiViet"> Mô tả:</label>
+          <label for="moTaBaiViet"> Mô tả:</label>
           <textarea
             className="form-control"
             name="moTaBaiViet"
@@ -24,7 +24,7 @@ export default function PostNews() {
             rows="3"
             required
           ></textarea>
-          <label htmlFor="noiDung"> Nội dung:</label>
+          <label for="noiDung"> Nội dung:</label>
           <textarea
             className="form-control"
             name="noiDung"

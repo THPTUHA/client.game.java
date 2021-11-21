@@ -2,6 +2,7 @@ import React, { useContext, useRef } from "react";
 
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
+import Logout from "../authorization/Logout";
 import logo from "../../assets/img/logo.png";
 
 export default function NavBar() {
@@ -25,13 +26,13 @@ export default function NavBar() {
               <li className="d-flex align-items-center">
                 <Link to="/news">Tin tức</Link>
               </li>
-              {
-               user&&user.role === "ROLE_ADMIN"?(
-                  <li className="d-flex align-items-center">
+              {user && user.role === "ROLE_ADMIN" ? (
+                <li className="d-flex align-items-center">
                   <Link to="/admin">ADMIN</Link>
                 </li>
-                ):""
-              }
+              ) : (
+                ""
+              )}
             </ul>
           </div>
         </div>
@@ -49,25 +50,18 @@ export default function NavBar() {
                         className="bgAccount"
                       >
                         <div className="d-flex  justify-content-center align-items-center">
-                          <img
-                            style={{
-                              width: "1.5rem",
-                              borderRadius: "50%",
-                              backgroundColor: "white",
-                              marginRight: "3px",
-                            }}
-                            src={user.avatar}
-                            alt=""
-                          />
+                          <div
+                            style={{ backgroundImage: `url(${user.avatar}` }}
+                            className="accountAvtContainer"
+                          >
+                            {/* <img className="accountAvatar" src={avatar} alt="" /> */}
+                          </div>
+
                           <p className="m-0">{user.first_name}</p>
                         </div>
                       </div>
                     </Link>
-                    <Link to="/logout">
-                      <div className="bg">
-                        <i className="fal fa-sign-out-alt"></i>
-                      </div>
-                    </Link>
+                    <Logout/>
                   </>
                 )}
               </li>

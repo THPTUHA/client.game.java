@@ -172,7 +172,11 @@ input:focus {
   cursor: pointer;
   font-size: 1.3rem;
 }
-
+.myNavbar .accountAvtContainer {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 10px;
+}
 .header {
   background-image: linear-gradient(
       45deg,
@@ -353,8 +357,17 @@ input:focus {
 }
 
 /* account */
-.accountAvatar {
+.accountAvtContainer {
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+.accountAvatar {
+  /* border-radius: 50%; */
+  width: 100%;
+  height: auto;
 }
 .info {
   width: 60%;
