@@ -10,7 +10,8 @@ const UserProvider = ({ children }) => {
           try {
             const user = await axios.get("/user", authorization());
             console.log("Goi lai");
-            user.avatar = user.avatar?user.avatar:`https://avatars.dicebear.com/api/micah/${user.first_name + " " + user.last_name}.svg`;
+            user.data.avatar = user.data.avatar?user.data.avatar:`https://avatars.dicebear.com/api/micah/${user.first_name + " " + user.last_name}.svg`;
+            console.log(user.data);
             setUser(user.data);
         } catch (err) {
           setUser("");

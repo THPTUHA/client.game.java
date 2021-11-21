@@ -151,6 +151,8 @@ const Play = ({ data }) => {
                   type: data.type,
                   id_match: data.id_match,
                   messages: messages,
+                  avatar:{you :{name:you.name,avatar:you.avatar},
+                          opponent :{name:opponent.name,avatar:opponent.avatar}}
                 }}
               />
             </div>

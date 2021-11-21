@@ -26,7 +26,7 @@ export default function NavBar() {
                 <Link to="/news">Tin tức</Link>
               </li>
               {
-                user.role === "ROLE_ADMIN"?(
+               user&&user.role === "ROLE_ADMIN"?(
                   <li className="d-flex align-items-center">
                   <Link to="/admin">ADMIN</Link>
                 </li>

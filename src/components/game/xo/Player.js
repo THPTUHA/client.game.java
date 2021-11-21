@@ -67,7 +67,7 @@ const Player = ({ player, id_match, stompClient, you, turn }) => {
         {player.status === Contrast.PLAY && player.type === turn ? (
           <CountDown
             data={{
-              time: 2,
+              time: 30,
               type: player.type,
               stompClient: stompClient,
               id_match: id_match,

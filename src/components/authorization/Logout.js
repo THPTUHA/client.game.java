@@ -3,8 +3,7 @@ import { Redirect } from "react-router";
 import { UserContext } from "../../context/UserProvider";
 
 export default function Logout(){
-    localStorage.removeItem("user");
-    localStorage.removeItem("email");
+    localStorage.removeItem("token");
     const {updateDataUser} = useContext(UserContext);
     updateDataUser("");
     return <Redirect to="/"/>;
