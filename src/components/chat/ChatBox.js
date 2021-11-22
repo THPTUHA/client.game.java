@@ -38,7 +38,7 @@ function ChatBox({ data }) {
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
           return (
-            <Message key={index} message={e} is_chat={data.type === e.type} />
+            <Message key={index} message={e} is_chat={data.type === e.type} you={data.you} opponent={data.opponent}/>
           );
         })}
         <div ref={messagesEndRef} />

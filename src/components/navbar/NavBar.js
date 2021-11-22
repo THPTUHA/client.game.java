@@ -7,6 +7,7 @@ import logo from "../../assets/img/logo.png";
 
 export default function NavBar() {
   const { user } = useContext(UserContext);
+console.log(user);
   return (
     <div className="container-fluid padding-0">
       <div className="row myNavbar padding-lg">
@@ -40,7 +41,7 @@ export default function NavBar() {
           <div className="menu pl-5 pr-5">
             <ul className="d-flex justify-content-end">
               <li className="d-flex align-items-center ">
-                {!user ? (
+                {user ==="unload" ||!user? (
                   <Link to="/login/">Đăng nhập</Link>
                 ) : (
                   <>
