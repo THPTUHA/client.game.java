@@ -26,6 +26,7 @@ export default function Login() {
       localStorage.setItem("token", JSON.stringify(response.data));
       try {
         const user = await axios.get("/user", authorization());
+        user.data.avatar = user.data.avatar?user.data.avatar:`https://avatars.dicebear.com/api/micah/${user.first_name  + user.last_name}.svg`;
         setData(user.data);
       } catch (err) {
         console.log(err);

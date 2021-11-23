@@ -12,7 +12,6 @@ export default function Account() {
   const [avatar, setAvatar] = useState(user.avatar);
   const [new_avatar, setNewAvatar] = useState();
 
-  console.log(user);
   const submit = async () => {
     console.log(new_avatar[0]);
     const formData = new FormData();

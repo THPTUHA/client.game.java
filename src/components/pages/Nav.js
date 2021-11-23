@@ -24,16 +24,16 @@ export default function Nav() {
 
   return (
     <div>
+      <Route exact path="/" component={Home}></Route>
+      <Route exact path="/news" component={NewsList}></Route>
+      <Route path="/login">
+               <Login />
+        </Route>
       {user === "unload" ? (
         <Loading />
       ) : (
         <>
           <Switch>
-            <Route exact path="/" component={Home}></Route>
-            <Route exact path="/news" component={NewsList}></Route>
-            <Route path="/login">
-              {user ? <Redirect to="/" /> : <Login />}
-            </Route>
             <Route path="/register">
               {user ? <Redirect to="/" /> : <Register />}
             </Route>
