@@ -24,16 +24,16 @@ export default function Nav() {
 
   return (
     <div>
-      <Route exact path="/" component={Home}></Route>
-      <Route exact path="/news" component={NewsList}></Route>
-      <Route path="/login">
-               <Login />
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        <Route exact path="/news" component={NewsList}></Route>
+        <Route path="/login">
+          <Login />
         </Route>
-      {user === "unload" ? (
-        <Loading />
-      ) : (
-        <>
-          <Switch>
+        {user === "unload" ? (
+          <Loading />
+        ) : (
+          <>
             <Route path="/register">
               {user ? <Redirect to="/" /> : <Register />}
             </Route>
@@ -63,11 +63,11 @@ export default function Nav() {
             <Route exact path="/admin/user">
               {!user ? <Redirect to="/login" /> : <User />}
             </Route>
-            <Route component={NotFound} />
-          </Switch>
-          <GoToTop />
-        </>
-      )}
+            <GoToTop />
+          </>
+        )}
+        <Route component={NotFound} />
+      </Switch>
     </div>
   );
 }
