@@ -54,15 +54,15 @@ console.log(user);
                           <div
                             style={{ backgroundImage: `url(${user.avatar}` }}
                             className="accountAvtContainer"
-                          >
-                            {/* <img className="accountAvatar" src={avatar} alt="" /> */}
-                          </div>
+                          ></div>
 
-                          <p className="m-0">{user.first_name}</p>
+                          <p className="m-0">{user.first_name} </p>
+                          <div> </div>
                         </div>
                       </div>
                     </Link>
-                    <Logout/>
+
+                    <Logout />
                   </>
                 )}
               </li>

@@ -114,23 +114,7 @@ export default function Register() {
                 <form action="Login">
                   <p className="form__title">Đăng ký</p>
 
-                  <StyledInput
-                    theme={{
-                      main: eWarning !== "" ? "red" : "gray",
-                      bg: eWarning !== "" ? "#F9ADA0" : "white",
-                    }}
-                    onBlur={(e) => {
-                      checkEmail(e.target.value);
-                    }}
-                    className="mb-3"
-                    type="email"
-                    placeholder="Nhập email"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                  />
-
-                  <p className="text-danger">{eWarning}</p>
+                 
                   <StyledInput
                     theme={{
                       main: fWarning !== "" ? "red" : "gray",
@@ -199,7 +183,23 @@ export default function Register() {
                       </div>
                     </div>
                   </div>
+                  <StyledInput
+                    theme={{
+                      main: eWarning !== "" ? "red" : "gray",
+                      bg: eWarning !== "" ? "#F9ADA0" : "white",
+                    }}
+                    onBlur={(e) => {
+                      checkEmail(e.target.value);
+                    }}
+                    className="mb-3"
+                    type="email"
+                    placeholder="Nhập email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
 
+                  <p className="text-danger">{eWarning}</p>
                   <StyledInput
                     theme={{
                       main: pWarning !== "" ? "red" : "gray",

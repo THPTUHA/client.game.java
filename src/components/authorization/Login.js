@@ -48,7 +48,6 @@ export default function Login() {
           >
             <div style={{ height: "100vh" }} className="grid">
               <div className="form">
-              <div>{error}</div>
                 <form action="Login">
                   <p className="form__title">Đăng nhập</p>
                   <input
@@ -69,12 +68,14 @@ export default function Login() {
                     }}
                   />
                   <br />
+                  <p className="text-danger">{error}</p>
+
                   <button
                     type="button"
                     className="Form__btn btn btn-warning"
                     onClick={submit}
                   >
-                    Submit
+                    Đăng nhập
                   </button>
                   <Link to="/register" className="form__signUp">
                     Tạo tài khoản
