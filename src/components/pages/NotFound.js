@@ -7,7 +7,7 @@ export default function NotFound() {
         className="w-50 "
         src="https://code.ptit.edu.vn/2020/images/download (1)@3x.png"
         alt=""
-        srcset=""
+        srcSet=""
       />
       <p className="text-danger h2">NOT FOUND!</p>
     </div>

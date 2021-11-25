@@ -18,6 +18,7 @@ import Admin from "../admin/Admin";
 import News from "../admin/News";
 import User from "../admin/User";
 import UpdateNews from "../admin/UpdateNews";
+import NewsDetail from "../news/NewsDetail";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
@@ -26,6 +27,7 @@ export default function Nav() {
     <div>
       <Route exact path="/" component={Home}></Route>
       <Route exact path="/news" component={NewsList}></Route>
+      <Route exact path="/news/detail/:id"><NewsDetail/></Route>
       <Route path="/login">
                <Login />
         </Route>
