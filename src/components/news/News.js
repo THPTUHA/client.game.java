@@ -1,9 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { authorization } from "../../service/authorization";
-import NewsDetail from "./NewsDetail";
-import Loading from "../../loading/Loading";
 const getDay = (time) => {
   console.log(time);
   const date = time.split("T");
@@ -14,9 +11,12 @@ export default function News({ index, e }) {
   return (
     <div key={index}>
       <Link to={`/news/detail/${e.id}`}>
-        <div className="blog">
+        <div className="blog mb-5">
           <div>
-            <img src={e.background_image} alt="" />
+            <div
+              style={{ backgroundImage: `url(${e.background_image}` }}
+              className="NewsImgContainer"
+            ></div>
             <p className="title">{e.title}</p>
           </div>
           <div className="d-flex">

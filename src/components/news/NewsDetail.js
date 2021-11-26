@@ -29,7 +29,9 @@ export default function NewsDetail() {
       <NavBar />
       <div class="container">
         <div class="col-sm-12">
-          <div dangerouslySetInnerHTML={{ __html: detail }} />
+          <div className="grid newsDetail">
+            <div dangerouslySetInnerHTML={{ __html: detail }} />
+          </div>
         </div>
       </div>
     </div>
