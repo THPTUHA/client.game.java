@@ -26,18 +26,20 @@ export default function RecentNews() {
     setDetail(e.content);
   };
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div className="blogs pt-5 pb-5">
-          <p className="sessionTitle">BÀI VIẾT MỚI</p>
+        <div class="col-sm-12">
+          <div className="blogs pt-5 pb-5">
+            <p className="sessionTitle">BÀI VIẾT MỚI</p>
+          </div>
         </div>
       </div>
       <div className="row">
         {news ? (
           news.map((e, index) => {
             return (
-              <div class="col-sm-4">
-                <div key={index}>
+              <div key={index} class="col-sm-6 col-lg-4 recentNews">
+                <div>
                   <Link to={`/news/detail/${e.id}`}>
                     <News index={index} e={e} />
                   </Link>

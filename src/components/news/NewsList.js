@@ -34,7 +34,7 @@ export default function ListNews() {
         <div className="row pt-5">
           <div className="col-8 padding-0">
             <div className="container">
-              <div className="row">
+              <div className="row NewsList">
                 {news ? (
                   news.map((e, index) => {
                     return (

@@ -7,7 +7,7 @@ import logo from "../../assets/img/logo.png";
 
 function NavBar() {
   const { user } = useContext(UserContext);
-console.log(user);
+  console.log(user);
   return (
     <div className="container-fluid padding-0">
       <div className="row myNavbar padding-lg">
@@ -18,7 +18,10 @@ console.log(user);
             </Link>
           </div>
         </div>
-        <div className="col-6 padding-0" style={{ textAlign: "center" }}>
+        <div
+          className="col-9 col-sm-6 padding-0"
+          style={{ textAlign: "center" }}
+        >
           <div className="main">
             <ul className="d-flex">
               <li className="d-flex align-items-center">
@@ -37,11 +40,11 @@ console.log(user);
             </ul>
           </div>
         </div>
-        <div className="col-3 padding-0">
+        <div className="col-12 col-sm-3 padding-0">
           <div className="menu pl-5 pr-5">
-            <ul className="d-flex justify-content-end">
+            <ul className="d-flex justify-content-center justify-content-lg-end">
               <li className="d-flex align-items-center ">
-                {user ==="unload" ||!user? (
+                {user === "unload" || !user ? (
                   <Link to="/login/">Đăng nhập</Link>
                 ) : (
                   <>

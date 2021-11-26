@@ -177,6 +177,7 @@ input:focus {
   height: 1.5rem;
   margin-right: 10px;
 }
+
 .header {
   background-image: linear-gradient(
       45deg,
@@ -316,6 +317,20 @@ input:focus {
   font-size: 1.8rem;
   text-align: center;
 }
+.NewsList .NewsImgContainer {
+  height: 30rem;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+.newsDetail img {
+  width: 100%;
+}
+.recentNews .NewsImgContainer {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
 .blog .title {
   font-weight: 800;
   font-size: 1.5rem;
@@ -364,6 +379,7 @@ input:focus {
   background-size: cover;
   background-position: center;
 }
+
 .accountAvatar {
   /* border-radius: 50%; */
   width: 100%;
