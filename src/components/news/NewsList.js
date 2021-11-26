@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Loading from "../../loading/Loading";
+import { authorization } from "../../service/authorization";
+import NewsDetail from "./NewsDetail";
 import NavBar from "../navbar/NavBar";
 import News from "./News";
 import SmallNewsBox from "./SmallNewsBox";
 
 export default function ListNews() {
+  const [news, setNews] = useState();
+  const [detail, setDetail] = useState();
+
+  useEffect(async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER}/news`,
+        {},
+        authorization()
+      );
+      console.log(res.data);
+      setNews(res.data);
+    } catch (err) {}
+  }, []);
+
+  const readDetail = (e) => {
+    setDetail(e.content);
+  };
   return (
     <>
       <NavBar />
@@ -12,7 +35,21 @@ export default function ListNews() {
           <div className="col-8 padding-0">
             <div className="container">
               <div className="row">
-                <News />
+                {news ? (
+                  news.map((e, index) => {
+                    return (
+                      <div class="col-sm-12">
+                        <div key={index}>
+                          <Link to={`/news/detail/${e.id}`}>
+                            <News index={index} e={e} />
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <Loading />
+                )}
               </div>
             </div>
           </div>
@@ -20,7 +57,6 @@ export default function ListNews() {
             <div className="container-fluid smallBlogs padding-0">
               <div className="row">
                 <div className="col-sm-12">
-                
                   <p className="sessionTitle">BÀI VIẾT NỔI BẬT</p>
                 </div>
               </div>
