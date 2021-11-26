@@ -30,7 +30,7 @@ export default function ListNews() {
   return (
     <>
       <NavBar />
-      <div className="container-fluid ">
+      <div className="container ">
         <div className="row pt-5">
           <div className="col-8 padding-0">
             <div className="container">

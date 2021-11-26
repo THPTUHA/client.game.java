@@ -312,11 +312,15 @@ input:focus {
 .blogs {
   width: 100%;
 }
+.NewsList .blog {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
 .blogs .sessionTitle {
   font-weight: 800;
   font-size: 1.8rem;
   text-align: center;
 }
+
 .NewsList .NewsImgContainer {
   height: 30rem;
   width: 100%;
@@ -327,14 +331,19 @@ input:focus {
   width: 100%;
 }
 .recentNews .NewsImgContainer {
-  height: 200px;
+  height: 15rem;
   background-size: cover;
   background-position: center;
 }
+
 .blog .title {
   font-weight: 800;
   font-size: 1.5rem;
+  color: #000;
   text-transform: uppercase;
+}
+.NewsList .blogInfo {
+  padding: 2rem;
 }
 .blog .summary,
 .blog .author,
@@ -353,6 +362,7 @@ input:focus {
   width: 100%;
 }
 .blog .title:hover {
+  transition: all 0.2s;
   color: #ffba00;
 }
 .blog .author,
