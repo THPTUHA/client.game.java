@@ -5,18 +5,21 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import { authorization } from "../../service/authorization";
 import NavBar from "../navbar/NavBar";
+import Loading from "../../loading/Loading";
 
 export default function Login() {
   const { updateDataUser } = useContext(UserContext);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [data, setData] = useState();
+  const [loading,setLoading]= useState(false);
   const [error, setError] = useState();
   useEffect(() => {
     updateDataUser(data);
   }, [data]);
 
   const submit = async () => {
+    setLoading(true);
     const data = { email: email, password: password };
     try {
       const response = await axios.post(
@@ -35,59 +38,61 @@ export default function Login() {
       setError("Sai email hoặc password");
       console.log(err);
     }
+    setLoading(false);
   };
 
-  return !data ? (
-    <>
-      <NavBar />
-      <div className="container">
-        <div className="row">
-          <div
-            style={{ position: "relative", height: "90vh" }}
-            className="col-sm-12"
-          >
-            <div style={{ height: "100vh" }} className="grid">
-              <div className="form">
-                <form action="Login">
-                  <p className="form__title">Đăng nhập</p>
-                  <input
-                    className="mb-3"
-                    type="text"
-                    placeholder="Enter your email"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                  />
-                  <br />
-                  <input
-                    type="password"
-                    className="mb-3"
-                    placeholder="Enter your password"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  />
-                  <br />
-                  <p className="text-danger">{error}</p>
-
-                  <button
-                    type="button"
-                    className="Form__btn btn btn-warning"
-                    onClick={submit}
-                  >
-                    Đăng nhập
-                  </button>
-                  <Link to="/register" className="form__signUp">
-                    Tạo tài khoản
-                  </Link>
-                </form>
+  return  !loading?(
+    !data ? (
+      <>
+        <NavBar />
+        <div className="container">
+          <div className="row">
+            <div
+              style={{ position: "relative", height: "90vh" }}
+              className="col-sm-12"
+            >
+              <div style={{ height: "100vh" }} className="grid">
+                <div className="form">
+                  <form action="Login">
+                    <p className="form__title">Đăng nhập</p>
+                    <input
+                      className="mb-3"
+                      type="text"
+                      placeholder="Enter your email"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    />
+                    <br />
+                    <input
+                      type="password"
+                      className="mb-3"
+                      placeholder="Enter your password"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                    <br />
+                    <p className="text-danger">{error}</p>
+  
+                    <button
+                      type="button"
+                      className="Form__btn btn btn-warning"
+                      onClick={submit}
+                    >
+                      Đăng nhập
+                    </button>
+                    <Link to="/register" className="form__signUp">
+                      Tạo tài khoản
+                    </Link>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
-  ) : (
-    <Redirect to="/"></Redirect>
-  );
+      </>
+    ) :<Redirect to="/"></Redirect>
+  ):<Loading></Loading>
+  
 }

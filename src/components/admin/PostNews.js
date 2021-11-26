@@ -47,7 +47,7 @@ export default function PostNews() {
   
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_SERVER}/news/create`,
+        `${process.env.REACT_APP_SERVER}/admin/news/create`,
         formData,
         authorization()
       );

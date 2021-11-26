@@ -30,8 +30,8 @@ export default function Nav() {
       <Route exact path="/news" component={NewsList}></Route>
       <Route exact path="/news/detail/:id"><NewsDetail/></Route>
       <Route path="/login">
-               <Login />
-        </Route>
+        {user==="unload"||!user?<Login />:<Redirect to="/"/>}
+      </Route>
         {user === "unload" ? (
           <Loading />
         ) : (
