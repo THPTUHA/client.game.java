@@ -14,10 +14,12 @@ export default function ListNews() {
 
   useEffect(async () => {
     try {
+       console.log(process.env.REACT_APP_SERVER)
       const res = await axios.get(
         `${process.env.REACT_APP_SERVER}/news`,
         {},
         authorization()
+       
       );
       console.log(res.data);
       setNews(res.data);

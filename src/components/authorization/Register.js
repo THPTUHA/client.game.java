@@ -91,7 +91,7 @@ export default function Register() {
       sex: parseInt(sex),
     };
     try {
-      const res = await axios.post("http://localhost:8080/register", data);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/register`, data);
       console.log(res.data);
       if(res.data === "Success") setOk(true);
       alert(`${res.data}!!`);
