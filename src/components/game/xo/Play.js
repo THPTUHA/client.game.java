@@ -34,12 +34,7 @@ const Play = ({ data }) => {
   const handleMessage = (res) => {
     const mess = JSON.parse(localStorage.getItem("messages")) || [];
     if (res != "")
-      mess.push({
-        message: res.message,
-        avatar: res.player.avatar,
-        name: res.player.name,
-        user_id: res.player.id,
-      });
+      mess.push(res);
     localStorage.setItem("messages", JSON.stringify(mess));
     return mess;
   };

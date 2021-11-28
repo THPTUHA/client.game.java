@@ -4,3 +4,7 @@ export function authorization(){
       return { headers: {Authorization: `${token.tokenType} ${token.accessToken}`}}
     return null;
 }
+
+export  const token = ()=>{
+  return {"token":JSON.parse(localStorage.getItem("token"))}
+}

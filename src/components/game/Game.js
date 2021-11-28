@@ -9,14 +9,23 @@ import ChatBox from "../chat/ChatBox";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import caroGame from "../../assets/img/caroGame.png";
+import axios from "axios";
+import { authorization } from "../../service/authorization";
 function Game() {
   const match = useRouteMatch();
   const { user ,updateDataUser } = useContext(UserContext);
   const [stompClient, setstompClient] = useState();
   const [messages, setMessages] = useState([]);
 
-  useEffect(()=>{
-    updateDataUser({...user,status:-1})
+  useEffect(async()=>{
+    updateDataUser({...user,status:-1});
+    try{
+      const res = await axios.get(`${process.env.REACT_APP_SERVER}/gameplay/chat`,authorization());
+      console.log(res);
+      setMessages(res.data);
+    }catch(err){
+
+    }
     const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
@@ -24,10 +33,11 @@ function Game() {
         `/topic/chat`,
         function (response) {
           const res = JSON.parse(response.body);
-          setMessages([res]);
+          setMessages(res);
         }
       )});
     setstompClient(stompClient);
+
     return ()=>{
       stompClient.disconnect();
     }
