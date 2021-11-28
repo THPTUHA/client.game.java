@@ -55,7 +55,7 @@ export default function Account() {
     <>
       <NavBar />
       <div className="container-fluid">
-        <div className="row pt-3">
+        <div className="row pt-3 pb-3">
           <div className="col-sm-4">
             <div className="position-relative">
               <div className="info d-flex flex-column">

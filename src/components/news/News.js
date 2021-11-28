@@ -8,6 +8,7 @@ const getDay = (time) => {
 };
 
 export default function News({ index, e }) {
+  console.log(e);
   return (
     <div key={index}>
       <Link to={`/news/detail/${e.id}`}>
@@ -17,16 +18,19 @@ export default function News({ index, e }) {
               style={{ backgroundImage: `url(${e.background_image}` }}
               className="NewsImgContainer"
             ></div>
-            <p className="title">{e.title}</p>
           </div>
-          <div className="d-flex">
-            <div className="d-flex align-items-center m-1">
-              <i className="fas fa-user-circle"></i>
-              <p className="author">{e.user_name}</p>
-            </div>
-            <div className="d-flex align-items-center">
-              <i className="far fa-calendar-alt"></i>
-              <p className="date">{getDay(e.time_create)}</p>
+          <div className="blogInfo">
+            <p className="title">{e.title}</p>
+            <p className="summary">{e.describes}</p>
+            <div className="d-flex ">
+              <div className="d-flex align-items-center m-1">
+                <i className="fas fa-user-circle"></i>
+                <p className="author">{e.user_name}</p>
+              </div>
+              <div className="d-flex align-items-center ">
+                <i className="far fa-clock"></i>
+                <p className="date">{getDay(e.time_create)}</p>
+              </div>
             </div>
           </div>
         </div>
