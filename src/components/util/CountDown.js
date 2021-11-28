@@ -10,16 +10,15 @@ const CountDown= ({data})=>{
         const play = {
             random:true,
             type: data.type,
-            id_match: data.id_match,
+            match_id: data.match_id,
             status:Contrast.PLAY
           };
-        data.stompClient.send( `/app/xo/${Contrast.ID_GAMEXO}/${data.id_match}`, {}, JSON.stringify(play) );
+        data.stompClient.send( `/app/xo/${Contrast.ID_GAMEXO}/${data.match_id}`, {}, JSON.stringify(play) );
     }
      pre= setTimeout(()=>{
             setTime(time-1);
     },1000);
         return ()=>{
-            console.log(pre);
             clearTimeout(pre);
         }
     },[time]);

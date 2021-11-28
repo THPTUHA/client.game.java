@@ -1,13 +1,13 @@
 import React, { memo } from "react";
 import chatSound from "../../assets/mp3/discord.mp3";
-function Message({ message, is_chat ,you,opponent}) {
+function Message({ message, is_chat }) {
   // console.log(message);
   return (
     <div className="">
       {!is_chat ? (
         <div className="d-flex  justify-content-start align-items-end mb-2 ">
           <img
-            src={opponent.avatar?opponent.avatar:`https://avatars.dicebear.com/api/micah/${opponent.name}.svg`}
+            src={message.avatar?message.avatar:`https://avatars.dicebear.com/api/micah/${message.name}.svg`}
             alt=""
           />
           <p className="message--received">{message.message}</p>
@@ -19,7 +19,7 @@ function Message({ message, is_chat ,you,opponent}) {
         <div className="d-flex  justify-content-end align-items-end mb-2">
           <p className="message--sent">{message.message}</p>
           <img
-            src={you.avatar?you.avatar:`https://avatars.dicebear.com/api/micah/${you.name}.svg`}
+            src={message.avatar?message.avatar:`https://avatars.dicebear.com/api/micah/${message.name}.svg`}
             alt=""
           />
         </div>

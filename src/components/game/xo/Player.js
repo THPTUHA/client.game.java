@@ -2,16 +2,17 @@ import { Redirect } from "react-router";
 import Contrast from "../../../Contrast";
 import CountDown from "../../util/CountDown";
 
-const Player = ({ player, id_match, stompClient, you, turn }) => {
+
+const Player = ({ player, match_id, stompClient, you, turn }) => {
   const handleCancelMatch = () => {
     try {
       const req = {
-        id_match: id_match,
+        match_id: match_id,
         status: Contrast.CANCEL_GAME,
         type: player.type,
       };
       stompClient.send(
-        `/app/xo/${Contrast.ID_GAMEXO}/${id_match}`,
+        `/app/xo/${Contrast.ID_GAMEXO}/${match_id}`,
         {},
         JSON.stringify(req)
       );
@@ -23,12 +24,12 @@ const Player = ({ player, id_match, stompClient, you, turn }) => {
   const ready = () => {
     try {
       const req = {
-        id_match: id_match,
+        match_id: match_id,
         status: Contrast.READY,
         type: player.type,
       };
       stompClient.send(
-        `/app/xo/${Contrast.ID_GAMEXO}/${id_match}`,
+        `/app/xo/${Contrast.ID_GAMEXO}/${match_id}`,
         {},
         JSON.stringify(req)
       );
@@ -40,12 +41,12 @@ const Player = ({ player, id_match, stompClient, you, turn }) => {
   function playAgain() {
     try {
       const req = {
-        id_match: id_match,
+        match_id: match_id,
         status: Contrast.PLAY_AGAIN,
         type: player.type,
       };
       stompClient.send(
-        `/app/xo/${Contrast.ID_GAMEXO}/${id_match}`,
+        `/app/xo/${Contrast.ID_GAMEXO}/${match_id}`,
         {},
         JSON.stringify(req)
       );
@@ -70,7 +71,7 @@ const Player = ({ player, id_match, stompClient, you, turn }) => {
               time: 30,
               type: player.type,
               stompClient: stompClient,
-              id_match: id_match,
+              match_id: match_id,
             }}
           />
         ) : (
@@ -127,6 +128,8 @@ const Player = ({ player, id_match, stompClient, you, turn }) => {
         ) : (
           ""
         )}
+
+        <p> Point :{player.point}</p>
       </div>
     </>
   );

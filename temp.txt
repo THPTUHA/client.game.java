@@ -48,12 +48,12 @@ import Stomp from "stompjs";
 // let stompClient;
 // // function App(){
 // let id_game=1;
-// function connect(id_match) {
+// function connect(match_id) {
 //   var socket = new SockJS('http://localhost:8080/gameplay');
 //   stompClient = Stomp.over(socket);
 //   stompClient.connect({}, function (frame) {
 //       console.log('Connected: ' + frame);
-//       stompClient.subscribe(`/topic/${id_game}/${id_match}`, function (greeting) {
+//       stompClient.subscribe(`/topic/${id_game}/${match_id}`, function (greeting) {
 //           console.log(JSON.parse(greeting.body));
 //       });
 //   });
@@ -85,20 +85,20 @@ const user={id_user:Math.floor(Math.random()*100),name:"Hieu"};
 let stompClient;
 let id_game=1;
 let ans;
-function connect(id_match) {
+function connect(match_id) {
   var socket = new SockJS('http://localhost:8080/gameplay');
   stompClient = Stomp.over(socket);
   stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
-      stompClient.subscribe(`/topic/xo/${id_game}/${id_match}`, function (greeting) {
+      stompClient.subscribe(`/topic/xo/${id_game}/${match_id}`, function (greeting) {
           console.log(JSON.parse(greeting.body));
       });
   });
 }
-function sendName(x,y,type,id_match) {
-  console.log("send to:",id_match);
-  const play={coordinateX:x,coordinateY:y,type:type,id_match:id_match}
- if(stompClient) stompClient.send(`/app/xo/${id_game}/${id_match}`, {}, JSON.stringify(play));
+function sendName(x,y,type,match_id) {
+  console.log("send to:",match_id);
+  const play={coordinateX:x,coordinateY:y,type:type,match_id:match_id}
+ if(stompClient) stompClient.send(`/app/xo/${id_game}/${match_id}`, {}, JSON.stringify(play));
 }
 
 function App(){
@@ -107,7 +107,7 @@ function App(){
   const submitForm = async ()=>{
     try{
       ans = await axios.post("http://localhost:8080/xo/start",user);
-      connect(ans.data.id_match);
+      connect(ans.data.match_id);
       console.log(ans.data);
     }catch(err){
       console.log(err);
@@ -119,7 +119,7 @@ function App(){
       <input type="text" onChange={(e)=>{setX(e.target.value)}}/>
       <input type="text" onChange={(e)=>{setY(e.target.value)}}/>
       <button onClick={submitForm}>Connect</button>
-      <button onClick={(e)=>{sendName(x,y,ans.data.type,ans.data.id_match)}}>Send</button>
+      <button onClick={(e)=>{sendName(x,y,ans.data.type,ans.data.match_id)}}>Send</button>
     </div>
   )
 }

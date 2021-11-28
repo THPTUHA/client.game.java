@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../../context/UserProvider";
 import NavBar from "../navbar/NavBar";
@@ -7,11 +7,35 @@ import FormData from "form-data";
 import { authorization } from "../../service/authorization";
 // const FormData = require('form-data');
 
+const formatDataHistoryGame = (history,user)=>{
+  return history.map((data,index)=>{
+    const tmp = data.data.split("@#$");
+    let temp_data ={};
+    for(let i=0;i<tmp.length;i+=2)temp_data[tmp[i]] = tmp[i+1];
+    const opp = data.opponent.split("@#$");
+    let opponent ={};
+    for(let i=0;i<opp.length;i+=2)opponent[opp[i]] = opp[i+1];
+    let you = {...user, point :temp_data[user.id]};
+    opponent.point = temp_data[opponent.id];
+    data.opponent =opponent;
+    data.you = you;
+    return data;
+    })
+}
 export default function Account() {
   const { user } = useContext(UserContext);
   const [avatar, setAvatar] = useState(user.avatar);
   const [new_avatar, setNewAvatar] = useState();
+  const [gameplay_history,setGamePlayHistory] = useState();
+  useEffect(async()=>{
+    try{
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/user/gameplay/history`,{},authorization());
+      // console.log(formatDataHistoryGame(res.data,user));
+      setGamePlayHistory(formatDataHistoryGame(res.data,user));
+    }catch(err){
 
+    }
+  },[]);
   const submit = async () => {
     console.log(new_avatar[0]);
     const formData = new FormData();
@@ -22,7 +46,6 @@ export default function Account() {
         formData,
         authorization()
       );
-      console.log(res);
       setAvatar(res.data);
     } catch (err) {
       console.log(err);
@@ -85,32 +108,26 @@ export default function Account() {
             <div className="row">
               <strong>Lịch sử đấu</strong>
             </div>
-            <div className="row pt-3">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Đối thủ</th>
-                    <th>Thời gian</th>
-                    <th>Kết quả</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Nghia</td>
-                    <td>11-11-2021</td>
-                    <td>Thắng</td>
-                  </tr>
-                  <tr>
-                    <td>Nghia</td>
-                    <td>11-11-2021</td>
-                    <td>Thua</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+           {
+             gameplay_history?(
+               gameplay_history.map((e,index)=>{
+                return (
+                  <div>
+                    <div>{e.game_name}</div>
+                    <img src={e.you.avatar}/>
+                    <div>{e.you.first_name+" "+e.you.last_name}</div>
+                    <div>{e.you.point}</div>
+                    <div>{e.opponent.point}</div>
+                    <div>{e.opponent.first_name+" "+e.opponent.last_name}</div>
+                 </div>
+                )
+                  
+               })):""
+           }
           </div>
         </div>
       </div>
     </>
   );
 }
+

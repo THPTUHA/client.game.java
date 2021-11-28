@@ -5,12 +5,16 @@ import ChatBox from "../../chat/ChatBox";
 import BoardXO from "./BoardXO";
 import Player from "./Player";
 import Contrast from "../../../Contrast";
-import CountDown from "../../util/CountDown";
 import nhac from "../../../assets/mp3/lmht.mp3";
-import nhacGame from "../../../assets/mp3/startedGame.mp3";
 
-const getPlayer = (data, type) => {
-  if (type === 1) return data.player1;
+
+const getPlayer = (data, user_id) => {
+  if(data.player1.id === user_id )return data.player1;
+  return data.player2;
+};
+
+const getOpponent = (data, user_id) => {
+  if(data.player1.id !== user_id )return data.player1;
   return data.player2;
 };
 const Play = ({ data }) => {
@@ -22,9 +26,9 @@ const Play = ({ data }) => {
   const [board, setBoard] = useState([]);
   const [stompClient, setstompClient] = useState();
 
-  const player = (data, type) => {
-    setYou(getPlayer(data, type));
-    setOpponent(getPlayer(data, 3 - type));
+  const player = (data, user_id) => {
+    setYou(getPlayer(data, user_id));
+    setOpponent(getOpponent(data, user_id));
   };
 
   const handleMessage = (res) => {
@@ -32,18 +36,21 @@ const Play = ({ data }) => {
     if (res != "")
       mess.push({
         message: res.message,
-        type: res.player.type,
+        avatar: res.player.avatar,
+        name: res.player.name,
+        user_id: res.player.id,
       });
     localStorage.setItem("messages", JSON.stringify(mess));
     return mess;
   };
+
   useEffect(() => {
     const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
       console.log("Connected: " + frame);
       stompClient.subscribe(
-        `/topic/xo/${Contrast.ID_GAMEXO}/${data.id_match}`,
+        `/topic/xo/${Contrast.ID_GAMEXO}/${data.match_id}`,
         function (response) {
           const res = JSON.parse(response.body);
 
@@ -52,14 +59,14 @@ const Play = ({ data }) => {
               setStatus(res.status);
               setBoard(res.board);
               setTurn(res.turn);
-              player(res, data.type);
+              player(res, data.user_id);
               break;
 
             case Contrast.PLAY:
               setBoard(res.board);
               setStatus(res.status);
               setTurn(res.turn);
-              player(res, data.type);
+              player(res, data.user_id);
               break;
 
             case Contrast.MESSAGE:
@@ -68,62 +75,42 @@ const Play = ({ data }) => {
 
             case Contrast.CANCEL_GAME:
               setStatus(res.status);
-              player(res, data.type);
+              player(res, data.user_id);
               break;
 
             case Contrast.PLAY_AGAIN:
               setStatus(res.status);
-              player(res, data.type);
+              player(res, data.user_id);
               break;
 
             case Contrast.READY:
               setStatus(res.status);
-              player(res, data.type);
+              player(res, data.user_id);
               break;
 
             case Contrast.END_GAME:
               setBoard(res.board);
               setStatus(res.status);
-              player(res, data.type);
+              player(res, data.user_id);
           }
 
           console.log(res);
         }
       );
 
-      if (data.status === Contrast.RELOAD) {
-        console.log(data);
-        setStatus(data.status);
-        setBoard(data.board);
-        setMessages(handleMessage(""));
-        player(data, data.type);
-      }
-
-      if (data.status === Contrast.START_GAME) {
-        const req = { id_match: data.id_match, status: Contrast.START_GAME };
-        stompClient.send(
-          `/app/xo/${Contrast.ID_GAMEXO}/${data.id_match}`,
-          {},
-          JSON.stringify(req)
-        );
-      }
-
+      setStatus(data.status);
+      setBoard(data.board);
+      setMessages(handleMessage(""));
+      player(data, data.user_id);
       setstompClient(stompClient);
     });
     return () => {
       stompClient.disconnect();
+      localStorage.removeItem("messages");
       console.log("Unmouted");
     };
   }, []);
 
-  useEffect(() => {
-    if (status && you) {
-      if (you.status === Contrast.CANCEL_GAME) {
-        localStorage.removeItem("messages");
-        stompClient.disconnect();
-      }
-    }
-  }, [status]);
 
   return (
     <div className="container-fluid padding-0">
@@ -134,7 +121,7 @@ const Play = ({ data }) => {
               <div>
                 <Player
                   player={you}
-                  id_match={data.id_match}
+                  match_id={data.match_id}
                   stompClient={stompClient}
                   you={1}
                   turn={turn}
@@ -142,15 +129,15 @@ const Play = ({ data }) => {
                 <BoardXO
                   data={{
                     stompClient: stompClient,
-                    type: data.type,
-                    id_match: data.id_match,
+                    type: you.type,
+                    match_id: data.match_id,
                     board: board,
                     status: status,
                   }}
                 />
                 <Player
                   player={opponent}
-                  id_match={data.id_match}
+                  match_id={data.match_id}
                   stompClient={stompClient}
                   you={0}
                   turn={turn}
@@ -161,25 +148,15 @@ const Play = ({ data }) => {
               <ChatBox
                 data={{
                   stompClient: stompClient,
-                  type: data.type,
-                  id_match: data.id_match,
-                  messages: messages,
-                  you:you,
-                  opponent:opponent
+                  user_id: data.user_id,
+                  match_id: data.match_id,
+                  url:`/app/xo/${1}/${data.match_id}`,
+                  messages: messages 
                 }}
               />
             </div>
           </>
-        ) : (
-          <div className="d-flex align-items-center">
-            <audio playsInline loop autoPlay>
-              <source src={nhac} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
-            <h3>Đang tìm trận</h3>
-            <i className="fad fa-spinner-third"></i>
-          </div>
-        )}
+        ) : ""}
       </div>
     </div>
   );

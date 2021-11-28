@@ -4,17 +4,17 @@ import Contrast from "../../Contrast";
 
 const id_game = 1;
 function ChatBox({ data }) {
-  console.log(data);
   const [mes, setMes] = useState("");
   const handleMessage = (e) => {
+    console.log(mes);
     if (mes === "") return;
     if (e.key === "Enter" || e.type === "click") {
       data.stompClient.send(
-        `/app/xo/${id_game}/${data.id_match}`,
+        data.url,
         {},
         JSON.stringify({
-          id_match: data.id_match,
-          type: data.type,
+          match_id: data.match_id,
+          user_id: data.user_id,
           message: mes,
           status: Contrast.MESSAGE,
         })
@@ -38,7 +38,7 @@ function ChatBox({ data }) {
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
           return (
-            <Message key={index} message={e} is_chat={data.type === e.type} you={data.you} opponent={data.opponent}/>
+            <Message key={index} message={e} is_chat={data.user_id === e.user_id} />
           );
         })}
         <div ref={messagesEndRef} />

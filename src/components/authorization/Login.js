@@ -8,14 +8,14 @@ import NavBar from "../navbar/NavBar";
 import Loading from "../../loading/Loading";
 
 export default function Login() {
-  const { updateDataUser } = useContext(UserContext);
+  const { updateGobleUser} = useContext(UserContext);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [data, setData] = useState();
   const [loading,setLoading]= useState(false);
   const [error, setError] = useState();
   useEffect(() => {
-    updateDataUser(data);
+    updateGobleUser(data);
   }, [data]);
 
   const submit = async () => {

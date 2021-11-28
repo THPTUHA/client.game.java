@@ -19,6 +19,7 @@ import News from "../admin/News";
 import User from "../admin/User";
 import UpdateNews from "../admin/UpdateNews";
 import NewsDetail from "../news/NewsDetail";
+import Play from "../game/xo/Play";
 
 export default function Nav() {
   const { user } = useContext(UserContext);

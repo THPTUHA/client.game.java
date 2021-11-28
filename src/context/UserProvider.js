@@ -23,11 +23,16 @@ const UserProvider = ({ children }) => {
      })();
   }, []);
   const updateDataUser = (user) => {
-    setUser(user);
+    user =user;
   };
+
+  const updateGobleUser =(user) =>{
+    setUser(user);
+  }
   const userContextData = {
     user,
     updateDataUser,
+    updateGobleUser
   };
   return (
     <UserContext.Provider value={userContextData}>

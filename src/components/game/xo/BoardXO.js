@@ -3,15 +3,14 @@ import Contrast from "../../../Contrast";
 
 const BoardXO = ({data})=>{
     function sendAction(x, y) {
-      console.log("send to:", data.id_match);
       const play = {
         coordinateX: x,
         coordinateY: y,
         type: data.type,
-        id_match: data.id_match,
+        match_id: data.match_id,
         status:Contrast.PLAY
       };
-      data.stompClient.send( `/app/xo/${Contrast.ID_GAMEXO}/${data.id_match}`, {}, JSON.stringify(play) );
+      data.stompClient.send( `/app/xo/${Contrast.ID_GAMEXO}/${data.match_id}`, {}, JSON.stringify(play) );
       
     }
 
