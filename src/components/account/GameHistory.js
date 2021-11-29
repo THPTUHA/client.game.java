@@ -4,7 +4,7 @@ export default function GameHistory({ e }) {
   console.log(e);
   return (
     <div className="gameHistory container-fluid p-0">
-      <div className="row p-0">
+      <div className="row p-0 pt-1">
         <div class="col-1">
           <div className="h-100 grid">
             <div>{e.game_name}</div>
@@ -47,8 +47,8 @@ export default function GameHistory({ e }) {
             <div
               style={{
                 backgroundImage: `url(${e.opponent.avatar}`,
-                width: 40,
-                height: 40,
+                width: 30,
+                height: 30,
               }}
               className="accountAvtContainer"
             ></div>

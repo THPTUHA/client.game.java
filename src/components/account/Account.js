@@ -113,7 +113,12 @@ export default function Account() {
             </div>
             {gameplay_history
               ? gameplay_history.map((e, index) => {
-                  return <GameHistory e={e} key={index} />;
+                  return (
+                    <div key={index}>
+                      <hr />
+                      <GameHistory e={e} />
+                    </div>
+                  );
                 })
               : ""}
           </div>
