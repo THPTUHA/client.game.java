@@ -17,7 +17,6 @@ export default function NewsDetail() {
         { id: id },
         authorization()
       );
-      console.log(res.data);
       setLoading(true);
       setDetail(res.data.content);
     } catch (err) {

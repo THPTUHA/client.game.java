@@ -4,21 +4,59 @@ import ReactQuill from "react-quill";
 import axios from "axios";
 import { authorization } from "../../service/authorization";
 import "react-quill/dist/quill.snow.css";
-import { Delta } from "quill";
+
+
+let editorRef = null;
+
+const saveToServer = async(file)=>{
+  const formData = new FormData();
+  formData.append("image", file);
+  try{
+    const res = await axios.post(`${process.env.REACT_APP_SERVER}/admin/news/image`,formData);
+    console.log(res.data);
+    editorRef.getEditor().insertEmbed(null, "image", res.data);
+    console.log(editorRef);
+  }catch(err){
+    console.log(err);
+  }
+}
+const imageHandler = (e) => {
+  const input = document.createElement("input");
+  input.setAttribute("type", "file");
+  input.setAttribute("accept", "image/*");
+  input.click();
+
+  input.onchange = () => {
+      const file = input.files[0];
+
+      // file type is only image.
+      if (/^image\//.test(file.type)) {
+          saveToServer(file);
+      } else {
+          console.warn("You could only upload images.");
+      }
+  };
+};
+
 const modules = {
-  toolbar: [
-    [{ header: "1" }, { header: "2" }, { font: [] }],
-    [{ size: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
+  toolbar: {
+    container:[
+      [{ header: "1" }, { header: "2" }, { font: [] }],
+      [{ size: [] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image", "video"],
+      ["clean"],
     ],
-    ["link", "image", "video"],
-    ["clean"],
-  ],
+    handlers: {  
+     image: imageHandler  
+    }
+  }, 
   clipboard: {
     matchVisual: false,
   },
@@ -106,10 +144,12 @@ export default function PostNews() {
                   <div> Nội dung:</div>
                   <div>
                     <ReactQuill
+                      ref={(e)=>{editorRef=e}}
                       theme="snow"
                       modules={modules}
                       formats={formats}
                       value={content}
+                      forwardedRef={editorRef}
                       onChange={setContent}
                     />
                   </div>

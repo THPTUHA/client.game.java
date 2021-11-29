@@ -2,13 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 const getDay = (time) => {
-  console.log(time);
   const date = time.split("T");
   return date[0];
 };
 
 export default function News({ index, e }) {
-  console.log(e);
   return (
     <div key={index}>
       <Link to={`/news/detail/${e.id}`}>

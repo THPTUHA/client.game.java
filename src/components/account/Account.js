@@ -9,6 +9,7 @@ import { authorization } from "../../service/authorization";
 
 const formatDataHistoryGame = (history,user)=>{
   return history.map((data,index)=>{
+    console.log(data);
     const tmp = data.data.split("@#$");
     let temp_data ={};
     for(let i=0;i<tmp.length;i+=2)temp_data[tmp[i]] = tmp[i+1];
@@ -30,7 +31,7 @@ export default function Account() {
   useEffect(async()=>{
     try{
       const res = await axios.post(`${process.env.REACT_APP_SERVER}/user/gameplay/history`,{},authorization());
-      // console.log(formatDataHistoryGame(res.data,user));
+      console.log(res.data);
       setGamePlayHistory(formatDataHistoryGame(res.data,user));
     }catch(err){
 
@@ -112,7 +113,7 @@ export default function Account() {
              gameplay_history?(
                gameplay_history.map((e,index)=>{
                 return (
-                  <div>
+                  <div key={index}>
                     <div>{e.game_name}</div>
                     <img src={e.you.avatar}/>
                     <div>{e.you.first_name+" "+e.you.last_name}</div>

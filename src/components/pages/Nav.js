@@ -19,6 +19,7 @@ import News from "../admin/News";
 import User from "../admin/User";
 import UpdateNews from "../admin/UpdateNews";
 import NewsDetail from "../news/NewsDetail";
+import GameXO from "../game/xo/GameXO";
 import Play from "../game/xo/Play";
 
 export default function Nav() {
@@ -30,6 +31,8 @@ export default function Nav() {
       <Route exact path="/" component={Home}></Route>
       <Route exact path="/news" component={NewsList}></Route>
       <Route exact path="/news/detail/:id"><NewsDetail/></Route>
+      <Route path="/gameplay/xo" ><GameXO/></Route>
+      <Route path="/gameplay"><Game/></Route>
       <Route path="/login">
         {user==="unload"||!user?<Login />:<Redirect to="/"/>}
       </Route>

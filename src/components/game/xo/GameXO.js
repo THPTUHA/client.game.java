@@ -1,11 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Play from "./Play";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import  { authorization } from "../../../service/authorization";
 import nhac from "../../../assets/mp3/lmht.mp3";
-function GameXO({ user }) {
+import { UserContext } from "../../../context/UserProvider";
+
+function GameXO() {
+  const { user } = useContext(UserContext);
   const [data, setData] = useState();
   const [loading,setLoading] = useState(false);
 
@@ -32,10 +35,10 @@ function GameXO({ user }) {
     }
   };
 
-  useEffect(async () => {
+ (async () => {
     console.log(user);
     if (user.status>0) {
-      console.log("FUCK");
+      setLoading(true);
       try {
         const res = await axios.post(
           `${process.env.REACT_APP_SERVER}/xo/reload`,
@@ -49,7 +52,8 @@ function GameXO({ user }) {
         console.log(err);
       }
     }
-  }, []);
+    setLoading(false);
+  }) ();
 
   // const { user } = useContext(UserContext);
   // console.log(user);

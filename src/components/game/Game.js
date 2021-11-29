@@ -12,7 +12,6 @@ import caroGame from "../../assets/img/caroGame.png";
 import axios from "axios";
 import { authorization } from "../../service/authorization";
 function Game() {
-  const match = useRouteMatch();
   const { user ,updateDataUser } = useContext(UserContext);
   const [stompClient, setstompClient] = useState();
   const [messages, setMessages] = useState([]);
@@ -45,19 +44,12 @@ function Game() {
 
   return (
     <>
-      <Switch>
-        <Route
-          path={`${match.url}/xo`}
-          component={() => <GameXO user={user} />}
-        />
-        <Route path="/gameplay">
           <NavBar />
-
           <div className="container-fluid game">
             <div className="row">
               <div className="col-sm-6">
                 <h1>Game </h1>
-                <Link to={`${match.url}/xo`}>Cờ Caro</Link>
+                <Link to={`gameplay/xo`}>Cờ Caro</Link>
               </div>
               <div className="col-sm-6">
                 <ChatBox
@@ -72,8 +64,6 @@ function Game() {
               </div>
             </div>
           </div>
-        </Route>
-      </Switch>
     </>
   );
 }
