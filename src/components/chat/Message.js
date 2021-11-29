@@ -23,7 +23,12 @@ function Message({ message, is_chat }) {
             }}
             className="accountAvtContainer"
           ></div>
-          <p className="message--received">{message.message}</p>
+          <div className="d-flex flex-column">
+            <p style={{ fontSize: "0.5rem", marginLeft: "0.5rem" }}>
+              {message.user_name}
+            </p>
+            <p className="message--received">{message.message}</p>
+          </div>
         </div>
       ) : (
         <div className="d-flex  justify-content-end align-items-end mb-2">

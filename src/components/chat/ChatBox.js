@@ -12,7 +12,7 @@ function ChatBox({ data }) {
     console.log(mes);
     if (mes === "") return;
     if (e.key === "Enter" || e.type === "click") {
-      setPlaying(false)
+      setPlaying(false);
       data.stompClient.send(
         data.url,
         {},
@@ -34,18 +34,22 @@ function ChatBox({ data }) {
 
   useEffect(() => {
     if (data.messages.length !== 0) scrollToBottom();
-    if(playing)
-        audio.play()
-    setPlaying(true)
+    if (playing) audio.play();
+    setPlaying(true);
   }, [data.messages]);
 
   return (
     <div className="chatBox mt-lg-4 ">
+      {console.log(data.messages)}
       <h3>Trò chuyện</h3>
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
           return (
-            <Message key={index} message={e} is_chat={data.user_id === e.user_id} />
+            <Message
+              key={index}
+              message={e}
+              is_chat={data.user_id === e.user_id}
+            />
           );
         })}
         <div ref={messagesEndRef} />

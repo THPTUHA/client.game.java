@@ -486,7 +486,7 @@ input:focus {
 .message--received {
   background-color: white;
   padding: 0.5rem 1rem;
-  margin-left: 0, 5rem !important;
+  margin-left: 0.5rem !important;
 
   border-radius: 0.5rem;
   border-bottom-left-radius: 2px;
