@@ -501,3 +501,15 @@ input:focus {
   position: inherit;
   right: 10px;
 } */
+
+/* lsd */
+.gameHistory .name {
+  font-weight: 500;
+}
+.gameHistory .res {
+  background-color: #28a745;
+  color: white;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 0.8rem;
+}

@@ -40,7 +40,6 @@ function ChatBox({ data }) {
 
   return (
     <div className="chatBox mt-lg-4 ">
-      {console.log(data.messages)}
       <h3>Trò chuyện</h3>
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
