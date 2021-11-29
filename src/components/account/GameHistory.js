@@ -12,7 +12,7 @@ export default function GameHistory({ e }) {
         </div>
         <div class="col-4">
           <div className="d-flex align-items-center justify-content-end h-100">
-            <span className="name">
+            <span style={{ textAlign: "end" }} className="name">
               {e.you.first_name + " " + e.you.last_name}
             </span>
 
@@ -53,7 +53,7 @@ export default function GameHistory({ e }) {
               className="accountAvtContainer"
             ></div>
 
-            <span className="name">
+            <span style={{ textAlign: "start" }} className="name">
               {e.opponent.first_name + " " + e.opponent.last_name}
             </span>
           </div>
