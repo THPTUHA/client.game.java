@@ -2,7 +2,6 @@ import { Redirect } from "react-router";
 import Contrast from "../../../Contrast";
 import CountDown from "../../util/CountDown";
 
-
 const Player = ({ player, match_id, stompClient, you, turn }) => {
   const handleCancelMatch = () => {
     try {
@@ -62,7 +61,13 @@ const Player = ({ player, match_id, stompClient, you, turn }) => {
           src={`https://avatars.dicebear.com/api/micah/${player.name}.svg`}
           alt=""
         />
-        <h6>
+        <h6
+          className={
+            player.status === Contrast.PLAY && player.type === turn
+              ? "turn"
+              : ""
+          }
+        >
           {player.name} EXP: {player.exp}
         </h6>
         {player.status === Contrast.PLAY && player.type === turn ? (
