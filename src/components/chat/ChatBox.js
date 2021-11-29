@@ -33,7 +33,9 @@ function ChatBox({ data }) {
   };
 
   useEffect(() => {
-    if (data.messages.length !== 0) scrollToBottom();
+    // if (data.messages.length !== 0) scrollToBottom();
+    var element = document.getElementById("trochuyen");
+    element.scrollTop = element.scrollHeight;
     if (playing) audio.play();
     setPlaying(true);
   }, [data.messages]);
@@ -41,7 +43,7 @@ function ChatBox({ data }) {
   return (
     <div className="chatBox mt-lg-4 ">
       <h3>Trò chuyện</h3>
-      <div className="content mt-1 mb-2 ">
+      <div id="trochuyen" className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
           return (
             <Message
