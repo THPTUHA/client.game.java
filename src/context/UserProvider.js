@@ -11,7 +11,7 @@ const UserProvider = ({ children }) => {
             const athu = authorization();
             if(athu){
               console.log(athu);
-              const user = await axios.get("/user", athu);
+              const user = await axios.get(`${process.env.REACT_APP_SERVER}/user`, athu);
               console.log("Goi lai");
               user.data.avatar = user.data.avatar?user.data.avatar:`https://avatars.dicebear.com/api/micah/${user.data.first_name  + user.data.last_name}.svg`;
               console.log(user.data);

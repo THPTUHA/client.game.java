@@ -1,14 +1,18 @@
 import React, { memo, useState, useEffect, useRef } from "react";
 import Message from "./Message";
 import Contrast from "../../Contrast";
+import chatSound from "../../assets/mp3/discord.mp3";
 
 const id_game = 1;
 function ChatBox({ data }) {
+  const [audio] = useState(new Audio(chatSound));
+  const [playing, setPlaying] = useState(false);
   const [mes, setMes] = useState("");
   const handleMessage = (e) => {
     console.log(mes);
     if (mes === "") return;
     if (e.key === "Enter" || e.type === "click") {
+      setPlaying(false);
       data.stompClient.send(
         data.url,
         {},
@@ -30,6 +34,8 @@ function ChatBox({ data }) {
 
   useEffect(() => {
     if (data.messages.length !== 0) scrollToBottom();
+    if (playing) audio.play();
+    setPlaying(true);
   }, [data.messages]);
 
   return (
@@ -38,7 +44,11 @@ function ChatBox({ data }) {
       <div className="content mt-1 mb-2 ">
         {data.messages.map((e, index) => {
           return (
-            <Message key={index} message={e} is_chat={data.user_id === e.user_id} />
+            <Message
+              key={index}
+              message={e}
+              is_chat={data.user_id === e.user_id}
+            />
           );
         })}
         <div ref={messagesEndRef} />

@@ -5,38 +5,40 @@ import NavBar from "../navbar/NavBar";
 import { Link } from "react-router-dom";
 import FormData from "form-data";
 import { authorization } from "../../service/authorization";
+import GameHistory from "./GameHistory";
 // const FormData = require('form-data');
 
-const formatDataHistoryGame = (history,user)=>{
-  return history.map((data,index)=>{
-    console.log(data);
+const formatDataHistoryGame = (history, user) => {
+  return history.map((data, index) => {
     const tmp = data.data.split("@#$");
-    let temp_data ={};
-    for(let i=0;i<tmp.length;i+=2)temp_data[tmp[i]] = tmp[i+1];
+    let temp_data = {};
+    for (let i = 0; i < tmp.length; i += 2) temp_data[tmp[i]] = tmp[i + 1];
     const opp = data.opponent.split("@#$");
-    let opponent ={};
-    for(let i=0;i<opp.length;i+=2)opponent[opp[i]] = opp[i+1];
-    let you = {...user, point :temp_data[user.id]};
+    let opponent = {};
+    for (let i = 0; i < opp.length; i += 2) opponent[opp[i]] = opp[i + 1];
+    let you = { ...user, point: temp_data[user.id] };
     opponent.point = temp_data[opponent.id];
-    data.opponent =opponent;
+    data.opponent = opponent;
     data.you = you;
     return data;
-    })
-}
+  });
+};
 export default function Account() {
   const { user } = useContext(UserContext);
   const [avatar, setAvatar] = useState(user.avatar);
   const [new_avatar, setNewAvatar] = useState();
-  const [gameplay_history,setGamePlayHistory] = useState();
-  useEffect(async()=>{
-    try{
-      const res = await axios.post(`${process.env.REACT_APP_SERVER}/user/gameplay/history`,{},authorization());
-      console.log(res.data);
-      setGamePlayHistory(formatDataHistoryGame(res.data,user));
-    }catch(err){
-
-    }
-  },[]);
+  const [gameplay_history, setGamePlayHistory] = useState();
+  useEffect(async () => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER}/user/gameplay/history`,
+        {},
+        authorization()
+      );
+      // console.log(formatDataHistoryGame(res.data,user));
+      setGamePlayHistory(formatDataHistoryGame(res.data, user));
+    } catch (err) {}
+  }, []);
   const submit = async () => {
     console.log(new_avatar[0]);
     const formData = new FormData();
@@ -109,26 +111,14 @@ export default function Account() {
             <div className="row">
               <strong>Lịch sử đấu</strong>
             </div>
-           {
-             gameplay_history?(
-               gameplay_history.map((e,index)=>{
-                return (
-                  <div key={index}>
-                    <div>{e.game_name}</div>
-                    <img src={e.you.avatar}/>
-                    <div>{e.you.first_name+" "+e.you.last_name}</div>
-                    <div>{e.you.point}</div>
-                    <div>{e.opponent.point}</div>
-                    <div>{e.opponent.first_name+" "+e.opponent.last_name}</div>
-                 </div>
-                )
-                  
-               })):""
-           }
+            {gameplay_history
+              ? gameplay_history.map((e, index) => {
+                  return <GameHistory e={e} key={index} />;
+                })
+              : ""}
           </div>
         </div>
       </div>
     </>
   );
 }
-

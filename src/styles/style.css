@@ -420,6 +420,10 @@ input:focus {
   height: 25rem;
   background-color: rgba(0, 0, 0, 0.4);
 }
+.chatBox .accountAvtContainer {
+  width: 40px;
+  height: 40px;
+}
 .chatBox .content {
   overflow-y: scroll;
   height: 18rem;
@@ -463,24 +467,27 @@ input:focus {
 .content p {
   margin: 0;
 }
-.content img {
+/* .content img {
   width: 40px;
   border-radius: 50%;
   border: 1px solid black;
   background-color: white;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
-}
+} */
 
 .message--sent {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  margin-right: 0.5rem !important;
   border-bottom-right-radius: 2px;
   background-color: tomato;
 }
 .message--received {
   background-color: white;
   padding: 0.5rem 1rem;
+  margin-left: 0.5rem !important;
+
   border-radius: 0.5rem;
   border-bottom-left-radius: 2px;
 
@@ -494,3 +501,15 @@ input:focus {
   position: inherit;
   right: 10px;
 } */
+
+/* lsd */
+.gameHistory .name {
+  font-weight: 500;
+}
+.gameHistory .res {
+  background-color: #28a745;
+  color: white;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 0.8rem;
+}
