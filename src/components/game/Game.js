@@ -59,7 +59,7 @@ function Game() {
                 <h1>Game </h1>
                 <Link to={`${match.url}/xo`}>Cờ Caro</Link>
               </div>
-              <div className="col-sm-6">
+              <div className="col-lg-6">
                 <ChatBox
                   data={{
                     stompClient: stompClient,
