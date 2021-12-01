@@ -8,11 +8,11 @@ import NavBar from "../navbar/NavBar";
 import Loading from "../../loading/Loading";
 
 export default function Login() {
-  const { updateGobleUser} = useContext(UserContext);
+  const { updateGobleUser } = useContext(UserContext);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [data, setData] = useState();
-  const [loading,setLoading]= useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   useEffect(() => {
     updateGobleUser(data);
@@ -29,7 +29,11 @@ export default function Login() {
       localStorage.setItem("token", JSON.stringify(response.data));
       try {
         const user = await axios.get("/user", authorization());
-        user.data.avatar = user.data.avatar?user.data.avatar:`https://avatars.dicebear.com/api/micah/${user.first_name  + user.last_name}.svg`;
+        user.data.avatar = user.data.avatar
+          ? user.data.avatar
+          : `https://avatars.dicebear.com/api/micah/${
+              user.first_name + user.last_name
+            }.svg`;
         setData(user.data);
       } catch (err) {
         console.log(err);
@@ -41,7 +45,7 @@ export default function Login() {
     setLoading(false);
   };
 
-  return  !loading?(
+  return !loading ? (
     !data ? (
       <>
         <NavBar />
@@ -58,7 +62,7 @@ export default function Login() {
                     <input
                       className="mb-3"
                       type="text"
-                      placeholder="Enter your email"
+                      placeholder="Nhập email"
                       onChange={(e) => {
                         setEmail(e.target.value);
                       }}
@@ -67,14 +71,14 @@ export default function Login() {
                     <input
                       type="password"
                       className="mb-3"
-                      placeholder="Enter your password"
+                      placeholder="Nhập mật khẩu"
                       onChange={(e) => {
                         setPassword(e.target.value);
                       }}
                     />
                     <br />
                     <p className="text-danger">{error}</p>
-  
+
                     <button
                       type="button"
                       className="Form__btn btn btn-warning"
@@ -92,7 +96,10 @@ export default function Login() {
           </div>
         </div>
       </>
-    ) :<Redirect to="/"></Redirect>
-  ):<Loading></Loading>
-  
+    ) : (
+      <Redirect to="/"></Redirect>
+    )
+  ) : (
+    <Loading></Loading>
+  );
 }

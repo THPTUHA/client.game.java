@@ -45,7 +45,6 @@
   .NewsList .NewsImgContainer {
     height: 10rem;
   }
-
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -118,7 +117,8 @@
   .padding-lg {
     padding-right: 3rem;
     padding-left: 3rem;
-  }.NewsList{
+  }
+  .NewsList {
     width: 75%;
   }
 }
@@ -139,7 +139,7 @@
     padding-right: 4rem;
     padding-left: 4rem;
   }
-  .NewsList{
+  .NewsList {
     width: 75%;
   }
 }
