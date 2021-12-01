@@ -475,7 +475,9 @@ input:focus {
   margin-right: 0.5rem;
   margin-left: 0.5rem;
 } */
-
+.message--sent,.message--received{
+  max-width: 80%;
+}
 .message--sent {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;

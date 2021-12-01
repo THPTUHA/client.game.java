@@ -36,6 +36,7 @@ function ChatBox({ data }) {
     // if (data.messages.length !== 0) scrollToBottom();
     var element = document.getElementById("trochuyen");
     element.scrollTop = element.scrollHeight;
+    console.log(playing);
     if (playing) audio.play();
     setPlaying(true);
   }, [data.messages]);
