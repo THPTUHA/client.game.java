@@ -1,4 +1,6 @@
+import axios from "axios";
 import { React, useState } from "react";
+import { authorization } from "../../service/authorization";
 import StyledInput from "../styledComponents/StyledInput";
 
 export default function UpdatePassword() {
@@ -8,6 +10,22 @@ export default function UpdatePassword() {
   const [nWarning, setNWarning] = useState("");
   const [rPassword, setRPassword] = useState("");
   const [rWarning, setRWarning] = useState("");
+
+  const submit =async ()=>{
+    console.log(password,nPassword,rPassword);
+    if(rPassword === nPassword){
+      console.log("OK");
+      const data ={password:password,new_password:nPassword}
+      try{
+        const res = await axios.post(`${process.env.REACT_APP_SERVER}/user/change_password`,
+        data,
+        authorization());
+        console.log(res.data)
+      }catch(err){
+
+      }
+    }
+  }
   const checkInput = (str) => {
     if (str === "") {
       return false;
@@ -81,15 +99,15 @@ export default function UpdatePassword() {
                     onChange={(e) => {
                       setRPassword(e.target.value);
                     }}
-                    onBlur={(e) => {
-                      checkRPassword(e.target.value);
-                    }}
+                    // onBlur={(e) => {
+                    //   checkRPassword(e.target.value);
+                    // }}
                   />
                   <p className="text-danger">{rWarning}</p>
                   <button
                     type="button"
                     className="Form__btn btn btn-warning shadow-none"
-                    // onClick={submit}
+                    onClick={submit}
                   >
                     Submit
                   </button>

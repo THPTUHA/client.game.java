@@ -28,7 +28,7 @@ export default function RecentNews() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div class="col-sm-12">
+        <div className="col-sm-12">
           <div className="blogs pt-5 pb-5">
             <p className="sessionTitle">BÀI VIẾT MỚI</p>
           </div>
@@ -38,7 +38,7 @@ export default function RecentNews() {
         {news ? (
           news.map((e, index) => {
             return (
-              <div key={index} class="col-sm-6 col-lg-4 recentNews">
+              <div key={index} className="col-sm-6 col-lg-4 recentNews">
                 <div>
                   <Link to={`/news/detail/${e.id}`}>
                     <News index={index} e={e} />

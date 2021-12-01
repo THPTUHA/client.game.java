@@ -21,7 +21,6 @@ export default function ListNews() {
         authorization()
        
       );
-      console.log(res.data);
       setNews(res.data);
     } catch (err) {}
   }, []);
@@ -40,8 +39,8 @@ export default function ListNews() {
                 {news ? (
                   news.map((e, index) => {
                     return (
-                      <div class="col-sm-12">
-                        <div key={index}>
+                      <div className="col-sm-12" key={index}>
+                        <div >
                           <Link to={`/news/detail/${e.id}`}>
                             <News index={index} e={e} />
                           </Link>

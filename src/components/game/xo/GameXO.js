@@ -35,25 +35,25 @@ function GameXO() {
     }
   };
 
- (async () => {
-    console.log(user);
-    if (user.status>0) {
-      setLoading(true);
-      try {
-        const res = await axios.post(
-          `${process.env.REACT_APP_SERVER}/xo/reload`,
-          {
-            match_id: user.status,
-          }
-        );
-        console.log(res.data);
-        setData({...res.data,user_id:user.id});
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    setLoading(false);
-  }) ();
+//  (async () => {
+//     console.log(user);
+//     if (user.status>0) {
+//       setLoading(true);
+//       try {
+//         const res = await axios.post(
+//           `${process.env.REACT_APP_SERVER}/xo/reload`,
+//           {
+//             match_id: user.status,
+//           }
+//         );
+//         console.log(res.data);
+//         setData({...res.data,user_id:user.id});
+//       } catch (err) {
+//         console.log(err);
+//       }
+//     }
+//     setLoading(false);
+//   }) ();
 
   // const { user } = useContext(UserContext);
   // console.log(user);

@@ -99,7 +99,15 @@ const Play = ({ data }) => {
       player(data, data.user_id);
       setstompClient(stompClient);
     });
+  //   window.addEventListener("beforeunload", (ev) => 
+  // {  
+  //     ev.preventDefault();
+  //     console.log(ev);
+  //     if(ev.isTrusted ==false)console.log("FUCK")
+  //     return ev.returnValue = 'Are you sure you want to close?';
+  // });
     return () => {
+      // window.removeEventListener("beforeunload");
       stompClient.disconnect();
       localStorage.removeItem("messages");
       console.log("Unmouted");

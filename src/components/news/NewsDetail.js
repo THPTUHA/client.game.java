@@ -26,8 +26,8 @@ export default function NewsDetail() {
   return detail ? (
     <div>
       <NavBar />
-      <div class="container">
-        <div class="col-sm-12">
+      <div className="container">
+        <div className="col-sm-12">
           <div className="grid newsDetail">
             <div dangerouslySetInnerHTML={{ __html: detail }} />
           </div>

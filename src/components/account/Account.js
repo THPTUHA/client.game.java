@@ -5,24 +5,8 @@ import NavBar from "../navbar/NavBar";
 import { Link } from "react-router-dom";
 import FormData from "form-data";
 import { authorization } from "../../service/authorization";
-import GameHistory from "./GameHistory";
-// const FormData = require('form-data');
+import GameHistory from "./GameXOHistory";
 
-const formatDataHistoryGame = (history, user) => {
-  return history.map((data, index) => {
-    const tmp = data.data.split("@#$");
-    let temp_data = {};
-    for (let i = 0; i < tmp.length; i += 2) temp_data[tmp[i]] = tmp[i + 1];
-    const opp = data.opponent.split("@#$");
-    let opponent = {};
-    for (let i = 0; i < opp.length; i += 2) opponent[opp[i]] = opp[i + 1];
-    let you = { ...user, point: temp_data[user.id] };
-    opponent.point = temp_data[opponent.id];
-    data.opponent = opponent;
-    data.you = you;
-    return data;
-  });
-};
 export default function Account() {
   const { user } = useContext(UserContext);
   const [avatar, setAvatar] = useState(user.avatar);
@@ -35,8 +19,8 @@ export default function Account() {
         {},
         authorization()
       );
-      // console.log(formatDataHistoryGame(res.data,user));
-      setGamePlayHistory(formatDataHistoryGame(res.data, user));
+      console.log(res.data);
+      setGamePlayHistory(res.data);
     } catch (err) {}
   }, []);
   const submit = async () => {
@@ -113,12 +97,9 @@ export default function Account() {
             </div>
             {gameplay_history
               ? gameplay_history.map((e, index) => {
-                  return (
-                    <div key={index}>
-                      <hr />
-                      <GameHistory e={e} />
-                    </div>
-                  );
+                return  e.map((match,id)=>{
+                   return  <GameHistory key={id} index={index} match={match}/>
+                 })
                 })
               : ""}
           </div>
