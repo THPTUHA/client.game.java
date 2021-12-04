@@ -179,20 +179,75 @@ input:focus {
 }
 
 .header {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
       45deg,
       rgba(2, 33, 64, 0.3) 55%,
       rgba(45, 95, 93, 0.35)
     ),
-    url("../assets/img/banner_2.png");
+    url("../assets/img/banner_2.png"); */
   background-position: center;
   background-size: cover;
-  height: 500px;
+  height: 550px;
   background-attachment: fixed;
   width: 100%;
   background-repeat: repeat-x;
   transition: all 1s;
   position: relative;
+}
+.zed {
+  z-index: -1;
+  color: white;
+  height: 550px;
+}
+.zed__backGround {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 1;
+  height: 550px;
+
+  top: 0;
+  left: 0;
+  /* height: 100%; */
+  /* height: 40rem; */
+  width: 100%;
+}
+.zed__video {
+  object-fit: cover;
+  width: 100%;
+  height: 550px;
+
+  max-width: 100%;
+  /* height: 40rem; */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.zed__titles {
+  position: absolute;
+  z-index: 1;
+  color: white;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin: 0;
+}
+
+.zed__title1 {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.zed__title2 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 0;
+}
+.zed__title3 {
+  font-weight: 600;
+}
+.zed__title4 {
+  font-weight: 300;
 }
 .header__btn {
   padding: 0.5rem 2rem;
@@ -282,7 +337,8 @@ input:focus {
   animation: flicker 1s linear infinite;
   color: #ffba00;
 }
-.game {
+.game,
+.gameRoom {
   background-image: linear-gradient(
       45deg,
       rgba(2, 33, 64, 0.5) 55%,
@@ -293,6 +349,9 @@ input:focus {
   height: 100vh;
   background-size: cover;
   color: white;
+}
+.gameRoom {
+  background-image: url("../assets/img/findingGameBg.jpg");
 }
 @keyframes mymove {
   from {
@@ -475,7 +534,8 @@ input:focus {
   margin-right: 0.5rem;
   margin-left: 0.5rem;
 } */
-.message--sent,.message--received{
+.message--sent,
+.message--received {
   max-width: 80%;
 }
 .message--sent {
@@ -496,7 +556,6 @@ input:focus {
   color: black;
 }
 
-
 .answer--sent-check {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -513,7 +572,6 @@ input:focus {
   background-color: rgb(255, 0, 0);
 }
 
-
 .answer--sent-correct {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -521,7 +579,6 @@ input:focus {
   border-bottom-right-radius: 2px;
   background-color: rgb(66, 252, 9);
 }
-
 
 .answer--received-check {
   padding: 0.5rem 1rem;
@@ -538,7 +595,6 @@ input:focus {
   border-bottom-left-radius: 2px;
   background-color: rgb(255, 0, 0);
 }
-
 
 .answer--received-correct {
   padding: 0.5rem 1rem;
