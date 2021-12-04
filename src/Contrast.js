@@ -9,7 +9,14 @@
     RELOAD: 8,
     WINNER : 9,
     DRAW : 10,
-    ID_GAMEXO : 1
+   ID_GAMEXO : 1,
+   TIME_CHECK :11,
+   TIME_SET : 12,
+   CORRECT : 1,
+   WRONG : 0,
+   UNCHECK :-1,
+   LOSE:13
+  
  }
 export const Err = {
    ERR_TITLE :1,
