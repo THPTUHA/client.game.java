@@ -13,28 +13,27 @@ import axios from "axios";
 import { authorization } from "../../service/authorization";
 import ChatGeneral from "./ChatGeneral";
 function Game() {
-  const { user ,updateDataUser } = useContext(UserContext);
+  const { user, updateDataUser } = useContext(UserContext);
   const [stompClient, setstompClient] = useState();
   const [messages, setMessages] = useState([]);
 
-
   return (
     <>
-          <NavBar />
-          <div className="container-fluid game">
-            <div className="row">
-              <div className="col-sm-6">
-                <h1>Game </h1>
-                <Link to={`gameplay/xo`}>Cờ Caro</Link>
-                <div>
-                 <Link to={`gameplay/cw`}>Nối từ</Link>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <ChatGeneral user_id={user.id}/>
-              </div>
+      <NavBar />
+      <div className="container-fluid game">
+        <div className="row">
+          <div className="col-sm-6">
+            <h1>Game </h1>
+            <Link to={`gameplay/xo`}>Cờ Caro</Link>
+            <div>
+              <Link to={`gameplay/cw`}>Nối từ</Link>
             </div>
           </div>
+          <div className="col-lg-6">
+            <ChatGeneral user_id={user.id} />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

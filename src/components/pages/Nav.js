@@ -21,22 +21,31 @@ import UpdateNews from "../admin/UpdateNews";
 import NewsDetail from "../news/NewsDetail";
 import GameXO from "../game/xo/GameXO";
 import Play from "../game/xo/Play";
-import ConcatedWord from "../game/cw/ConcatedWord"
+import ConcatedWord from "../game/cw/ConcatedWord";
 export default function Nav() {
   const { user } = useContext(UserContext);
 
   return (
     <div>
       <Switch>
-      <Route exact path="/" component={Home}></Route>
-      <Route exact path="/news" component={NewsList}></Route>
-      <Route exact path="/news/detail/:id"><NewsDetail/></Route>
-      <Route path="/gameplay/xo" ><GameXO/></Route>
-      <Route path="/gameplay/cw" ><ConcatedWord/></Route>
-      <Route path="/gameplay"><Game/></Route>
-      <Route path="/login">
-        {user==="unload"||!user?<Login />:<Redirect to="/"/>}
-      </Route>
+        <Route exact path="/" component={Home}></Route>
+        <Route exact path="/news" component={NewsList}></Route>
+        <Route exact path="/news/detail/:id">
+          <NewsDetail />
+        </Route>
+        <Route path="/gameplay/xo">
+          <GameXO />
+        </Route>
+        <Route path="/gameplay/cw">
+          <ConcatedWord user={user} />
+        </Route>
+        <Route path="/gameplay">
+          <Game />
+        </Route>
+        <Route path="/login">
+          {user === "unload" || !user ? <Login /> : <Redirect to="/" />}
+        </Route>
+
         {user === "unload" ? (
           <Loading />
         ) : (
@@ -70,7 +79,6 @@ export default function Nav() {
             <Route exact path="/admin/user">
               {!user ? <Redirect to="/login" /> : <User />}
             </Route>
-            <GoToTop />
           </>
         )}
         <Route component={NotFound} />

@@ -64,9 +64,9 @@ function GameXO() {
     <>
       <div className="container-fluid gameRoom">
         <h1>Cờ Caro </h1>
-        <div className="row">
+        <div className="row h-100">
           <div className="col-12">
-            <div className=" mb-4">
+            <div className=" h-100 mb-4">
               {loading ? (
                 <div className="d-flex align-items-center">
                   <audio playsInline loop autoPlay>
@@ -77,9 +77,16 @@ function GameXO() {
                   <i className="fad fa-spinner-third"></i>
                 </div>
               ) : !data ? (
-                <button className="btn btn-info " onClick={requestStart}>
-                  Tìm trận
-                </button>
+                <div class="container-fluid h-100">
+                  <div class="row h-100">
+                    <div class="col-12 h-100 ">
+                      {/* <div className="frame ">{user.first_name}</div> */}
+                      <button className="btn btn-info " onClick={requestStart}>
+                        Tìm trận
+                      </button>
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <Play data={data} />
               )}
