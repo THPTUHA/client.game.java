@@ -21,11 +21,9 @@ export default function Header() {
               <source src={vid} type="video/mp4" />
             </video>
             <div className="zed__titles">
-              <p className="zed__title1">NEW GAMES</p>
+              <p className="zed__title1">NEW GAME</p>
               <p className="zed__title2">League Of Legends</p>
-              <p className="zed__title3">
-                The 11 Biggest Autumn/Winter 2021 Trends
-              </p>
+              <p className="zed__title3">The Biggest Autumn/Winter 2021 Game</p>
 
               <div style={{ position: "relative", padding: "3rem 0" }}>
                 <p className="zed__title1">BY RIOT GAMES</p>
