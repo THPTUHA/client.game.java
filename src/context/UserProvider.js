@@ -20,6 +20,7 @@ const UserProvider = ({ children }) => {
         } catch (err) {
           setUser("");
           console.log(err);
+       
         }
      })();
   }, []);
