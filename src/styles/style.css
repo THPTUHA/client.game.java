@@ -495,6 +495,58 @@ input:focus {
 
   color: black;
 }
+
+
+.answer--sent-check {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem !important;
+  border-bottom-right-radius: 2px;
+  background-color: rgb(252, 101, 184);
+}
+
+.answer--sent-wrong {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem !important;
+  border-bottom-right-radius: 2px;
+  background-color: rgb(255, 0, 0);
+}
+
+
+.answer--sent-correct {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem !important;
+  border-bottom-right-radius: 2px;
+  background-color: rgb(66, 252, 9);
+}
+
+
+.answer--received-check {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem !important;
+  border-bottom-left-radius: 2px;
+  background-color: rgb(252, 101, 184);
+}
+
+.answer--received-wrong {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem !important;
+  border-bottom-left-radius: 2px;
+  background-color: rgb(255, 0, 0);
+}
+
+
+.answer--received-correct {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem !important;
+  border-bottom-left-radius: 2px;
+  background-color: rgb(66, 252, 9);
+}
 /* .messages {
   padding-top: 10px;
   padding-bottom: 10px;

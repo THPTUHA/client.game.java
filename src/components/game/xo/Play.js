@@ -25,6 +25,7 @@ const Play = ({ data }) => {
   const [messages, setMessages] = useState([]);
   const [board, setBoard] = useState([]);
   const [stompClient, setstompClient] = useState();
+  const [time,setTime] = useState();
 
   const player = (data, user_id) => {
     setYou(getPlayer(data, user_id));
@@ -43,7 +44,6 @@ const Play = ({ data }) => {
     const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-      console.log("Connected: " + frame);
       stompClient.subscribe(
         `/topic/xo/${Contrast.ID_GAMEXO}/${data.match_id}`,
         function (response) {
@@ -57,10 +57,15 @@ const Play = ({ data }) => {
               player(res, data.user_id);
               break;
 
+            case Contrast.TIME_SET:
+              setTime(res.time);
+              break;
+            
             case Contrast.PLAY:
               setBoard(res.board);
               setStatus(res.status);
               setTurn(res.turn);
+              setTime(res.time);
               player(res, data.user_id);
               break;
 
@@ -97,6 +102,7 @@ const Play = ({ data }) => {
       setBoard(data.board);
       setMessages(handleMessage(""));
       player(data, data.user_id);
+      setTime(data.time);
       setstompClient(stompClient);
     });
   //   window.addEventListener("beforeunload", (ev) => 
@@ -114,7 +120,6 @@ const Play = ({ data }) => {
     };
   }, []);
 
-
   return (
     <div className="container-fluid padding-0">
       <div className="row">
@@ -127,7 +132,8 @@ const Play = ({ data }) => {
                   match_id={data.match_id}
                   stompClient={stompClient}
                   you={1}
-                  turn={turn}
+                  turn = {turn}
+                  time  = {time}
                 />
                 <BoardXO
                   data={{
@@ -143,7 +149,8 @@ const Play = ({ data }) => {
                   match_id={data.match_id}
                   stompClient={stompClient}
                   you={0}
-                  turn={turn}
+                  turn = {turn}
+                  time = {time}
                 />
               </div>
             </div>

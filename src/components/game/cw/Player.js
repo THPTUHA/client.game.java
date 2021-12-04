@@ -4,6 +4,7 @@ import CountDown from "../../util/CountDown";
 
 const Player = ({ player, match_id, stompClient, you, turn ,time,url}) => {
   const handleCancelMatch = () => {
+    localStorage.removeItem("answers");
     try {
       const req = {
         match_id: match_id,
@@ -135,6 +136,12 @@ const Player = ({ player, match_id, stompClient, you, turn ,time,url}) => {
         )}
 
         <p> Point :{player.point}</p>
+        <p> Blood :{player.blood}</p>
+        {
+            player.status === Contrast.LOSE?(
+                <p>FUCK</p>
+            ):""
+        }
       </div>
     </>
   );

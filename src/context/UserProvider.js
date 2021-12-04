@@ -14,6 +14,7 @@ const UserProvider = ({ children }) => {
               const user = await axios.get(`${process.env.REACT_APP_SERVER}/user`, athu);
               console.log("Goi lai");
               user.data.avatar = user.data.avatar?user.data.avatar:`https://avatars.dicebear.com/api/micah/${user.data.first_name  + user.data.last_name}.svg`;
+              localStorage.removeItem("answers");
               console.log(user.data);
               setUser(user.data);
             }
