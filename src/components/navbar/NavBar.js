@@ -45,22 +45,38 @@ function NavBar() {
             <ul className="d-flex justify-content-center justify-content-lg-end">
               <li className="d-flex align-items-center ">
                 {user === "unload" || !user ? (
-                  <Link to="/login/">Đăng nhập</Link>
+                  <Link to="/login/">
+                    <div className="p-sm-3 p-lg-0">
+                      <div
+                        style={{
+                          backgroundColor: "rgb(11, 196, 226)",
+                          padding: "0.5rem 1rem",
+                          borderRadius: "3px",
+                        }}
+                      >
+                        <p className="m-0">
+                          <strong>Đăng nhập</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
                 ) : (
                   <>
                     <Link to="/account">
-                      <div
-                        style={{ marginRight: "2rem" }}
-                        className="bgAccount"
-                      >
-                        <div className="d-flex  justify-content-center align-items-center">
-                          <div
-                            style={{ backgroundImage: `url(${user.avatar}` }}
-                            className="accountAvtContainer"
-                          ></div>
+                      <div className="pt-sm-2 pb-sm-2 p-lg-0">
+                        <div
+                          style={{ marginRight: "2rem" }}
+                          className="bgAccount"
+                        >
+                          <div className="d-flex  justify-content-center align-items-center">
+                            <div
+                              style={{ backgroundImage: `url(${user.avatar}` }}
+                              className="accountAvtContainer"
+                            ></div>
 
-                          <p className="m-0">{user.first_name} </p>
-                          <div> </div>
+                            <p className="m-0">{user.first_name} </p>
+                            <div> </div>
+                          </div>
                         </div>
                       </div>
                     </Link>
