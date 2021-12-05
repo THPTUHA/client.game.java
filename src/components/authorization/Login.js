@@ -6,6 +6,8 @@ import { UserContext } from "../../context/UserProvider";
 import { authorization } from "../../service/authorization";
 import NavBar from "../navbar/NavBar";
 import Loading from "../../loading/Loading";
+import {Toast} from "../../service/Toast";
+import { ToastContainer } from "react-toastify";
 
 export default function Login() {
   const { updateGobleUser } = useContext(UserContext);
@@ -35,6 +37,7 @@ export default function Login() {
               user.first_name + user.last_name
             }.svg`;
         setData(user.data);
+        Toast.success("Đăng nhập thành công");
       } catch (err) {
         console.log(err);
       }

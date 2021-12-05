@@ -3,6 +3,7 @@ import { UserContext } from "../../context/UserProvider";
 
 import { Link } from "react-router-dom";
 import headerImg from "../../assets/img/game.png";
+import { Toast } from "react-toastify/dist/components";
 export default function Header() {
   const { user } = useContext(UserContext);
 
@@ -15,11 +16,10 @@ export default function Header() {
               <img className="header__img" src={headerImg} alt="" />
             </div>
           </div>
-
           <Link to={!user ? "login" : "/gameplay"} className="">
             <div className="header__btn myBtn">
               <i className="fas fa-gamepad"></i>
-              Chơi ngay
+              Chơi ngay 
             </div>
           </Link>
         </div>
