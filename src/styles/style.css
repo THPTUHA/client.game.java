@@ -365,7 +365,7 @@ input:focus {
     rgba(92, 103, 99, 0.4322771344866071) 100%
   );
   width: 200px;
-  height: 80%;
+  height: 100%;
   position: relative;
   transform: translate(-50%, 0%);
   left: 50%;
@@ -420,7 +420,11 @@ input:focus {
 .frame__rank {
   width: 100%;
   position: absolute;
-  bottom: 0;
+  /* bottom: 0; */
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  width: 200px;
 }
 @keyframes mymove {
   from {

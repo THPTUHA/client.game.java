@@ -77,7 +77,15 @@ function ConctedWord({ user }) {
             <Frame user={user} />
             <div className=" mb-4">
               {!data ? (
-                <div className="d-flex justify-content-center mt-2">
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "3rem",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                  }}
+                  className="d-flex justify-content-center mt-2"
+                >
                   {loading ? (
                     <div>
                       <audio playsInline loop autoPlay>
