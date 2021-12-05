@@ -187,7 +187,7 @@ input:focus {
     url("../assets/img/banner_2.png"); */
   background-position: center;
   background-size: cover;
-  height: 550px;
+  height: 35rem;
   background-attachment: fixed;
   width: 100%;
   background-repeat: repeat-x;
@@ -197,13 +197,13 @@ input:focus {
 .zed {
   z-index: -1;
   color: white;
-  height: 550px;
+  height: 35rem;
 }
 .zed__backGround {
   background-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   z-index: 1;
-  height: 550px;
+  height: 35rem;
 
   top: 0;
   left: 0;
@@ -214,7 +214,7 @@ input:focus {
 .zed__video {
   object-fit: cover;
   width: 100%;
-  height: 550px;
+  height: 35rem;
 
   max-width: 100%;
   /* height: 40rem; */
@@ -354,11 +354,78 @@ input:focus {
 .gameRoom {
   background-image: url("../assets/img/findingGameBg.jpg");
 }
-/* .frame {
-  border: 1px solid white;
-  width: 10rem;
-  height: 50%;
+.frame {
+  border-left: 3px solid rgba(255, 255, 255, 0.253);
+  border-right: 3px solid rgba(255, 255, 255, 0.253);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 0, 0, 0.5499241933101365) 50%,
+    rgba(92, 103, 99, 0.4322771344866071) 100%
+  );
+  width: 200px;
+  height: 100%;
+  position: relative;
+  transform: translate(-50%, 0%);
+  left: 50%;
+  top: 0;
+}
+.avt {
+  width: 200px;
+  height: 200px;
+  z-index: 1;
+  background-image: url(../assets/img/boderAvt.png);
+  background-size: cover;
+}
+.frame__name {
+  font-weight: 600;
+  text-align: center;
+  padding-top: 2rem;
+  color: #ffba00;
+  font-size: 1.2rem;
+  font-family: "Fuzzy Bubbles", cursive;
+}
+.gameRoom__btn {
+  background-color: #2f3033;
+  border: unset;
+  padding: 0.5rem 1.5rem;
+  color: white;
+  border-radius: 3px;
+  border: 3px solid rgba(255, 255, 255, 0.253);
+  font-weight: 600;
+}
+.gameRoom__btn h6 {
+  margin: 0;
+}
+.gameRoom__btn h6,
+.gameRoom__btn i {
+  cursor: not-allowed;
+
+  color: #777777;
+}
+.avt__img {
+  /* width: 50%; */
+  width: 110px;
+  /* height: 100%; */
+  border-radius: 50%;
+  z-index: -1;
+  margin-left: 8px;
+}
+/* .frame__borderAvt {
+  width: 100%;
+  position: absolute;
+  top: 2rem;
 } */
+.frame__rank {
+  width: 100%;
+  position: absolute;
+  /* bottom: 0; */
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  width: 200px;
+}
 @keyframes mymove {
   from {
     transform: rotate(0deg);

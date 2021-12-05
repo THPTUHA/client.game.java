@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../context/UserProvider";
-import vid from "../../assets/img/animated-zed-odyssey-intro.webm";
+import vid from "../../assets/img/animated-zed-odyssey-intro.mp4";
 import { Link } from "react-router-dom";
 import headerImg from "../../assets/img/game.png";
 import { Toast } from "../../service/Toast";
