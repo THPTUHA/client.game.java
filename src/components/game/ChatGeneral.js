@@ -9,33 +9,31 @@ import { authorization } from "../../service/authorization";
 import Loading from "../../loading/Loading";
 
 const id_game = 1;
-function ChatGeneral({user_id}) {
+function ChatGeneral({ user_id }) {
   const [audio] = useState(new Audio(chatSound));
-  const [data,setData] = useState();
+  const [data, setData] = useState();
   const [playing, setPlaying] = useState(false);
   const [stompClient, setstompClient] = useState();
   const [mes, setMes] = useState("");
-  const [loading ,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [newMes, setNewMes] = useState(false);
 
-  const handleLoadingChat =async (e)=>{
-    if(e.target.scrollTop === 0){
-      const req = {pos:data.length}
-      try{
+  const handleLoadingChat = async (e) => {
+    if (e.target.scrollTop === 0) {
+      const req = { pos: data.length };
+      try {
         setLoading(true);
-        const res = await  axios.post(
-          `${process.env.REACT_APP_SERVER}/gameplay/chat/loading`,req,
+        const res = await axios.post(
+          `${process.env.REACT_APP_SERVER}/gameplay/chat/loading`,
+          req,
           authorization()
         );
         console.log(res.data);
-        setData([...res.data,...data]);
+        setData([...res.data, ...data]);
         setLoading(false);
-      }catch(err){
-  
-      }
+      } catch (err) {}
     }
-    
-  }
+  };
   const handleMessage = (e) => {
     if (mes === "") return;
     if (e.key === "Enter" || e.type === "click") {
@@ -58,51 +56,60 @@ function ChatGeneral({user_id}) {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
-    if (data&&data[data.length-1].user_id ==user_id) scrollToBottom();
+    if (data && data[data.length - 1].user_id == user_id) scrollToBottom();
+    var element = document.getElementById("chattong");
+    element.scrollTop = element.scrollHeight;
     if (playing) audio.play();
     setPlaying(true);
   }, [data]);
 
-  useEffect(async()=>{
-    try{
-      const res = await axios.get(`${process.env.REACT_APP_SERVER}/gameplay/chat`,authorization());
+  useEffect(async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER}/gameplay/chat`,
+        authorization()
+      );
       console.log(res);
       setData(res.data);
-    }catch(err){
-
-    }
+    } catch (err) {}
     const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
-      stompClient.subscribe(
-        `/topic/chat`,
-        function (response) {
-          const res = JSON.parse(response.body);
-          setData(res);
-        }
-      )});
+      stompClient.subscribe(`/topic/chat`, function (response) {
+        const res = JSON.parse(response.body);
+        setData(res);
+      });
+    });
     setstompClient(stompClient);
 
-    return ()=>{
+    return () => {
       stompClient.disconnect();
-    }
-  },[]);
+    };
+  }, []);
 
   return (
     <div className="chatBox mt-lg-4 ">
       <h3>Trò chuyện</h3>
-      <div onScroll ={handleLoadingChat}  className="content mt-1 mb-2 ">
-        {
-          loading?<Loading/>:data?data.map((e, index) => {
-          return (
-            <Message
-              key={index}
-              message={e}
-              is_chat={user_id === e.user_id}
-            />
-          );
-         }):""
-        }
+      <div
+        id="chattong"
+        onScroll={handleLoadingChat}
+        className="content mt-1 mb-2 "
+      >
+        {loading ? (
+          <Loading />
+        ) : data ? (
+          data.map((e, index) => {
+            return (
+              <Message
+                key={index}
+                message={e}
+                is_chat={user_id === e.user_id}
+              />
+            );
+          })
+        ) : (
+          ""
+        )}
         {/* {
           newMes?<p>Tin nhắn mới</p>:""
         } */}

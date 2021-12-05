@@ -6,7 +6,8 @@ import Stomp from "stompjs";
 import { authorization } from "../../../service/authorization";
 import nhac from "../../../assets/mp3/lmht.mp3";
 import { UserContext } from "../../../context/UserProvider";
-
+import rankImg from "../../../assets/img/rank.png";
+import boderAvt from "../../../assets/img/boderAvt.png";
 function GameXO() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState();
@@ -63,27 +64,60 @@ function GameXO() {
   return (
     <>
       <div className="container-fluid gameRoom">
-        <h1>Cờ Caro </h1>
+        <h3>Cờ Caro </h3>
         <div className="row h-100">
           <div className="col-12">
             <div className=" h-100 mb-4">
-              {loading ? (
-                <div className="d-flex align-items-center">
-                  <audio playsInline loop autoPlay>
-                    <source src={nhac} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                  </audio>
-                  <h3>Đang tìm trận</h3>
-                  <i className="fad fa-spinner-third"></i>
-                </div>
-              ) : !data ? (
+              {!data ? (
                 <div class="container-fluid h-100">
                   <div class="row h-100">
-                    <div class="col-12 h-100 ">
-                      {/* <div className="frame ">{user.first_name}</div> */}
-                      <button className="btn btn-info " onClick={requestStart}>
-                        Tìm trận
-                      </button>
+                    <div class="col-12 h-100  position-relative">
+                      <div className="frame ">
+                        <p className="frame__name">
+                          {user.first_name + " " + user.last_name}
+                        </p>
+                        <div className="grid">
+                          <div className="avt grid">
+                            {" "}
+                            <img
+                              className="avt__img"
+                              src={user.avatar}
+                              alt=""
+                            />
+                          </div>
+                          <img className="frame__rank" src={rankImg} alt="" />
+                          {/* <img
+                            className="frame__borderAvt"
+                            src={boderAvt}
+                            alt=""
+                          /> */}
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-center mt-2">
+                        {loading ? (
+                          <div>
+                            <audio playsInline loop autoPlay>
+                              <source src={nhac} type="audio/mpeg" />
+                              Your browser does not support the audio element.
+                            </audio>
+                            <div className="gameRoom__btn ">
+                              {" "}
+                              <div className="d-flex align-items-center">
+                                {" "}
+                                <h6>Đang tìm trận</h6>
+                                <i className="fad fa-spinner-third"></i>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <button
+                            className="gameRoom__btn  "
+                            onClick={requestStart}
+                          >
+                            TÌM TRẬN
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
