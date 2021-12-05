@@ -6,6 +6,7 @@ import Stomp from "stompjs";
 import { authorization } from "../../../service/authorization";
 import nhac from "../../../assets/mp3/lmht.mp3";
 import { UserContext } from "../../../context/UserProvider";
+import Frame from "../Frame";
 
 function ConctedWord({ user }) {
   console.log(user);
@@ -69,24 +70,35 @@ function ConctedWord({ user }) {
   // if (!user) return <Redirect to="/login" />;
   return (
     <>
-      <div className="container-fluid game">
+      <div className="container-fluid gameRoom ">
         <h1>Nối từ </h1>
-        <div className="row">
-          <div className="col-12">
+        <div className="row h-100">
+          <div className="col-12 h-100">
+            <Frame user={user} />
             <div className=" mb-4">
-              {loading ? (
-                <div className="d-flex align-items-center">
-                  <audio playsInline loop autoPlay>
-                    <source src={nhac} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                  </audio>
-                  <h3>Đang tìm trận</h3>
-                  <i className="fad fa-spinner-third"></i>
+              {!data ? (
+                <div className="d-flex justify-content-center mt-2">
+                  {loading ? (
+                    <div>
+                      <audio playsInline loop autoPlay>
+                        <source src={nhac} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                      </audio>
+                      <div className="gameRoom__btn ">
+                        {" "}
+                        <div className="d-flex align-items-center">
+                          {" "}
+                          <h6>Đang tìm trận</h6>
+                          <i className="fad fa-spinner-third"></i>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <button className="gameRoom__btn  " onClick={requestStart}>
+                      TÌM TRẬN
+                    </button>
+                  )}
                 </div>
-              ) : !data ? (
-                <button className="btn btn-info " onClick={requestStart}>
-                  Tìm trận
-                </button>
               ) : (
                 <Play data={data} />
               )}

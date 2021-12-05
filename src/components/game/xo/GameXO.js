@@ -6,8 +6,7 @@ import Stomp from "stompjs";
 import { authorization } from "../../../service/authorization";
 import nhac from "../../../assets/mp3/lmht.mp3";
 import { UserContext } from "../../../context/UserProvider";
-import rankImg from "../../../assets/img/rank.png";
-import boderAvt from "../../../assets/img/boderAvt.png";
+import Frame from "../Frame";
 function GameXO() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState();
@@ -72,27 +71,7 @@ function GameXO() {
                 <div class="container-fluid h-100">
                   <div class="row h-100">
                     <div class="col-12 h-100  position-relative">
-                      <div className="frame ">
-                        <p className="frame__name">
-                          {user.first_name + " " + user.last_name}
-                        </p>
-                        <div className="grid">
-                          <div className="avt grid">
-                            {" "}
-                            <img
-                              className="avt__img"
-                              src={user.avatar}
-                              alt=""
-                            />
-                          </div>
-                          <img className="frame__rank" src={rankImg} alt="" />
-                          {/* <img
-                            className="frame__borderAvt"
-                            src={boderAvt}
-                            alt=""
-                          /> */}
-                        </div>
-                      </div>
+                      <Frame user={user} />
                       <div className="d-flex justify-content-center mt-2">
                         {loading ? (
                           <div>
