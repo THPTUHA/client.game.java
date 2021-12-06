@@ -1,11 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const getDay = (time) => {
-  const date = new Date(time*1000);
-  console.log(time);
-  return date.getHours()+":"+date.getMinutes()+" "+date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
-};
+import Help from "../../service/Help";
 
 export default function News({ index, e }) {
   return (
@@ -28,7 +24,7 @@ export default function News({ index, e }) {
               </div>
               <div className="d-flex align-items-center ">
                 <i className="far fa-clock"></i>
-                <p className="date">{getDay(e.time_create)}</p>
+                <p className="date">{Help.getDay(e.time_create)}</p>
               </div>
             </div>
           </div>
