@@ -7,6 +7,7 @@ import NewsDetail from "./NewsDetail";
 import NavBar from "../navbar/NavBar";
 import News from "./News";
 import SmallNewsBox from "./SmallNewsBox";
+import {Toast} from "../../service/Toast";
 
 export default function ListNews() {
   const [news, setNews] = useState();
@@ -22,12 +23,11 @@ export default function ListNews() {
        
       );
       setNews(res.data);
-    } catch (err) {}
+    } catch (err) {
+      Toast.error("Something wrong!!")
+    }
   }, []);
 
-  const readDetail = (e) => {
-    setDetail(e.content);
-  };
   return (
     <>
       <NavBar />

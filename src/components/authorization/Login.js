@@ -7,7 +7,6 @@ import { authorization } from "../../service/authorization";
 import NavBar from "../navbar/NavBar";
 import Loading from "../../loading/Loading";
 import {Toast} from "../../service/Toast";
-import { ToastContainer } from "react-toastify";
 
 export default function Login() {
   const { updateGobleUser } = useContext(UserContext);
@@ -15,7 +14,7 @@ export default function Login() {
   const [password, setPassword] = useState();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+
   useEffect(() => {
     updateGobleUser(data);
   }, [data]);
@@ -42,8 +41,7 @@ export default function Login() {
         console.log(err);
       }
     } catch (err) {
-      setError("Sai email hoặc password");
-      console.log(err);
+      Toast.error("Sai email hoặc mật khẩu");
     }
     setLoading(false);
   };
@@ -80,8 +78,6 @@ export default function Login() {
                       }}
                     />
                     <br />
-                    <p className="text-danger">{error}</p>
-
                     <button
                       type="button"
                       className="Form__btn btn btn-warning"
