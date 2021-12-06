@@ -40,7 +40,7 @@ export default function Nav() {
           <ConcatedWord user={user} />
         </Route>
         <Route path="/gameplay">
-          <Game />
+          {user === "unload" || !user ? <Redirect to="/login" /> : <Game />}
         </Route>
         <Route path="/login">
           {user === "unload" || !user ? <Login /> : <Redirect to="/" />}

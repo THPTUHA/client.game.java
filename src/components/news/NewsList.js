@@ -14,13 +14,16 @@ export default function ListNews() {
 
   useEffect(async () => {
     try {
-       console.log(process.env.REACT_APP_SERVER)
+      console.log(process.env.REACT_APP_SERVER);
       const res = await axios.get(
         `${process.env.REACT_APP_SERVER}/news`,
         {},
         authorization()
-       
       );
+      res.data.sort((y, x) => {
+        // console.log(typeof x.time_create);
+        return x.time_create.localeCompare(y.time_create);
+      });
       setNews(res.data);
     } catch (err) {}
   }, []);
@@ -35,12 +38,12 @@ export default function ListNews() {
         <div className="row pt-5">
           <div className="col-8 padding-0">
             <div className="container">
-              <div  className="row NewsList ">
+              <div className="row NewsList ">
                 {news ? (
                   news.map((e, index) => {
                     return (
                       <div className="col-sm-12" key={index}>
-                        <div >
+                        <div>
                           <Link to={`/news/detail/${e.id}`}>
                             <News index={index} e={e} />
                           </Link>

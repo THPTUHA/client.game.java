@@ -8,7 +8,6 @@ import { Switch } from "react-router";
 import ChatBox from "../chat/ChatBox";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
-import caroGame from "../../assets/img/caroGame.png";
 import axios from "axios";
 import { authorization } from "../../service/authorization";
 import ChatGeneral from "./ChatGeneral";

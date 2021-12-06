@@ -79,7 +79,7 @@ body {
 }
 .myNavbar li {
   color: white;
-  cursor: pointer;
+  cursor: url("../assets/img/cursor.png"), auto;
 }
 ul {
   padding: 0;
@@ -169,7 +169,8 @@ input:focus {
   transform: translateY(-50%);
   color: white;
   display: inline;
-  cursor: pointer;
+  cursor: url("../assets/img/cursor.png"), auto;
+
   font-size: 1.3rem;
 }
 .myNavbar .accountAvtContainer {
@@ -259,7 +260,7 @@ input:focus {
   transform: translateX(-50%);
   border: 2px solid rgba(242, 55, 55, 0.45);
   color: #f23737;
-  cursor: pointer;
+  cursor: url("../assets/img/cursor.png"), auto;
 }
 
 .myBtn:hover {
@@ -306,7 +307,7 @@ input:focus {
   height: 8rem;
   display: inline-block;
   position: relative;
-  cursor: pointer;
+  cursor: url("../assets/img/cursor.png"), auto;
 }
 .o p {
   position: absolute;
