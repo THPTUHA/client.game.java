@@ -697,3 +697,24 @@ input:focus {
   padding: 0.25rem 1rem;
   border-radius: 0.8rem;
 }
+/* comment */
+.comment .content {
+  display: inline-block;
+}
+.comment .name {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: 600;
+}
+.commentBox .counter {
+  font-weight: 600;
+}
+
+.comment .time {
+  display: inline-block;
+  font-weight: 400;
+  color: #6b6b6b;
+}
+.commentBox input {
+  height: 4rem !important;
+}
