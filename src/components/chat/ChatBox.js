@@ -8,8 +8,8 @@ function ChatBox({ data }) {
   const [audio] = useState(new Audio(chatSound));
   const [playing, setPlaying] = useState(false);
   const [mes, setMes] = useState("");
+  
   const handleMessage = (e) => {
-    console.log(mes);
     if (mes === "") return;
     if (e.key === "Enter" || e.type === "click") {
       setPlaying(false);

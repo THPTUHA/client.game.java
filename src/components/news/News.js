@@ -1,10 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const getDay = (time) => {
-  const date = time.split("T");
-  return date[0];
-};
+import Help from "../../service/Help";
 
 export default function News({ index, e }) {
   return (
@@ -23,11 +20,11 @@ export default function News({ index, e }) {
             <div className="d-flex ">
               <div className="d-flex align-items-center m-1">
                 <i className="fas fa-user-circle"></i>
-                <p className="author">{e.user_name}</p>
+                <p className="author">{e.owner.name}</p>
               </div>
               <div className="d-flex align-items-center ">
                 <i className="far fa-clock"></i>
-                <p className="date">{getDay(e.time_create)}</p>
+                <p className="date">{Help.getDay(e.time_create)}</p>
               </div>
             </div>
           </div>

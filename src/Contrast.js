@@ -15,7 +15,9 @@
    CORRECT : 1,
    WRONG : 0,
    UNCHECK :-1,
-   LOSE:13
+   LOSE:13,
+   ERROR:14,
+   SUCCESS:15
   
  }
 

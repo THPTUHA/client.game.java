@@ -3,6 +3,8 @@ import { UserContext } from "../../context/UserProvider";
 import vid from "../../assets/img/animated-zed-odyssey-intro.mp4";
 import { Link } from "react-router-dom";
 import headerImg from "../../assets/img/game.png";
+import { Toast } from "../../service/Toast";
+
 export default function Header() {
   const { user } = useContext(UserContext);
 
@@ -31,7 +33,6 @@ export default function Header() {
               </div>
             </div>
           </div>
-
           <Link to={!user ? "login" : "/gameplay"} className="">
             <div className="header__btn myBtn">
               <i className="fas fa-gamepad"></i>

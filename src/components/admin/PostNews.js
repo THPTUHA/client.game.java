@@ -4,7 +4,9 @@ import ReactQuill from "react-quill";
 import axios from "axios";
 import { authorization } from "../../service/authorization";
 import "react-quill/dist/quill.snow.css";
-
+import { Toast }  from "../../service/Toast";
+import Contrast from "../../Contrast";
+import ImageUploading, { ImageListType, ImageType } from 'react-images-uploading';
 
 let editorRef = null;
 
@@ -78,15 +80,20 @@ const formats = [
   "image",
   "video",
 ];
+
+
 export default function PostNews() {
   const [content, setContent] = useState();
-  const [status, setStatus] = useState("");
   const title = useRef();
   const describes = useRef();
   const background_image = useRef();
 
   const submit = async () => {
     const formData = new FormData();
+    if(!title.current)return Toast.error("Thiếu title");
+    if(!describes.current)return Toast.error("Thiếu mô tả");
+    if(!background_image.current)return Toast.error("Thiếu ảnh nền");
+    if(!content)return Toast.error("Thiếu nội dung");
     formData.append("content", content);
     formData.append("title", title.current);
     formData.append("describes", describes.current);
@@ -98,9 +105,15 @@ export default function PostNews() {
         formData,
         authorization()
       );
-      setStatus(res.data);
+      const data = res.data;
+      setContent("");
+      title.current="";
+      describes.current="";
+      background_image.current="";
+      if(data.status === Contrast.ERROR)Toast.error(data.message);
+      else Toast.success(data.message);
     } catch (err) {
-      console.log(err);
+      Toast.error("Some thing worng!!");
     }
   };
   return (
@@ -111,7 +124,6 @@ export default function PostNews() {
           <div className="col-sm-12">
             <div className="grid pt-5">
               <div>
-                <p>{status}</p>
                 <div> Tiêu đề:</div>
                 <input
                   className="form-control"
@@ -119,7 +131,6 @@ export default function PostNews() {
                   onChange={(e) => {
                     title.current = e.target.value;
                   }}
-                  required
                 />
                 <div> Mô tả:</div>
                 <input
@@ -128,7 +139,6 @@ export default function PostNews() {
                   onChange={(e) => {
                     describes.current = e.target.value;
                   }}
-                  required
                 />
                 <input
                   type="file"
@@ -137,7 +147,6 @@ export default function PostNews() {
                   onChange={(e) => {
                     background_image.current = e.target.files[0];
                   }}
-                  required
                 />{" "}
                 <br />
                 <div>

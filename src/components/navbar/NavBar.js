@@ -7,7 +7,6 @@ import logo from "../../assets/img/logo.png";
 
 function NavBar() {
   const { user } = useContext(UserContext);
-  console.log(user);
   return (
     <div className="container-fluid padding-0">
       <div className="row myNavbar padding-lg">
