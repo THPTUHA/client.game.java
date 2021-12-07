@@ -9,6 +9,7 @@ import Stomp from "stompjs";
 import {Toast} from "../../service/Toast";
 import { UserContext } from "../../context/UserProvider";
 import Help from "../../service/Help";
+import CommentBox from "./Comments/CommentBox";
 
 const handleListComment = (comment,id)=>{
   const object ={content:comment.content,owner:{avatar:comment.avatar,name:comment.name},since:comment.since};
@@ -24,22 +25,8 @@ export default function NewsDetail() {
   const { user } = useContext(UserContext);
   const [detail, setDetail] = useState();
   const [loading, setLoading] = useState(false);
-  const [comment,setComment] =  useState("");
   const [list_comment,setListComment]= useState([]);
   const [stompClient,setStompClient] = useState();
-
-  const handleComment = async(e) => {
-    if (comment === "") return;
-    if (e.key === "Enter" || e.type === "click") {
-      try{
-        const data ={news_id:id, content:comment, name:user.first_name+" "+user.last_name,avatar:user.avatar};
-        await axios.post(`${process.env.REACT_APP_SERVER}/news/comment`,data,authorization());
-      }catch(err){
-         Toast.error("Something wrong!!");
-      }
-      setComment("");
-    }
-  };
 
   useEffect(async () => {
     const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
@@ -87,26 +74,7 @@ export default function NewsDetail() {
           </div>
         </div>
       </div>
-      <div className="d-flex" onKeyPress={handleComment}>
-        <input
-          placeholder="Comment..."
-          type="text"
-          onChange={(e) => setComment(e.target.value)}
-          value={comment}
-        />
-        <i className="fas fa-arrow-circle-right " onClick={handleComment}></i>
-      </div>
-      {
-        list_comment?list_comment.map((e,index)=>{
-          return (
-            <div key={index}>
-              <div>{e.owner.name}</div>
-              <div>{Help.getDay(e.since)}</div>
-              <div>{e.content}</div>
-           </div>
-          )
-        }):""
-      }
+      <CommentBox user={user} list_comment={list_comment} news_id={id}/>
     </div>
   ) : (
     <Loading />

@@ -79,7 +79,7 @@ body {
 }
 .myNavbar li {
   color: white;
-  cursor: pointer;
+  cursor: url("../assets/img/cursor.png"), auto;
 }
 ul {
   padding: 0;
@@ -169,7 +169,8 @@ input:focus {
   transform: translateY(-50%);
   color: white;
   display: inline;
-  cursor: pointer;
+  cursor: url("../assets/img/cursor.png"), auto;
+
   font-size: 1.3rem;
 }
 .myNavbar .accountAvtContainer {
@@ -259,7 +260,7 @@ input:focus {
   transform: translateX(-50%);
   border: 2px solid rgba(242, 55, 55, 0.45);
   color: #f23737;
-  cursor: pointer;
+  cursor: url("../assets/img/cursor.png"), auto;
 }
 
 .myBtn:hover {
@@ -306,7 +307,7 @@ input:focus {
   height: 8rem;
   display: inline-block;
   position: relative;
-  cursor: pointer;
+  cursor: url("../assets/img/cursor.png"), auto;
 }
 .o p {
   position: absolute;
@@ -696,3 +697,91 @@ input:focus {
   padding: 0.25rem 1rem;
   border-radius: 0.8rem;
 }
+/* comment */
+.comment .content {
+  display: inline-block;
+}
+.comment .name {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: 600;
+}
+.commentBox .counter {
+  font-weight: 600;
+}
+
+.comment .time {
+  display: inline-block;
+  font-weight: 400;
+  color: #6b6b6b;
+}
+.commentBox input {
+  height: 4rem !important;
+}
+
+/* slider */
+/* .slider {
+  width: 800px;
+  height: 550px;
+  overflow: hidden;
+}
+.slides {
+  width: 200%;
+  height: 550px;
+  display: flex;
+  overflow: hidden;
+}
+.first {
+  transition: all 1s;
+} */
+/* img {
+  width: 800px;
+} */
+/* .navigation-auto {
+  display: none;
+}
+.navigation-manual {
+  position: relative;
+  top: 0;
+  display: flex;
+  width: 800px;
+  justify-content: center;
+}
+.manual-btn {
+  padding: 5px;
+  border: 1px solid rgb(68, 68, 136);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.manual-btn:not(:last-child) {
+  margin-right: 20px;
+} */
+
+/* body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+} */
+
+#calendarContainer,
+#organizerContainer {
+  float: left;
+  margin: 5px;
+}
+
+

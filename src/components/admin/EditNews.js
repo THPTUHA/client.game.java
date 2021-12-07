@@ -20,6 +20,7 @@ const saveToServer = async(file)=>{
     editorRef.getEditor().insertEmbed(null, "image", res.data);
     console.log(editorRef);
   }catch(err){
+    Toast.error("Something wrong!!");
     console.log(err);
   }
 }
