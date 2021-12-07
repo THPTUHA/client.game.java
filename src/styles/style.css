@@ -88,7 +88,7 @@ ul {
 .myNavbar {
   background-color: black;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   margin: 0;
 }
@@ -392,9 +392,9 @@ input:focus {
   border: unset;
   padding: 0.5rem 1.5rem;
   color: white;
-  border-radius: 3px;
+  border-radius: 1rem;
   border: 3px solid rgba(255, 255, 255, 0.253);
-  font-weight: 600;
+  /* font-weight: 600; */
 }
 .gameRoom__btn h6 {
   margin: 0;

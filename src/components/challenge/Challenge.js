@@ -5,9 +5,9 @@ export default function Challlenge() {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="container-fluid">
-      <div class="row w-50">
-        <div class="col-12">
+    <div className="container-fluid grid">
+      <div class="row w-50 ">
+        <div class="col-12 ">
           <div className="postStatus">
             <p className="title"> Tạo bài viết</p>
             <hr />
