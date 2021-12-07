@@ -4,16 +4,25 @@ import Comment from "./Comment";
 import { authorization } from "../../../service/authorization";
 import { Toast } from "../../../service/Toast";
 
-export default function CommentBox({user,list_comment,news_id}) {
-  const [comment,setComment] =  useState("");
-  const handleComment = async(e) => {
+export default function CommentBox({ user, list_comment, news_id }) {
+  const [comment, setComment] = useState("");
+  const handleComment = async (e) => {
     if (comment === "") return;
     if (e.key === "Enter" || e.type === "click") {
-      try{
-        const data ={news_id:news_id, content:comment, name:user.first_name+" "+user.last_name,avatar:user.avatar};
-        await axios.post(`${process.env.REACT_APP_SERVER}/news/comment`,data,authorization());
-      }catch(err){
-         Toast.error("Something wrong!!");
+      try {
+        const data = {
+          news_id: news_id,
+          content: comment,
+          name: user.first_name + " " + user.last_name,
+          avatar: user.avatar,
+        };
+        await axios.post(
+          `${process.env.REACT_APP_SERVER}/news/comment`,
+          data,
+          authorization()
+        );
+      } catch (err) {
+        Toast.error("Something wrong!!");
       }
       setComment("");
     }
@@ -26,18 +35,18 @@ export default function CommentBox({user,list_comment,news_id}) {
           <p className="counter">{list_comment.length} bình luận</p>
         </div>
         <div class="col-12 w-75 ">
-          <div className="d-flex align-items-center ">
+          <div className="d-flex align-items-start ">
             <div
               style={{
                 backgroundImage: `url(${user.avatar}`,
                 width: "4rem",
                 height: "4rem",
                 marginRight: "1rem",
-                borderRadius: "unset",
+                borderRadius: "2px",
               }}
               className="accountAvtContainer"
             ></div>
-            <div onKeyPress={handleComment}>
+            <div className="w-100   " onKeyPress={handleComment}>
               <input
                 type="text"
                 class="form-control m-0 h-100  "
@@ -48,18 +57,29 @@ export default function CommentBox({user,list_comment,news_id}) {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
               />
-              <i className="fas fa-arrow-circle-right " onClick={handleComment}></i>
+              <div className="d-flex justify-content-end">
+                <i
+                  style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                  className="fas fa-arrow-circle-right "
+                  onClick={handleComment}
+                ></i>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-12 w-75 ">
-        {
-          list_comment?list_comment.map((e,index)=>{
-          return (
-            <Comment key={index} user={e.owner} since={e.since} content={e.content}/>
-          )}):""
-        }
-         
+          {list_comment
+            ? list_comment.map((e, index) => {
+                return (
+                  <Comment
+                    key={index}
+                    user={e.owner}
+                    since={e.since}
+                    content={e.content}
+                  />
+                );
+              })
+            : ""}
         </div>
       </div>
     </div>

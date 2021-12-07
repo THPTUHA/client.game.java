@@ -79,7 +79,7 @@ body {
 }
 .myNavbar li {
   color: white;
-  cursor: url("../assets/img/cursor.png"), auto;
+  cursor: pointer;
 }
 ul {
   padding: 0;
@@ -686,8 +686,21 @@ input:focus {
 } */
 
 /* lsd */
+.gameHistory .time {
+  /* font-size: 0.9rem; */
+  margin: 0;
+}
+.gameHistory .rs {
+  padding: 1rem 2rem;
+  background-color: #ffba00;
+  border-radius: 1rem;
+  width: 70%;
+  margin-bottom: 1rem;
+  color: white;
+}
 .gameHistory .name {
   font-weight: 500;
+  margin: 0;
 }
 .gameHistory .res {
   background-color: #28a745;

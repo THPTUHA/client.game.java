@@ -4,7 +4,7 @@ import rankImg from "../../assets/img/rank.png";
 
 export default function Frame({ user }) {
   return (
-    <div style={{ height: "60%" }} className="position-relative ">
+    <div className="position-relative frameContainer">
       <div className="frame ">
         <p className="frame__name">{user.first_name + " " + user.last_name}</p>
         <div className="grid">
