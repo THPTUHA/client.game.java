@@ -1,6 +1,7 @@
 import React from "react";
+import Help from "../../../service/Help";
 
-export default function Comment({ user }) {
+export default function Comment({ user, since,content }) {
   return (
     <div className="d-flex align-items-start mt-3 comment">
       <div
@@ -22,16 +23,13 @@ export default function Comment({ user }) {
       </div>
       <div>
         <div className="d-flex align-items-center">
-          <p className="name ">{user.first_name + " " + user.last_name}</p>
-          <p className="time"> Oct 22 38:55pm</p>
+          <p className="name ">{user.name}</p>
+          <p className="time">{Help.getDay(since)}</p>
         </div>
         <div className="">
           {" "}
           <p className="content">
-            Tach cụ rồi Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consectetur doloribu Lorem ipsum, dolor sit amet consectetur
-            adipisicing elit. Dolore, natus ullam dolor ea totam, mollitia sit,
-            officia reprehenderit hic at
+           {content}
           </p>
         </div>
       </div>

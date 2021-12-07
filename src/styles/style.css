@@ -36,7 +36,7 @@
 }
 textarea:focus,
 input:focus {
-  outline: none;
+  outline: none !important;
 }
 
 input {
@@ -755,3 +755,62 @@ input:focus {
 .manual-btn:not(:last-child) {
   margin-right: 20px;
 } */
+
+/* body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+} */
+
+#calendarContainer,
+#organizerContainer {
+  float: left;
+  margin: 5px;
+}
+
+/* status */
+.postStatus .name,
+.postStatus .options__title {
+  font-weight: 600;
+  margin: 0;
+}
+.postStatus .title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align: center;
+}
+#statusInput {
+  border: unset;
+  font-size: 1.5rem;
+  /* height: 10rem; */
+  padding: 1rem 1rem 10rem 1rem;
+}
+.optionBox {
+  border: 1.5px solid gray;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
+.postStatus .btn {
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+.option i {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
