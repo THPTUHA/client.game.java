@@ -56,7 +56,7 @@ function ChatGeneral({ user_id }) {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
-    if (data && data[data.length - 1].user_id == user_id) scrollToBottom();
+    // if (data && data[data.length - 1].user_id == user_id) scrollToBottom();
     var element = document.getElementById("chattong");
     element.scrollTop = element.scrollHeight;
     if (playing) audio.play();

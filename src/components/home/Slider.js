@@ -1,12 +1,12 @@
 import { UserContext } from "../../context/UserProvider";
 import React, { Component, useContext } from "react";
 import ReactDOM from "react-dom";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import vid from "../../assets/img/animated-zed-odyssey-intro.mp4";
 import { Link } from "react-router-dom";
 import gialap from "../../assets/img/gialap.mp4";
-import rumbe from "../../assets/img/rumbe.mp4";
+import rumbe from "../../assets/img/rumble.mp4";
 import img from "../../assets/img/LOLBg.jpg";
 function DemoCarousel() {
   const { user } = useContext(UserContext);
@@ -99,7 +99,3 @@ function DemoCarousel() {
 }
 
 export default DemoCarousel;
-
-// Don't forget to include the css in your page
-// <link rel="stylesheet" href="carousel.css"/>
-// Begin DemoSliderControls

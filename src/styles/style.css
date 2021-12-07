@@ -406,9 +406,8 @@ input:focus {
   color: #777777;
 }
 .avt__img {
-  /* width: 50%; */
   width: 110px;
-  /* height: 100%; */
+  height: 110px;
   border-radius: 50%;
   z-index: -1;
   margin-left: 8px;
