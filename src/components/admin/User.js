@@ -3,12 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 import Loading from "../../loading/Loading";
 import { authorization } from "../../service/authorization";
 import NavBar from "../navbar/NavBar";
+import Help from "../../service/Help";
+import { Toast }  from "../../service/Toast";
 
 export default function User() {
   const [user,setUser] = useState();
   const [loading,setLoading] = useState(false);
   const [reload, setReload] = useState(false);
-  const [status,setStatus] = useState();
   const user_change = useRef([]);
 
   useEffect(async()=>{
@@ -27,10 +28,12 @@ export default function User() {
     try{
       const res = await axios.post(`${process.env.REACT_APP_SERVER}/admin/list_user/update`
                         ,user_change.current,authorization());
-      setStatus(res.data);
+      Toast.success("Thay đổi thành công!!");
+      setReload(false);
    }catch(err){
+      Toast.error("Something wrong!!");
+      setReload(false);
    }
-   setReload(false);
   }
 
   const handleUser = (name,value,index)=>{
@@ -59,6 +62,15 @@ export default function User() {
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
+            <div>
+              <select name="role" >
+                <option value="NEWSEST">NEWEST</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+                <option value="ROLE_USER">USER</option>
+                <option value="ROLE_VIP">VIP</option>
+                <option value="ROLE_GUEST">GUEST</option>
+              </select>
+            </div>
             <table className="table">
               <thead>
                 <tr>
@@ -76,7 +88,7 @@ export default function User() {
                         <tr key={index}>
                         <td scope="row">{e.first_name+" "+e.last_name}</td>
                           <td scope="row">{e.email}</td>
-                          <td>1</td>
+                          <td>{Help.getDay(e.last_login)}</td>
                           <td>
                             <select name="role" value={e.role} onChange={(e)=>{handleUser(e.target.name,e.target.value,index)}}>
                               <option value="ROLE_ADMIN">ADMIN</option>
@@ -100,7 +112,7 @@ export default function User() {
               Lưu
             </button>
             {
-              reload?(<i className="fad fa-spinner-third"></i>):status
+              reload?(<i className="fad fa-spinner-third"></i>):""
             }
           </div>
         </div>

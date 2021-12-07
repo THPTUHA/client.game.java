@@ -11,11 +11,9 @@ import {Toast} from "../../service/Toast";
 
 export default function ListNews() {
   const [news, setNews] = useState();
-  const [detail, setDetail] = useState();
 
   useEffect(async () => {
     try {
-       console.log(process.env.REACT_APP_SERVER)
       const res = await axios.get(
         `${process.env.REACT_APP_SERVER}/news`,
         {},

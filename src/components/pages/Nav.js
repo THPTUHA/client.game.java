@@ -22,6 +22,8 @@ import NewsDetail from "../news/NewsDetail";
 import GameXO from "../game/xo/GameXO";
 import Play from "../game/xo/Play";
 import ConcatedWord from "../game/cw/ConcatedWord";
+import EditNews from "../../components/admin/EditNews";
+
 export default function Nav() {
   const { user } = useContext(UserContext);
 
@@ -32,6 +34,9 @@ export default function Nav() {
         <Route exact path="/news" component={NewsList}></Route>
         <Route exact path="/news/detail/:id">
           <NewsDetail />
+        </Route>
+        <Route exact path="/admin/news/edit/:id">
+          <EditNews />
         </Route>
         <Route path="/gameplay/xo">
           <GameXO />
