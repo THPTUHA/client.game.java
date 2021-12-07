@@ -718,3 +718,41 @@ input:focus {
 .commentBox input {
   height: 4rem !important;
 }
+
+/* slider */
+/* .slider {
+  width: 800px;
+  height: 550px;
+  overflow: hidden;
+}
+.slides {
+  width: 200%;
+  height: 550px;
+  display: flex;
+  overflow: hidden;
+}
+.first {
+  transition: all 1s;
+} */
+/* img {
+  width: 800px;
+} */
+/* .navigation-auto {
+  display: none;
+}
+.navigation-manual {
+  position: relative;
+  top: 0;
+  display: flex;
+  width: 800px;
+  justify-content: center;
+}
+.manual-btn {
+  padding: 5px;
+  border: 1px solid rgb(68, 68, 136);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.manual-btn:not(:last-child) {
+  margin-right: 20px;
+} */
