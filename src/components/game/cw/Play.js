@@ -24,6 +24,7 @@ function Play({data}) {
   const [time ,setTime] = useState();
   const [answers ,setAnswers] = useState();
   const [word ,setWord] = useState();
+  const [messages, setMessages] = useState([]);
 
   const [audio] = useState(new Audio(chatSound));
   const [playing, setPlaying] = useState(false);
@@ -46,6 +47,13 @@ function Play({data}) {
        }
      }
   };
+  // const handleMessage = (res) => {
+  //   const mess = JSON.parse(localStorage.getItem("messages_2")) || [];
+  //   if (res != "")
+  //     mess.push(res);
+  //   localStorage.setItem("messages_2", JSON.stringify(mess));
+  //   return mess;
+  // };
 
   const player = (data, user_id)=>{
     let tmp = [];
@@ -122,6 +130,10 @@ function Play({data}) {
               setStatus(res.status);
               player(res.player, data.user_id);
               break;
+
+            case Contrast.MESSAGE:
+            setMessages(handleMessage(res));
+            break;
 
             case Contrast.PLAY_AGAIN:
               setAnswers(handleAnswer(res.answer,res.status));

@@ -6,22 +6,41 @@ import NavBar from "../navbar/NavBar";
 import Help from "../../service/Help";
 import { Toast }  from "../../service/Toast";
 
+const hanldePage = (size)=>{
+   const page = [];
+   let i=1;
+   while(size>0){
+     page.push(i);
+     size -=5;
+     i++;
+   }
+   return page;
+}
 export default function User() {
   const [user,setUser] = useState();
+  const [page,setPage] = useState([]);
   const [loading,setLoading] = useState(false);
   const [reload, setReload] = useState(false);
+  const [pos,setPos] = useState(0);
   const user_change = useRef([]);
+  const [selection, setSelection] =useState("NEWEST");
 
   useEffect(async()=>{
     setLoading(true);
+    const formData = new FormData();
+    formData.append("pos", pos);
+    formData.append("selection", selection);
     try{
-       const res = await axios.get(`${process.env.REACT_APP_SERVER}/admin/list_user`,{},authorization());
+       const res = await axios.post(`${process.env.REACT_APP_SERVER}/admin/list_user`,formData,authorization());
        console.log(res.data);
-       setUser(res.data);
+       setUser(res.data.users);
+       setPage(hanldePage(res.data.page_size));
     }catch(err){
+      Toast.error("Something wrong!!");
     }
     setLoading(false);
-  },[]);
+  },[pos,selection]);
+
 
   const submit = async()=>{
     setReload(true);
@@ -51,7 +70,6 @@ export default function User() {
       }
     }
     if(!exit)user_change.current.push(temp[index]);
-    console.log(user_change.current);
     setUser(temp);
   }
 
@@ -63,7 +81,7 @@ export default function User() {
         <div className="row">
           <div className="col-sm-12">
             <div>
-              <select name="role" >
+              <select name="select" value={selection} onChange={(e)=>{setSelection(e.target.value);setPos(0)}}>
                 <option value="NEWSEST">NEWEST</option>
                 <option value="ROLE_ADMIN">ADMIN</option>
                 <option value="ROLE_USER">USER</option>
@@ -108,6 +126,11 @@ export default function User() {
             </table>
           </div>
           <div className="col-sm-12">
+          {
+            page.map((e,index)=>{
+              return <span onClick={()=>{setPos(e-1)}}>{e}</span>
+            })
+          }
             <button type="button" className="btn btn-primary" onClick={submit}>
               Lưu
             </button>

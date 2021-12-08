@@ -1,191 +1,39 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import SockJS from "sockjs-client";
-import Stomp from "stompjs";
+ <ImageUploading
+                value={images}
+                onChange={onImageSelectChange}
+                maxNumber={1}
+                dataURLKey="data_url"
+            >
+                {({
+                    imageList,
+                    onImageUpload,
+                    onImageUpdate,
+                    isDragging,
+                    dragProps,
+                }) => (
+                    <div className="upload__image-wrapper">
+                        <button
 
-
-// className App extends React.Component{
-//   constructor(props){
-//      super(props);
-//      this.state={
-//        data:"",
-//        temp:[]
-//       };
-//       this.handleText=this.handleText.bind(this);
-//       this.handleAdd=this.handleAdd.bind(this);
-//       this.handleErase=this.handleErase.bind(this);
-//     }
-//     handleText(e){
-//       this.setState({data:e.target.value});
-//     }
-//     handleAdd(){
-//       let temp=this.state.temp;
-//       temp.push(this.state.data);
-//       this.setState({temp:temp,data:""});
-//     }
-//     handleErase(e){
-//       let temp=this.state.temp;
-//       temp.splice(e.target.id,1);
-//       this.setState({temp:temp});
-//     }
-//     render(){
-//       let temp=this.state.temp;
-//       return (
-//         <div>
-//           <input type="text"  value={this.state.data} onChange={this.handleText}/>
-//           <button onClick={this.handleAdd} >Add</button>
-//           <ul>
-//             {temp.map((item,index)=>
-//                <li key={index}>{item}<span className="erase" onClick={this.handleErase} id={index}>X</span></li>
-//               )}
-//           </ul>
-//         </div>
-//       )
-//     }
-// }
-
-
-// let stompClient;
-// // function App(){
-// let id_game=1;
-// function connect(match_id) {
-//   var socket = new SockJS('http://localhost:8080/gameplay');
-//   stompClient = Stomp.over(socket);
-//   stompClient.connect({}, function (frame) {
-//       console.log('Connected: ' + frame);
-//       stompClient.subscribe(`/topic/${id_game}/${match_id}`, function (greeting) {
-//           console.log(JSON.parse(greeting.body));
-//       });
-//   });
-// }
-// function sendName() {
-//  if(stompClient) stompClient.send(`/app/${id_game}/123`, {}, JSON.stringify({'name': 'Hieu'}));
-// }
-// function start(){
-//   let a=Math.floor(Math.random()*10);
-//   console.log(a);
-//   let data={id:5,name:"Hieu"}
-//     fetch("http://localhost:8080/start",{
-//       method:"POST",
-//       body:JSON.stringify(data),
-//       headers: {'Content-Type':'application/json'}
-//     })
-//       .then(response=>{ console.log(response.json())})
-//       .catch(err=>{console.log(err)});
-// }
-//   return (
-//     <div>
-//       <button onClick={start}>Start</button>
-//       <button onClick={connect}>Connect</button>
-//       <button onClick={sendName}>OK</button>
-//     </div>
-//   )
-// }
-const user={id_user:Math.floor(Math.random()*100),name:"Hieu"};
-let stompClient;
-let id_game=1;
-let ans;
-function connect(match_id) {
-  var socket = new SockJS('http://localhost:8080/gameplay');
-  stompClient = Stomp.over(socket);
-  stompClient.connect({}, function (frame) {
-      console.log('Connected: ' + frame);
-      stompClient.subscribe(`/topic/xo/${id_game}/${match_id}`, function (greeting) {
-          console.log(JSON.parse(greeting.body));
-      });
-  });
-}
-function sendName(x,y,type,match_id) {
-  console.log("send to:",match_id);
-  const play={coordinateX:x,coordinateY:y,type:type,match_id:match_id}
- if(stompClient) stompClient.send(`/app/xo/${id_game}/${match_id}`, {}, JSON.stringify(play));
-}
-
-function App(){
-  const[x,setX]=useState();
-  const[y,setY]=useState();
-  const submitForm = async ()=>{
-    try{
-      ans = await axios.post("http://localhost:8080/xo/start",user);
-      connect(ans.data.match_id);
-      console.log(ans.data);
-    }catch(err){
-      console.log(err);
-    }
-  }
-  console.log(x+"//"+y);
-  return(
-    <div>
-      <input type="text" onChange={(e)=>{setX(e.target.value)}}/>
-      <input type="text" onChange={(e)=>{setY(e.target.value)}}/>
-      <button onClick={submitForm}>Connect</button>
-      <button onClick={(e)=>{sendName(x,y,ans.data.type,ans.data.match_id)}}>Send</button>
-    </div>
-  )
-}
-export default App;
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.molded;
-
-import com.Connection.ConnectionDTB;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.sql.*;
-import java.util.ArrayList;
-
-/**
- *
- * @author Asus
- */
-public className NVSDT {
-    public static ArrayList<NVSDT> layTatCaNVSDT(int maNV) throws classNameNotFoundException, IOException, FileNotFoundException, SQLException {
-        Connection con = ConnectionDTB.getConnection();
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM nv_sdt where ma_nv=?");
-        statement.setInt(1, maNV);
-        ResultSet result = statement.executeQuery();
-        ArrayList<NVSDT> dsNVSDT = new ArrayList<>();
-        while (result.next()) {
-            dsNVSDT.add(new NVSDT(maNV, result.getString("sdt")));
-        }
-        return dsNVSDT;
-    }
-
-    public static void themNVSDT(int maNV, String sdt) throws classNameNotFoundException, IOException, FileNotFoundException, SQLException {
-        Connection con = ConnectionDTB.getConnection();
-        PreparedStatement statement = con.prepareStatement("insert into nv_sdt\n"
-                + "values(\n"
-                + "?,?\n"
-                + ")");
-        statement.setInt(1, maNV);
-        statement.setString(2, sdt);
-        statement.executeUpdate();
-    }
-
-    public static void capNhatNVSDT(int maNV, String sdtHT, String sdtMoi) throws classNameNotFoundException, IOException, FileNotFoundException, SQLException {
-        Connection con = ConnectionDTB.getConnection();
-        PreparedStatement statement = con.prepareStatement("update nv_sdt\n"
-                + "set sdt=?\n"
-                + "where ma_nv=? and sdt=?");
-        statement.setInt(2, maNV);
-        statement.setString(3, sdtHT);
-        statement.setString(1, sdtMoi);
-        statement.executeUpdate();
-    }
-
-    public static void xoaNVSDT(int maNV, String sdt) throws classNameNotFoundException, IOException, FileNotFoundException, SQLException {
-        Connection con = ConnectionDTB.getConnection();
-        PreparedStatement statement = con.prepareStatement("delete from nv_sdt\n"
-                + "where ma_nv=? and sdt=?");
-        statement.setInt(1, maNV);
-        statement.setString(2, sdt);
-        statement.executeUpdate();
-    }
-}
-
+                            className={` ${images.length > 0 && "none"} text-base outline-none focus:outline-none outline-none w-20 focus:outline-none bg-primary text-white flex items-center justify-center py-1 rounded font-medium mt-3 shadow `}
+                            style={isDragging ? { color: 'red' } : undefined}
+                            onClick={onImageUpload}
+                            {...dragProps}
+                        >
+                            Upload
+                        </button>
+                        {imageList.map((image, index) => (
+                            <div key={index} className="flex">
+                                <div
+                                    className=" overflow-hidden rounded-md shadow relative">
+                                    <img src={`${image['data_url']}`} alt="" />
+                                    <div className="absolute flex items-center top-3 right-1">
+                                        <span onClick={() => onImageUpdate(index)} className=" cursor-pointer px-1.5 py-1.5 mr-2 bg-white shadow-md text-lg rounded-full transition-all hover:bg-gray-200">
+                                            <FiEdit />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </ImageUploading>

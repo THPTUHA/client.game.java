@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import NavBar from "../navbar/NavBar";
 import ReactQuill from "react-quill";
 import axios from "axios";
@@ -7,62 +7,73 @@ import "react-quill/dist/quill.snow.css";
 import { Toast }  from "../../service/Toast";
 import Contrast from "../../Contrast";
 import ImageUploading, { ImageListType, ImageType } from 'react-images-uploading';
+import {ReactQuillNoSSR} from "../form/NoSSR";
+import { FiEdit } from "react-icons/fi";
 
 let editorRef = null;
 
-const saveToServer = async(file)=>{
-  const formData = new FormData();
-  formData.append("image", file);
-  try{
-    const res = await axios.post(`${process.env.REACT_APP_SERVER}/admin/news/image`,formData);
-    console.log(res.data);
-    editorRef.getEditor().insertEmbed(null, "image", res.data);
-    console.log(editorRef);
-  }catch(err){
-    console.log(err);
-  }
-}
-const imageHandler = (e) => {
-  const input = document.createElement("input");
-  input.setAttribute("type", "file");
-  input.setAttribute("accept", "image/*");
-  input.click();
+// const saveToServer = async(file)=>{
+//   const formData = new FormData();
+//   formData.append("image", file);
+//   try{
+//     // const res = await axios.post(`${process.env.REACT_APP_SERVER}/admin/news/image`,formData);
+//     // console.log(res.data);
+//     // editorRef.getEditor().insertEmbed(null, "image", res.data);
+//     // const a= document.getElementById("quill");
+//     // console.dir(a.getEditor());
+//     console.log(editorRef);
+//   }catch(err){
+//     console.log(err);
+//   }
+// }
+// const imageHandler = (e) => {
+//   const input = document.createElement("input");
+//   input.setAttribute("type", "file");
+//   input.setAttribute("accept", "image/*");
+//   input.click();
 
-  input.onchange = () => {
-      const file = input.files[0];
+//   input.onchange =async () => {
+//       const file = input.files[0];
+//       if (/^image\//.test(file.type)) {
+//         const formData = new FormData();
+//         formData.append("image", file);
+//         try{
+//           // const res = await axios.post(`${process.env.REACT_APP_SERVER}/admin/news/image`,formData);
+//           // console.log(res.data);
+//           // e.getEditor().insertEmbed(null, "image", res.data);
+//           console.log(e);
+//         }catch(err){
+//           console.log(err);
+//         }
+//       } else {
+//           console.warn("You could only upload images.");
+//       }
+//   };
+// };
 
-      // file type is only image.
-      if (/^image\//.test(file.type)) {
-          saveToServer(file);
-      } else {
-          console.warn("You could only upload images.");
-      }
-  };
-};
-
-const modules = {
-  toolbar: {
-    container:[
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image", "video"],
-      ["clean"],
-    ],
-    handlers: {  
-     image: imageHandler  
-    }
-  }, 
-  clipboard: {
-    matchVisual: false,
-  },
-};
+// const modules = {
+//   toolbar: {
+//     container:[
+//       [{ header: "1" }, { header: "2" }, { font: [] }],
+//       [{ size: [] }],
+//       ["bold", "italic", "underline", "strike", "blockquote"],
+//       [
+//         { list: "ordered" },
+//         { list: "bullet" },
+//         { indent: "-1" },
+//         { indent: "+1" },
+//       ],
+//       ["link", "image", "video"],
+//       ["clean"],
+//     ],
+//     handlers: {  
+//      image: imageHandler  
+//     }
+//   }, 
+//   clipboard: {
+//     matchVisual: false,
+//   },
+// };
 
 const formats = [
   "header",
@@ -83,21 +94,77 @@ const formats = [
 
 
 export default function PostNews() {
-  const [content, setContent] = useState();
-  const title = useRef();
-  const describes = useRef();
-  const background_image = useRef();
+  const [content, setContent] = useState("");
+  const [images,setImages]= useState([]);
+  const quillRef =useRef();
+  const [title,setTitle]= useState("");
+  const [describes,setDescribes]= useState("");
 
+  const onImageSelectChange = (
+    imageList
+) => {
+    setImages(imageList);
+};
+
+  const imageHandler = useCallback(()=>{
+      const input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "image/*");
+      input.click();
+    
+      input.onchange =async () => {
+          const file = input.files[0];
+          if (/^image\//.test(file.type)) {
+            const formData = new FormData();
+            formData.append("image", file);
+            try{
+              const res = await axios.post(`${process.env.REACT_APP_SERVER}/admin/news/image`,formData);
+              quillRef.current.getEditor().insertEmbed(null, "image", res.data);
+            }catch(err){
+              console.log(err);
+            }
+          } else {
+              console.warn("You could only upload images.");
+          }
+      };
+    },[quillRef]);
+
+  const modules = useMemo(()=>(
+    {
+      toolbar: {
+        container:[
+          [{ header: "1" }, { header: "2" }, { font: [] }],
+          [{ size: [] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" },
+          ],
+          ["link", "image", "video"],
+          ["clean"],
+        ],
+        handlers: {  
+         image: imageHandler  
+        }
+      }, 
+      clipboard: {
+        matchVisual: false,
+      },
+    }
+  ));
   const submit = async () => {
     const formData = new FormData();
-    if(!title.current)return Toast.error("Thiếu title");
-    if(!describes.current)return Toast.error("Thiếu mô tả");
-    if(!background_image.current)return Toast.error("Thiếu ảnh nền");
+    if(!title)return Toast.error("Thiếu title");
+    if(!describes)return Toast.error("Thiếu mô tả");
+    if(!images.length)return Toast.error("Thiếu ảnh nền");
     if(!content)return Toast.error("Thiếu nội dung");
+    console.log(images);
     formData.append("content", content);
-    formData.append("title", title.current);
-    formData.append("describes", describes.current);
-    formData.append("background_image", background_image.current);
+    formData.append("title", title);
+    formData.append("describes", describes);
+    formData.append("background_image", images[0].file);
 
     try {
       const res = await axios.post(
@@ -107,9 +174,9 @@ export default function PostNews() {
       );
       const data = res.data;
       setContent("");
-      title.current="";
-      describes.current="";
-      background_image.current="";
+      setTitle("");
+      setImages([]);
+      setDescribes("");
       if(data.status === Contrast.ERROR)Toast.error(data.message);
       else Toast.success(data.message);
     } catch (err) {
@@ -129,7 +196,7 @@ export default function PostNews() {
                   className="form-control"
                   type="text"
                   onChange={(e) => {
-                    title.current = e.target.value;
+                    setTitle( e.target.value);
                   }}
                 />
                 <div> Mô tả:</div>
@@ -137,28 +204,57 @@ export default function PostNews() {
                   className="form-control"
                   type="text"
                   onChange={(e) => {
-                    describes.current = e.target.value;
+                   setDescribes(e.target.value);
                   }}
                 />
-                <input
-                  type="file"
-                  id="file"
-                  name="image"
-                  onChange={(e) => {
-                    background_image.current = e.target.files[0];
-                  }}
-                />{" "}
-                <br />
+          <div>Ảnh nền</div>
+          <ImageUploading
+                value={images}
+                onChange={onImageSelectChange}
+                maxNumber={1}
+                dataURLKey="data_url"
+            >
+                {({
+                    imageList,
+                    onImageUpload,
+                    onImageUpdate,
+                    isDragging,
+                    dragProps,
+                }) => (
+                    <div className="upload__image-wrapper">
+                        <button
+                            className={` ${images.length > 0 && "none"} text-base outline-none focus:outline-none outline-none w-20 focus:outline-none bg-primary text-white flex items-center justify-center py-1 rounded font-medium mt-3 shadow `}
+                            style={isDragging ? { color: 'red' } : undefined}
+                            onClick={onImageUpload}
+                            {...dragProps}
+                        >
+                            Upload
+                        </button>
+                        {imageList.map((image, index) => (
+                            <div key={index} className="flex">
+                                <div
+                                    className=" overflow-hidden rounded-md shadow relative">
+                                    <img src={`${image['data_url']}`} alt="" />
+                                    <div className="absolute flex items-center top-3 right-1">
+                                        <span onClick={() => onImageUpdate(index)} className=" cursor-pointer px-1.5 py-1.5 mr-2 bg-white shadow-md text-lg rounded-full transition-all hover:bg-gray-200">
+                                            <FiEdit />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </ImageUploading>
                 <div>
                   <div> Nội dung:</div>
                   <div>
-                    <ReactQuill
-                      ref={(e)=>{editorRef=e}}
+                    <ReactQuillNoSSR
                       theme="snow"
                       modules={modules}
                       formats={formats}
                       value={content}
-                      forwardedRef={editorRef}
+                      forwardedRef={quillRef}
                       onChange={setContent}
                     />
                   </div>

@@ -21,6 +21,7 @@ const Player = ({ player, match_id, stompClient, you, turn ,time,url}) => {
   };
 
   const ready = () => {
+    console.log(url);
     try {
       const req = {
         match_id: match_id,

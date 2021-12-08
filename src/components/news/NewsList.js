@@ -19,12 +19,9 @@ export default function ListNews() {
         {},
         authorization()
       );
-      res.data.sort((y, x) => {
-        // console.log(typeof x.time_create);
-        return x.time_create.localeCompare(y.time_create);
-      });
       setNews(res.data);
     } catch (err) {
+      console.log(err);
       Toast.error("Something wrong!!")
     }
   }, []);
