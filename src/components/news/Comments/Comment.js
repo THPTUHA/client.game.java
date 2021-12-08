@@ -1,7 +1,7 @@
 import React from "react";
 import Help from "../../../service/Help";
 
-export default function Comment({ user, since,content }) {
+export default function Comment({ user, since, content }) {
   return (
     <div className="d-flex align-items-start mt-3 comment">
       <div
@@ -10,7 +10,7 @@ export default function Comment({ user, since,content }) {
           width: "4rem",
           height: "4rem",
           marginRight: "1rem",
-          borderRadius: "unset",
+          borderRadius: "2px",
         }}
         className="accountAvtContainer"
       >
@@ -28,9 +28,7 @@ export default function Comment({ user, since,content }) {
         </div>
         <div className="">
           {" "}
-          <p className="content">
-           {content}
-          </p>
+          <p className="content">{content}</p>
         </div>
       </div>
     </div>

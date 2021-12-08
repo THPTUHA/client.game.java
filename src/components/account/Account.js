@@ -114,7 +114,17 @@ export default function Account() {
             {gameplay_history
               ? gameplay_history.map((e, index) => {
                   return e.map((match, id) => {
-                    return <GameHistory key={id} index={index} match={match} />;
+                    return (
+                      <>
+                        {" "}
+                        <hr />{" "}
+                        <GameHistory
+                          key={id}
+                          index={index}
+                          match={match}
+                        />{" "}
+                      </>
+                    );
                   });
                 })
               : ""}

@@ -67,7 +67,7 @@ function GameXO() {
   // if (!user) return <Redirect to="/login" />;
   return (
     <>
-      <div className="container-fluid gameRoom">
+      <div className="container-fluid game">
         <h3>Cờ Caro </h3>
         <div className="row h-100">
           <div className="col-12">
