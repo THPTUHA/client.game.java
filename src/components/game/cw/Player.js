@@ -39,6 +39,7 @@ const Player = ({ player, match_id, stompClient, you, turn ,time,url}) => {
   };
 
   function playAgain() {
+    localStorage.removeItem("answers");
     try {
       const req = {
         match_id: match_id,

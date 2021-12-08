@@ -5,13 +5,17 @@ import NavBar from "../navbar/NavBar";
 import { Link } from "react-router-dom";
 import FormData from "form-data";
 import { authorization } from "../../service/authorization";
+import ImageUploading, { ImageListType, ImageType } from 'react-images-uploading';
+import { FiEdit } from "react-icons/fi";
 import GameHistory from "./GameXOHistory";
-
+const images =[];
 export default function Account() {
   const { user } = useContext(UserContext);
   const [avatar, setAvatar] = useState(user.avatar);
   const [new_avatar, setNewAvatar] = useState();
   const [gameplay_history, setGamePlayHistory] = useState();
+  const [images,setImages]= useState([]);
+
   useEffect(async () => {
     try {
       const res = await axios.post(
@@ -23,6 +27,7 @@ export default function Account() {
       setGamePlayHistory(res.data);
     } catch (err) {}
   }, []);
+
   const submit = async () => {
     console.log(new_avatar[0]);
     const formData = new FormData();
@@ -38,6 +43,14 @@ export default function Account() {
       console.log(err);
     }
   };
+
+  const onImageSelectChange = (
+    imageList
+) => {
+  console.log(imageList);
+    // setImages(imageList);
+};
+
   return (
     <>
       <NavBar />
@@ -47,25 +60,28 @@ export default function Account() {
             <div className="position-relative">
               <div className="info d-flex flex-column">
                 <div className="d-flex justify-content-center align-items-center">
-                  <div
-                    style={{ backgroundImage: `url(${avatar}` }}
-                    className="accountAvtContainer"
-                  >
-                    {/* <img className="accountAvatar" src={avatar} alt="" /> */}
-                  </div>
+              <ImageUploading
+                value={images}
+                onChange={onImageSelectChange}
+                maxNumber={1}
+                dataURLKey="data_url"
+            >
+                {({
+                    imageList,
+                    onImageUpload,
+                    onImageUpdate,
+                    isDragging,
+                    dragProps,
+                }) => (
+                    <div 
+                      style={{ backgroundImage: `url(${avatar}` }}
+                      className="accountAvtContainer"
+                      onClick={() => onImageUpdate()}>
+                    </div>
+                )}
+            </ImageUploading>
                 </div>
-                <div>
-                  <input
-                    type="file"
-                    id="file"
-                    onChange={(e) => {
-                      setNewAvatar(e.target.files);
-                    }}
-                  />
-                  <button className="btn btn-warning" onClick={submit}>
-                    Save
-                  </button>
-                </div>
+            
                 <p className="name">{user.first_name + " " + user.last_name}</p>
                 <p className="content">
                   <strong>Email:</strong> {user.email}

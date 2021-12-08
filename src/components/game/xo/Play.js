@@ -33,10 +33,10 @@ const Play = ({ data }) => {
   };
 
   const handleMessage = (res) => {
-    const mess = JSON.parse(localStorage.getItem("messages")) || [];
+    const mess = JSON.parse(localStorage.getItem("messages_1")) || [];
     if (res != "")
       mess.push(res);
-    localStorage.setItem("messages", JSON.stringify(mess));
+    localStorage.setItem("messages_1", JSON.stringify(mess));
     return mess;
   };
 
@@ -134,6 +134,7 @@ const Play = ({ data }) => {
                   you={1}
                   turn = {turn}
                   time  = {time}
+                  url={`/app/xo/1/${data.match_id}`}
                 />
                 <BoardXO
                   data={{
@@ -160,7 +161,7 @@ const Play = ({ data }) => {
                   stompClient: stompClient,
                   user_id: data.user_id,
                   match_id: data.match_id,
-                  url:`/app/xo/${1}/${data.match_id}`,
+                  url:`/app/xo/1/${data.match_id}`,
                   messages: messages 
                 }}
               />

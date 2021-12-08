@@ -17,11 +17,6 @@ export default function RecentNews() {
         {},
         authorization()
       );
-      // console.log(res.data);
-      res.data.sort((y, x) => {
-        // console.log(typeof x.time_create);
-        return x.time_create.localeCompare(y.time_create);
-      });
       if (res.data.length > 6) {
         setNews(res.data.slice(0, 6));
       } else setNews(res.data);

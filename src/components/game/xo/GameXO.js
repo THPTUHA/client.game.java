@@ -12,19 +12,24 @@ function GameXO() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
 
+  useEffect(()=>{
+    if(user!="unload"||!user){
+      const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
+      const stompClient = Stomp.over(socket);
+      stompClient.connect({}, function (frame) {
+        stompClient.subscribe(`/topic/xo/wating/${user.id}`, function (response) {
+          const res = JSON.parse(response.body);
+          console.log(res);
+          stompClient.disconnect();
+          setData({ ...res, user_id: user.id });
+          setLoading(false);
+        });
+      });
+    }
+  },[user]);
+
   const requestStart = async () => {
     setLoading(true);
-    const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
-    const stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-      stompClient.subscribe(`/topic/xo/wating/${user.id}`, function (response) {
-        const res = JSON.parse(response.body);
-        console.log(res);
-        stompClient.disconnect();
-        setData({ ...res, user_id: user.id });
-        setLoading(false);
-      });
-    });
 
     try {
       const res = await axios.post(
