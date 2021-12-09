@@ -91,40 +91,35 @@ function ChatGeneral({ user_id }) {
   return (
     <div className="chatBox mt-lg-4 ">
       <h3>Trò chuyện</h3>
-      <div
-        id="chattong"
-        onScroll={handleLoadingChat}
-        className="content mt-1 mb-2 "
-      >
-        {loading ? (
-          <Loading />
-        ) : data&&stompClient ? (
-          data.map((e, index) => {
-            return (
-              <Message
-                key={index}
-                message={e}
-                is_chat={user_id === e.user_id}
+       {
+        data&&stompClient?(
+          <div>
+              <div id="chattong" onScroll={handleLoadingChat} className="content mt-1 mb-2 ">
+              <div ref={messagesEndRef} />
+              </div>
+              {
+                data.map((e, index) => {
+                  return (
+                    <Message
+                      key={index}
+                      message={e}
+                      is_chat={user_id === e.user_id}
+                    />
+                  );
+                })
+              }
+              <div className="d-flex" onKeyPress={handleMessage}>
+              <input
+                placeholder="Aa"
+                type="text"
+                onChange={(e) => setMes(e.target.value)}
+                value={mes}
               />
-            );
-          })
-        ) : (
-          ""
-        )}
-        {/* {
-          newMes?<p>Tin nhắn mới</p>:""
-        } */}
-        <div ref={messagesEndRef} />
-      </div>
-      <div className="d-flex" onKeyPress={handleMessage}>
-        <input
-          placeholder="Aa"
-          type="text"
-          onChange={(e) => setMes(e.target.value)}
-          value={mes}
-        />
-        <i className="fas fa-arrow-circle-right " onClick={handleMessage}></i>
-      </div>
+              <i className="fas fa-arrow-circle-right " onClick={handleMessage}></i>
+            </div>
+          </div>
+        ):<Loading />
+       }
     </div>
   );
 }
