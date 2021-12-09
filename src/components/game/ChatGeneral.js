@@ -82,11 +82,11 @@ function ChatGeneral({ user_id }) {
     setstompClient(stompClient);
   }, []);
 
-  useEffect(()=>{
-    return ()=>{
-      if(stompClient) stompClient.disconnect();
-    }
-  },[stompClient]);
+  useEffect(() => {
+    return () => {
+      if (stompClient) stompClient.disconnect();
+    };
+  }, [stompClient]);
 
   return (
     <div className="chatBox mt-lg-4 ">
@@ -98,7 +98,7 @@ function ChatGeneral({ user_id }) {
       >
         {loading ? (
           <Loading />
-        ) : data&&stompClient ? (
+        ) : data && stompClient ? (
           data.map((e, index) => {
             return (
               <Message

@@ -11,9 +11,9 @@ export default function Home() {
       <NavBar />
       <Header />
       <RecentNews />
-      <a className="m-5 p-5" href={test} download>
+      {/* <a className="m-5 p-5" href={test} download>
         Tải game
-      </a>
+      </a> */}
     </>
   );
 }
