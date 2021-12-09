@@ -8,7 +8,6 @@ import chatSound from "../../assets/mp3/discord.mp3";
 import { authorization } from "../../service/authorization";
 import Loading from "../../loading/Loading";
 
-const id_game = 1;
 function ChatGeneral({ user_id }) {
   const [audio] = useState(new Audio(chatSound));
   const [data, setData] = useState();
@@ -28,12 +27,12 @@ function ChatGeneral({ user_id }) {
           req,
           authorization()
         );
-        console.log(res.data);
         setData([...res.data, ...data]);
         setLoading(false);
       } catch (err) {}
     }
   };
+
   const handleMessage = (e) => {
     if (mes === "") return;
     if (e.key === "Enter" || e.type === "click") {
@@ -56,7 +55,6 @@ function ChatGeneral({ user_id }) {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
-    console.log(data);
     // if (data && data[data.length - 1].user_id == user_id) scrollToBottom();
     var element = document.getElementById("chattong");
     element.scrollTop = element.scrollHeight;
@@ -82,11 +80,13 @@ function ChatGeneral({ user_id }) {
       });
     });
     setstompClient(stompClient);
-
-    return () => {
-      stompClient.disconnect();
-    };
   }, []);
+
+  useEffect(()=>{
+    return ()=>{
+      if(stompClient) stompClient.disconnect();
+    }
+  },[stompClient]);
 
   return (
     <div className="chatBox mt-lg-4 ">
@@ -98,7 +98,7 @@ function ChatGeneral({ user_id }) {
       >
         {loading ? (
           <Loading />
-        ) : data ? (
+        ) : data&&stompClient ? (
           data.map((e, index) => {
             return (
               <Message

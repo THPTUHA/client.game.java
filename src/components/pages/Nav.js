@@ -20,9 +20,9 @@ import User from "../admin/User";
 import UpdateNews from "../admin/UpdateNews";
 import NewsDetail from "../news/NewsDetail";
 import GameXO from "../game/xo/GameXO";
-import Play from "../game/xo/Play";
 import ConcatedWord from "../game/cw/ConcatedWord";
 import EditNews from "../../components/admin/EditNews";
+import Challlenge from "../challenge/Challenge";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
@@ -41,12 +41,15 @@ export default function Nav() {
         <Route path="/gameplay/xo">
           <GameXO />
         </Route>
+        <Route path="/challenge">
+          <Challlenge />
+        </Route>
         <Route path="/gameplay/cw">
           <ConcatedWord user={user} />
         </Route>
-        <Route path="/gameplay">
+        {/* <Route path="/gameplay">
           {user === "unload" || !user ? <Redirect to="/login" /> : <Game />}
-        </Route>
+        </Route> */}
         <Route path="/login">
           {user === "unload" || !user ? <Login /> : <Redirect to="/" />}
         </Route>

@@ -89,7 +89,7 @@ export default function GameXOHistory({ match, index }) {
             </div>
           </>
         ) : (
-          <div class="col-10 grid">
+          <div className="col-10 grid">
             {data &&
               data.map((player, index) => {
                 return (
