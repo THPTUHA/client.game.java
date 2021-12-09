@@ -11,7 +11,7 @@ const hanldePage = (size)=>{
    let i=1;
    while(size>0){
      page.push(i);
-     size -=5;
+    size -=5;
      i++;
    }
    return page;
@@ -77,7 +77,7 @@ export default function User() {
     !loading?(
       <div>
       <NavBar />
-      <div className="container">
+      <div className="container mt-10">
         <div className="row">
           <div className="col-sm-12">
             <div>

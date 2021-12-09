@@ -1,12 +1,11 @@
 import React from "react";
 import NavBar from "../navbar/NavBar";
 import { Link } from "react-router-dom";
-import Challlenge from "../challenge/Challenge";
 export default function Admin() {
   return (
     <div>
       <NavBar />
-      <div className="container">
+      <div className="container mt-10">
         <div className="row">
           <div className="col-sm-12">
             <div className="mb-2">
@@ -16,7 +15,6 @@ export default function Admin() {
           </div>
         </div>
       </div>
-      <Challlenge />
     </div>
   );
 }

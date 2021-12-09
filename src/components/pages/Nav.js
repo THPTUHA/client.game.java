@@ -38,6 +38,9 @@ export default function Nav() {
         <Route exact path="/admin/news/edit/:id">
           <EditNews />
         </Route>
+        <Route path="/gameplay">
+          <Game />
+        </Route>
         <Route path="/gameplay/xo">
           <GameXO />
         </Route>

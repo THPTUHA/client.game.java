@@ -17,8 +17,13 @@ const getUnixNum = function (date) {
   return Math.round(new Date(date).getTime() / 1000);
 }
 
+const getFormatTime = function (value) {
+  var date = new Date(value * 1000);
+  return date.getHours().toString().padStart(2,"0")+":"+date.getMinutes().toString().padStart(2,"0");
+}
 const Help ={getDay:getDay,
    getDateInputFormat:getDateInputFormat,
-   getUnixNum:getUnixNum
+   getUnixNum:getUnixNum,
+   getFormatTime:getFormatTime
 }
 export default Help;
