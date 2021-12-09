@@ -29,12 +29,12 @@ export default function CommentBox({ user, list_comment, news_id }) {
   };
 
   return (
-    <div class="container-fluid pt-5 pb-5 commentBox">
+    <div className="container-fluid pt-5 pb-5 commentBox">
       <div className="row grid">
-        <div class="col-12 w-75 ">
+        <div className="col-12 w-75 ">
           <p className="counter">{list_comment.length} bình luận</p>
         </div>
-        <div class="col-12 w-75 ">
+        <div className="col-12 w-75 ">
           <div className="d-flex align-items-start ">
             <div
               style={{
@@ -49,7 +49,7 @@ export default function CommentBox({ user, list_comment, news_id }) {
             <div className="w-100   " onKeyPress={handleComment}>
               <input
                 type="text"
-                class="form-control m-0 h-100  "
+                className="form-control m-0 h-100  "
                 name=""
                 id=""
                 aria-describedby="helpId"
@@ -67,7 +67,7 @@ export default function CommentBox({ user, list_comment, news_id }) {
             </div>
           </div>
         </div>
-        <div class="col-12 w-75 ">
+        <div className="col-12 w-75 ">
           {list_comment
             ? list_comment.map((e, index) => {
                 return (

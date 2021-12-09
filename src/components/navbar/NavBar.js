@@ -1,4 +1,4 @@
-import React, { memo, useContext, useRef } from "react";
+import React, { memo, useContext, useRef ,useState} from "react";
 
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
@@ -8,8 +8,8 @@ import logo from "../../assets/img/logo.png";
 function NavBar() {
   const { user } = useContext(UserContext);
   return (
-    <div className="container-fluid padding-0">
-      <div className="row myNavbar padding-lg">
+    <div className="container-fluid padding-0 h-15">
+    <div className="row myNavbar padding-lg">
         <div className="col-3 d-flex align-items-center">
           <div className="">
             <Link to="/">
@@ -97,3 +97,4 @@ function NavBar() {
 }
 
 export default memo(NavBar);
+

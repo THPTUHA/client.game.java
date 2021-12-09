@@ -12,14 +12,9 @@ function DemoCarousel() {
   const { user } = useContext(UserContext);
 
   return (
-    <Carousel>
-      <div>
-        <div
-          style={{
-            position: "relative",
-          }}
-          className="zed d-block w-100"
-        >
+    <Carousel  >
+      <div className="-top-0 -left-0">
+        <div className="-top-0 -left-0">
           <div className="zed__backGround"></div>
           <video className="zed__video" playsInline loop muted autoPlay>
             <source src={vid} type="video/mp4" />
@@ -34,7 +29,7 @@ function DemoCarousel() {
               <p className="zed__title4">11 NOVEMBER 2021</p>
             </div>
           </div>
-        </div>{" "}
+        </div>
         <Link to={!user ? "login" : "/gameplay"} className="">
           <div className="header__btn myBtn">
             <i className="fas fa-gamepad"></i>
@@ -54,20 +49,20 @@ function DemoCarousel() {
             <source src={rumbe} type="video/mp4" />
           </video>
           <div className="zed__titles">
-            <p className="zed__title1">NEW GAME</p>
-            <p className="zed__title2">League Of Legends</p>
-            <p className="zed__title3">The Biggest Autumn/Winter 2021 Game</p>
+            <p className="zed__title1">Game hot</p>
+            <p className="zed__title2">Thực chiến</p>
+            <p className="zed__title3">Cuộc đời như một tựa game</p>
 
             <div style={{ position: "relative", padding: "3rem 0" }}>
-              <p className="zed__title1">BY RIOT GAMES</p>
-              <p className="zed__title4">11 NOVEMBER 2021</p>
+              <p className="zed__title1">BY Thập cẩm</p>
+              <p className="zed__title4">10 DECEMBER 2021</p>
             </div>
           </div>
         </div>{" "}
-        <Link to={!user ? "login" : "/gameplay"} className="">
+        <Link to={!user ? "login" : "/challenge"} className="">
           <div className="header__btn myBtn">
             <i className="fas fa-gamepad"></i>
-            Chơi ngay
+            Bắt đầu ngay
           </div>
         </Link>
       </div>

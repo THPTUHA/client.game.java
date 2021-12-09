@@ -3,12 +3,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { authorization } from "../../service/authorization";
-import NewsDetail from "../news/NewsDetail";
 import Loading from "../../loading/Loading";
 
 export default function RecentNews() {
   const [news, setNews] = useState();
-  const [detail, setDetail] = useState();
 
   useEffect(async () => {
     try {
@@ -20,13 +18,10 @@ export default function RecentNews() {
       if (res.data.length > 6) {
         setNews(res.data.slice(0, 6));
       } else setNews(res.data);
-      console.log(news);
     } catch (err) {}
   }, []);
 
-  const readDetail = (e) => {
-    setDetail(e.content);
-  };
+ 
   return (
     <div className="container-fluid">
       <div className="row">

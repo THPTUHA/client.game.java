@@ -73,9 +73,9 @@ function GameXO() {
           <div className="col-12">
             <div className=" h-100 mb-4">
               {!data ? (
-                <div class="container-fluid h-100">
-                  <div class="row h-100">
-                    <div class="col-12 h-100  position-relative">
+                <div className="container-fluid h-100">
+                  <div className="row h-100">
+                    <div className="col-12 h-100  position-relative">
                       <Frame user={user} />
                       <div
                         style={{
