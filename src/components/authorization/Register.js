@@ -76,10 +76,10 @@ export default function Register() {
   };
   const submit = async () => {
     if (
-      !checkEmail(email) &&
-      !checkRePassword(rePassword) &&
-      !checkFirstName() &&
-      !checkPassword() &&
+      !checkEmail(email) ||
+      !checkRePassword(rePassword) ||
+      !checkFirstName() ||
+      !checkPassword() ||
       !checkLastName()
     )
       return;
@@ -91,9 +91,12 @@ export default function Register() {
       sex: parseInt(sex),
     };
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER}/register`, data);
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER}/register`,
+        data
+      );
       console.log(res.data);
-      if(res.data === "Success") setOk(true);
+      if (res.data === "Success") setOk(true);
       alert(`${res.data}!!`);
     } catch (err) {
       console.log(err);
@@ -114,7 +117,6 @@ export default function Register() {
                 <form action="Login">
                   <p className="form__title">Đăng ký</p>
 
-                 
                   <StyledInput
                     theme={{
                       main: fWarning !== "" ? "red" : "gray",
@@ -164,7 +166,7 @@ export default function Register() {
                           checked={sex === "1"}
                           value="nam"
                         />
-                        <label className="p-2" htmlFor ="nam">
+                        <label className="p-2" htmlFor="nam">
                           Nam
                         </label>
                       </div>
@@ -251,3 +253,5 @@ export default function Register() {
     </>
   );
 }
+
+

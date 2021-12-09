@@ -40,7 +40,7 @@ input:focus {
 }
 
 input {
-  padding: 1rem 2rem;
+  padding: 1rem 2rem !important;
   background-color: transparent;
   border: 2px gray solid;
   width: 100%;
