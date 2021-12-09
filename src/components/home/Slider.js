@@ -29,7 +29,7 @@ function DemoCarousel() {
               <p className="zed__title4">11 NOVEMBER 2021</p>
             </div>
           </div>
-        </div>
+        </div>{" "}
         <Link to={!user ? "login" : "/gameplay"} className="">
           <div className="header__btn myBtn">
             <i className="fas fa-gamepad"></i>
