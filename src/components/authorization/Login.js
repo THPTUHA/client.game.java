@@ -6,7 +6,7 @@ import { UserContext } from "../../context/UserProvider";
 import { authorization } from "../../service/authorization";
 import NavBar from "../navbar/NavBar";
 import Loading from "../../loading/Loading";
-import {Toast} from "../../service/Toast";
+import { Toast } from "../../service/Toast";
 
 export default function Login() {
   const { updateGobleUser } = useContext(UserContext);
@@ -29,7 +29,10 @@ export default function Login() {
       );
       localStorage.setItem("token", JSON.stringify(response.data));
       try {
-        const user = await axios.get("/user", authorization());
+        const user = await axios.get(
+          `${process.env.REACT_APP_SERVER}/user`,
+          authorization()
+        );
         user.data.avatar = user.data.avatar
           ? user.data.avatar
           : `https://avatars.dicebear.com/api/micah/${

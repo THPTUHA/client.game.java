@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 import gialap from "../../assets/img/gialap.mp4";
 import rumbe from "../../assets/img/rumble.mp4";
 import img from "../../assets/img/LOLBg.jpg";
+import test from "../../assets/2048.zip";
+
 function DemoCarousel() {
   const { user } = useContext(UserContext);
 
   return (
-    <Carousel  >
+    <Carousel>
       <div className="-top-0 -left-0">
         <div className="-top-0 -left-0">
           <div className="zed__backGround"></div>
@@ -88,6 +90,12 @@ function DemoCarousel() {
             </div>
           </div>
         </div>
+        <a className="" href={test} download>
+          <div className="header__btn myBtn">
+            <i className="fas fa-gamepad"></i>
+            Tải game
+          </div>
+        </a>
       </div>
     </Carousel>
   );

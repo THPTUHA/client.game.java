@@ -70,7 +70,7 @@ function ConctedWord({ user }) {
   // if (!user) return <Redirect to="/login" />;
   return (
     <>
-      <div className="container-fluid gameRoom ">
+      <div className="container-fluid game ">
         <h1>Nối từ </h1>
         <div className="row h-100">
           <div className="col-12 h-100">

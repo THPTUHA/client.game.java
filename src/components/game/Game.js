@@ -23,9 +23,9 @@ function Game() {
         <div className="row">
           <div className="col-sm-6">
             <h1>Game </h1>
-            <Link to={`gameplay/xo`}>Cờ Caro</Link>
+            <Link to={`/gameplay/xo`}>Tic-tac-toe</Link>
             <div>
-              <Link to={`gameplay/cw`}>Nối từ</Link>
+              <Link to={`/gameplay/cw`}>Nối từ</Link>
             </div>
           </div>
           <div className="col-lg-6">

@@ -22,7 +22,7 @@ export default function CommentBox({ user, list_comment, news_id }) {
           authorization()
         );
       } catch (err) {
-        Toast.error("Something wrong!!");
+        Toast.error("Bạn cần đăng nhập!!");
       }
       setComment("");
     }

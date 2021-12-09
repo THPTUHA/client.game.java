@@ -57,12 +57,21 @@ function ChatGeneral({ user_id }) {
   useEffect(() => {
     // if (data && data[data.length - 1].user_id == user_id) scrollToBottom();
     var element = document.getElementById("chattong");
-    element.scrollTop = element.scrollHeight;
+    if (element) element.scrollTop = element.scrollHeight;
     if (playing) audio.play();
     setPlaying(true);
-  }, [data]);
+  }, [data, stompClient]);
 
   useEffect(async () => {
+    const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
+    const stompClient = await Stomp.over(socket);
+    await stompClient.connect({}, async function (frame) {
+      await stompClient.subscribe(`/topic/chat`, function (response) {
+        const res = JSON.parse(response.body);
+        setData(res);
+      });
+    });
+    setstompClient(stompClient);
     try {
       const res = await axios.get(
         `${process.env.REACT_APP_SERVER}/gameplay/chat`,
@@ -71,15 +80,6 @@ function ChatGeneral({ user_id }) {
       console.log(res);
       setData(res.data);
     } catch (err) {}
-    const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
-    const stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-      stompClient.subscribe(`/topic/chat`, function (response) {
-        const res = JSON.parse(response.body);
-        setData(res);
-      });
-    });
-    setstompClient(stompClient);
   }, []);
 
   useEffect(() => {
@@ -91,40 +91,44 @@ function ChatGeneral({ user_id }) {
   return (
     <div className="chatBox mt-lg-4 ">
       <h3>Trò chuyện</h3>
-      <div
-        id="chattong"
-        onScroll={handleLoadingChat}
-        className="content mt-1 mb-2 "
-      >
-        {loading ? (
-          <Loading />
-        ) : data && stompClient ? (
-          data.map((e, index) => {
-            return (
-              <Message
-                key={index}
-                message={e}
-                is_chat={user_id === e.user_id}
-              />
-            );
-          })
-        ) : (
-          ""
-        )}
-        {/* {
-          newMes?<p>Tin nhắn mới</p>:""
-        } */}
-        <div ref={messagesEndRef} />
-      </div>
-      <div className="d-flex" onKeyPress={handleMessage}>
-        <input
-          placeholder="Aa"
-          type="text"
-          onChange={(e) => setMes(e.target.value)}
-          value={mes}
-        />
-        <i className="fas fa-arrow-circle-right " onClick={handleMessage}></i>
-      </div>
+      {data && stompClient ? (
+        <div>
+          <div
+            id="chattong"
+            onScroll={handleLoadingChat}
+            className="content mt-1 mb-2 "
+          >
+            {" "}
+            {data.map((e, index) => {
+              return (
+                <Message
+                  key={index}
+                  message={e}
+                  is_chat={user_id === e.user_id}
+                />
+              );
+            })}
+            <div ref={messagesEndRef} />
+          </div>
+
+          <div className="d-flex" onKeyPress={handleMessage}>
+            <input
+              placeholder="Aa"
+              type="text"
+              onChange={(e) => setMes(e.target.value)}
+              value={mes}
+            />
+            <i
+              className="fas fa-arrow-circle-right "
+              onClick={handleMessage}
+            ></i>
+          </div>
+        </div>
+      ) : (
+        <div className="content mt-1 mb-2 ">
+          <Loading height={50} width={50} heightContainer={"100%"} />
+        </div>
+      )}
     </div>
   );
 }
