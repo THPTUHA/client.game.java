@@ -40,9 +40,9 @@ export default function Challlenge() {
      {
         challengs?challengs.map((e,index)=>{
           return  (
-            <div>
+            <div key={index}>
               <Link to={`/challenge/${e.id}`}>
-              <Item key={index} challenge={e}/>
+              <Item  challenge={e}/>
               </Link>
           </div>
           )

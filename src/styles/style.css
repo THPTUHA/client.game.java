@@ -836,3 +836,19 @@ input:focus {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+/* download */
+.download {
+  background-image: url("../assets/img/bg.svg");
+  background-color: #8ee3ef;
+  background-size: cover;
+}
+.download img {
+  border-radius: 10px;
+  margin-top: 10px;
+  transition: all 0.5s;
+}
+.download img:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
