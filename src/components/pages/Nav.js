@@ -23,6 +23,7 @@ import GameXO from "../game/xo/GameXO";
 import ConcatedWord from "../game/cw/ConcatedWord";
 import EditNews from "../../components/admin/EditNews";
 import Challlenge from "../challenge/Challenge";
+import DownLoad from "../game/download/DownLoad";
 
 export default function Nav() {
   const { user } = useContext(UserContext);
@@ -31,6 +32,8 @@ export default function Nav() {
     <div>
       <Switch>
         <Route exact path="/" component={Home}></Route>
+        <Route path="/download" component={DownLoad}></Route>
+
         <Route exact path="/news" component={NewsList}></Route>
         <Route exact path="/news/detail/:id">
           <NewsDetail />

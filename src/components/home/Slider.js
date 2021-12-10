@@ -90,7 +90,7 @@ function DemoCarousel() {
             </div>
           </div>
         </div>
-        <a className="" href={test} download>
+        <a className="" href="/download">
           <div className="header__btn myBtn">
             <i className="fas fa-gamepad"></i>
             Tải game
