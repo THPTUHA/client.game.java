@@ -9,11 +9,16 @@ import { FaCheck } from "react-icons/fa";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { GoTriangleUp,GoTriangleDown } from "react-icons/go";
 import axios from "axios";
+import SockJS from "sockjs-client";
+import Stomp from "stompjs";
 import Help from "../../service/Help";
 import {ImArrowUp,ImArrowDown} from "react-icons/im";
 import { authorization } from "../../service/authorization";
 import {Toast} from "../../service/Toast";
 import Contrast from "../../Contrast";
+import { useParams } from "react-router-dom";
+import Loading from "../../loading/Loading";
+import CommentBox from "./Comment/CommentBox";
 const SmallMenu = () => {
     const [open, setOpen] = useState(false);
 
@@ -22,8 +27,73 @@ const SmallMenu = () => {
     </>)
 }
 
-export default function Challlenge({challenge}) {
-   console.log( Help.getFormatTime(challenge.start));
+const handleInteraction = (interactions,status)=>{
+  let count=0;
+  for(let i=0;i<interactions.length;++i){
+    if(status==interactions[i].status)count++;
+  }
+  return count;
+}
+
+const handleListComment = (comment,id)=>{
+  const object ={content:comment.content,user:{avatar:comment.avatar,name:comment.name},since:comment.since};
+  let comments = JSON.parse(localStorage.getItem(`challenge${id}`)) || [];
+  comments = [...comments,object];
+  localStorage.setItem(`challenge${id}`, JSON.stringify(comments));
+  return comments;
+
+}
+
+export default function Challlenge() {
+  const { id } = useParams();
+  const { user } = useContext(UserContext);
+  const [up,setUp]= useState();
+  const [down,setDown]= useState();
+  const [stompClient,setStompClient] = useState();
+  const [challenge,setChallenge] = useState();
+  const [list_comment,setListComment]= useState([]);
+
+  useEffect(async () => {
+    const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
+    const stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+      stompClient.subscribe(
+        `/topic/challenge/comment/${id}`,
+        function (response) {
+          const res = JSON.parse(response.body);
+          setListComment(handleListComment(res,id));
+      })});
+    
+    setStompClient(stompClient);
+    try {
+      const formData = new FormData();
+      formData.append("challenge_id", id);
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER}/challenge/detail`,
+        formData,
+        authorization()
+      );
+        console.log(res.data);
+        setChallenge(res.data);
+        setUp(handleInteraction(res.data.interactions,Contrast.UP));
+        setDown(handleInteraction(res.data.interactions,Contrast.DOWN));
+        console.log(res.data.comments);
+      localStorage.setItem(`challenge${id}`, JSON.stringify(res.data.comments));
+      setListComment(res.data.comments);
+    } catch (err) {
+      Toast.error("Something worng!!");
+    }
+    return ()=>{
+      stompClient.disconnect();
+    }
+  }, []);
+
+  useEffect(()=>{
+    return ()=>{
+      if(stompClient)
+      stompClient.disconnect();
+    }
+  },[stompClient]);
 
   const [open,setOpen] = useState({
     "advantage":false,
@@ -62,9 +132,52 @@ export default function Challlenge({challenge}) {
     if(challenge.level==4)return "Rất khó";
   }
 
+  const handleUp = async()=>{
+    const formData = new FormData();
+    formData.append("challenge_id", challenge.id);
+    formData.append("status", Contrast.UP);
+    try{
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/challenge/interaction`,formData,authorization());
+      const data = res.data;
+      console.log(res.data);
+
+      if(res.data.status==Contrast.SUCCESS){
+        if(data.message==="0")setUp(up-1);
+        else if(data.message==="1")setUp(up+1);
+        else if(data.message==="2"){
+          setUp(up+1);
+          setDown(down-1);
+        }
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  const handleDown =async ()=>{
+    const formData = new FormData();
+    formData.append("challenge_id", challenge.id);
+    formData.append("status", Contrast.DOWN);
+    try{
+      const res = await axios.post(`${process.env.REACT_APP_SERVER}/challenge/interaction`,formData,authorization());
+      const data = res.data;
+      console.log(res.data);
+
+      if(res.data.status==Contrast.SUCCESS){
+        if(data.message==="0")setDown(down-1);
+        else if(data.message==="1")setDown(down+1);
+        else if(data.message==="2"){
+          setUp(up-1);
+          setDown(down+1);
+        }
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
   return (  
     <div>
-     <div className={`${handleColor()} ml-10 mb-5 inline-block shadow hover:shadow-md  transition-all cursor-pointer rounded-md px-3 py-2  mt-5 `}>
+     {challenge&&stompClient?(<div className={`${handleColor()} ml-10 mb-5 inline-block shadow hover:shadow-md  transition-all cursor-pointer rounded-md px-3 py-2  mt-5 `}>
        <div className="flex flex-swap">
         <div className="ml-2 text-base font-medium text-gray-600 mb-1.5 block">Cuộc chơi</div>
         <div className="ml-2 text-base font-medium text-black mb-1.5 block">{handleText()}</div>
@@ -253,15 +366,16 @@ export default function Challlenge({challenge}) {
     </div>
     <div className="flex mt-2">
         <div className="flex">
-            <ImArrowUp />
-            <div className="ml-1">{challenge.up}</div>
+            <ImArrowUp onClick={handleUp}/>
+            <div className="ml-1">{up}</div>
         </div>
         <div className="flex ml-5">
-             <ImArrowDown/>
-             <div className="ml-1">{challenge.down}</div>
+             <ImArrowDown onClick={handleDown}/>
+             <div className="ml-1">{down}</div>
         </div>
     </div>
-  </div>
+    <CommentBox user={user}  list_comment={list_comment} challenge_id={id}/>
+  </div>):<Loading/>}
    </div>
   );
 }

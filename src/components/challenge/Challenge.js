@@ -15,7 +15,9 @@ import {Toast} from "../../service/Toast";
 import Contrast from "../../Contrast";
 import  Navbar  from "../navbar/NavBar";
 import ChallengeItem from "./ChallengeItem";
-
+import { Link } from "react-router-dom";
+import Loading from "../../loading/Loading";
+import Item from "./Item";
 export default function Challlenge() {
   const [challengs,setChallenges] = useState();
   useEffect(async()=>{
@@ -31,11 +33,22 @@ export default function Challlenge() {
   return (  
     <div>
       <Navbar/>
-      {
+      <Link to="/challenge/create">
+        <button className="fixed border-2 font-medium text-gray-600 px-2 py-2 bg-green-200 rounded-lg">Tạo mục tiêu</button>
+      </Link>
+     <div className="flex flex-swap">
+     {
         challengs?challengs.map((e,index)=>{
-          return <ChallengeItem key={index} challenge={e}/>
-        }):""
+          return  (
+            <div>
+              <Link to={`/challenge/${e.id}`}>
+              <Item key={index} challenge={e}/>
+              </Link>
+          </div>
+          )
+        }):<Loading/>
       }
+     </div>
     </div>
   );
 }
