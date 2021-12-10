@@ -74,39 +74,44 @@ function ConctedWord({ user }) {
         <h1>Nối từ </h1>
         <div className="row h-100">
           <div className="col-12 h-100">
-            <Frame user={user} />
             <div className=" mb-4">
               {!data ? (
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "3rem",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                  }}
-                  className="d-flex justify-content-center mt-2"
-                >
-                  {loading ? (
-                    <div>
-                      <audio playsInline loop autoPlay>
-                        <source src={nhac} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                      </audio>
-                      <div className="gameRoom__btn ">
-                        {" "}
-                        <div className="d-flex align-items-center">
+                <>
+                  <Frame user={user} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "3rem",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                    }}
+                    className="d-flex justify-content-center mt-2"
+                  >
+                    {loading ? (
+                      <div>
+                        <audio playsInline loop autoPlay>
+                          <source src={nhac} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
+                        <div className="gameRoom__btn ">
                           {" "}
-                          <h6>Đang tìm trận</h6>
-                          <i className="fad fa-spinner-third"></i>
+                          <div className="d-flex align-items-center">
+                            {" "}
+                            <h6>Đang tìm trận</h6>
+                            <i className="fad fa-spinner-third"></i>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    <button className="gameRoom__btn  " onClick={requestStart}>
-                      TÌM TRẬN
-                    </button>
-                  )}
-                </div>
+                    ) : (
+                      <button
+                        className="gameRoom__btn  "
+                        onClick={requestStart}
+                      >
+                        TÌM TRẬN
+                      </button>
+                    )}
+                  </div>
+                </>
               ) : (
                 <Play data={data} />
               )}

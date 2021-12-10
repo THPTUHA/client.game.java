@@ -42,17 +42,21 @@ export default function Nav() {
           <EditNews />
         </Route>
         <Route exact path="/gameplay">
-          <Game />
+          {user === "unload" || !user ? <Redirect to="/login" /> : <Game />}
         </Route>
 
         <Route path="/gameplay/xo">
-          <GameXO />
+          {user === "unload" || !user ? <Redirect to="/login" /> : <GameXO />}
         </Route>
         <Route path="/challenge">
           <Challlenge />
         </Route>
         <Route path="/gameplay/cw">
-          <ConcatedWord user={user} />
+          {user === "unload" || !user ? (
+            <Redirect to="/login" />
+          ) : (
+            <ConcatedWord user={user} />
+          )}
         </Route>
         {/* <Route path="/gameplay">
           {user === "unload" || !user ? <Redirect to="/login" /> : <Game />}

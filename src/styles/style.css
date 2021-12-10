@@ -836,7 +836,12 @@ input:focus {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+/* admin */
+.adminOption {
+  background-color: #2f3033;
+  left: 0;
+  width: 10rem;
+}
 /* download */
 .download {
   background-image: url("../assets/img/bg.svg");
