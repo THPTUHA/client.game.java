@@ -24,7 +24,7 @@ import ConcatedWord from "../game/cw/ConcatedWord";
 import EditNews from "../../components/admin/EditNews";
 import Challlenge from "../challenge/Challenge";
 import Create from "../challenge/Create";
-import ChallengItem from "../../components/challenge/ChallengeItem"
+import ChallengItem from "../../components/challenge/ChallengeItem";
 import DownLoad from "../game/download/DownLoad";
 
 export default function Nav() {
@@ -44,7 +44,7 @@ export default function Nav() {
           <EditNews />
         </Route>
         <Route exact path="/gameplay">
-          {user === "unload" || !user ? <Redirect to="/login" /> : <Game />}
+          {user === "unload" ? <Redirect to="/login" /> : <Game />}
         </Route>
         <Route exact path="/challenge/create">
           <Create />
@@ -52,18 +52,15 @@ export default function Nav() {
         <Route exact path="/challenge/:id">
           <ChallengItem />
         </Route>
+        {/* {console.log(user)} */}
         <Route path="/gameplay/xo">
-          {user === "unload" || !user ? <Redirect to="/login" /> : <GameXO />}
+          {!user ? <Redirect to="/login" /> : <GameXO />}
         </Route>
         <Route path="/challenge">
           <Challlenge />
         </Route>
         <Route path="/gameplay/cw">
-          {user === "unload" || !user ? (
-            <Redirect to="/login" />
-          ) : (
-            <ConcatedWord user={user} />
-          )}
+          {!user ? <Redirect to="/login" /> : <ConcatedWord user={user} />}
         </Route>
         {/* <Route path="/gameplay">
           {user === "unload" || !user ? <Redirect to="/login" /> : <Game />}

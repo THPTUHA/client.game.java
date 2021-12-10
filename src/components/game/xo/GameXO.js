@@ -12,21 +12,24 @@ function GameXO() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
-    if(user!="unload"||!user){
+  useEffect(() => {
+    if (user != "unload" || !user) {
       const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
       const stompClient = Stomp.over(socket);
       stompClient.connect({}, function (frame) {
-        stompClient.subscribe(`/topic/xo/wating/${user.id}`, function (response) {
-          const res = JSON.parse(response.body);
-          console.log(res);
-          stompClient.disconnect();
-          setData({ ...res, user_id: user.id });
-          setLoading(false);
-        });
+        stompClient.subscribe(
+          `/topic/xo/wating/${user.id}`,
+          function (response) {
+            const res = JSON.parse(response.body);
+            console.log(res);
+            stompClient.disconnect();
+            setData({ ...res, user_id: user.id });
+            setLoading(false);
+          }
+        );
       });
     }
-  },[user]);
+  }, [user]);
 
   const requestStart = async () => {
     setLoading(true);
@@ -79,8 +82,8 @@ function GameXO() {
                       <Frame user={user} />
                       <div
                         style={{
-                          position: "absolute",
-                          bottom: "5rem",
+                          position: "relative",
+                          top: "5rem",
                           left: "50%",
                           transform: "translateX(-50%)",
                         }}

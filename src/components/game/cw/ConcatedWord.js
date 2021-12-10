@@ -74,14 +74,14 @@ function ConctedWord({ user }) {
         <h1>Nối từ </h1>
         <div className="row h-100">
           <div className="col-12 h-100">
-            <div className=" mb-4">
+            <div className="h-100 mb-4">
               {!data ? (
                 <>
                   <Frame user={user} />
                   <div
                     style={{
-                      position: "absolute",
-                      bottom: "3rem",
+                      position: "relative",
+                      top: "5rem",
                       left: "50%",
                       transform: "translateX(-50%)",
                     }}
