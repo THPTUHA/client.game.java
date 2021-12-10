@@ -15,7 +15,6 @@ const handleTime = (e) => {
   );
 };
 export default function GameXOHistory({ match, index }) {
-  console.log(match);
   let data = [];
   if (match.game_id === 2) {
     data.push(match.player_1);

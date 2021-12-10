@@ -9,10 +9,11 @@ import { UserContext } from "../../../context/UserProvider";
 import Frame from "../Frame";
 
 function ConctedWord({ user }) {
-  console.log(user);
+  // console.log(user);
   // const { user } = useContext(UserContext);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
+  const [stompClient, setStompClient] = useState(null);
   useEffect(() => {
     if (user !== "unload") {
       const socket = new SockJS(`${process.env.REACT_APP_SERVER}/gameplay`);
@@ -29,6 +30,7 @@ function ConctedWord({ user }) {
           }
         );
       });
+      setStompClient(stompClient);
     }
   }, [user]);
   const requestStart = async () => {
@@ -75,7 +77,7 @@ function ConctedWord({ user }) {
         <div className="row h-100">
           <div className="col-12 h-100">
             <div className="h-100 mb-4">
-              {!data ? (
+              {!data && stompClient ? (
                 <>
                   <Frame user={user} />
                   <div
@@ -113,7 +115,7 @@ function ConctedWord({ user }) {
                   </div>
                 </>
               ) : (
-                <Play data={data} />
+                data && <Play data={data} />
               )}
             </div>
           </div>

@@ -46,25 +46,29 @@ export default function CommentBox({ user, list_comment, news_id }) {
               }}
               className="accountAvtContainer"
             ></div>
-            <div className="w-100   " onKeyPress={handleComment}>
-              <input
-                type="text"
-                className="form-control m-0 h-100  "
-                name=""
-                id=""
-                aria-describedby="helpId"
-                placeholder="Thêm bình luận..."
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <div className="d-flex justify-content-end">
-                <i
-                  style={{ fontSize: "1.5rem", cursor: "pointer" }}
-                  className="fas fa-arrow-circle-right "
-                  onClick={handleComment}
-                ></i>
-              </div>
-            </div>
+              {
+                user!="unload"?(
+                  <div className="w-100   " onKeyPress={handleComment}>
+                  <input
+                    type="text"
+                    className="form-control m-0 h-100  "
+                    name=""
+                    id=""
+                    aria-describedby="helpId"
+                    placeholder="Thêm bình luận..."
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                  <div className="d-flex justify-content-end">
+                    <i
+                      style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                      className="fas fa-arrow-circle-right "
+                      onClick={handleComment}
+                    ></i>
+                  </div>
+                </div>
+                ):""
+              }
           </div>
         </div>
         <div className="col-12 w-75 ">

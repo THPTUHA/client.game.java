@@ -18,7 +18,7 @@ export default function Account() {
   const [new_avatar, setNewAvatar] = useState();
   const [gameplay_history, setGamePlayHistory] = useState();
   const [images, setImages] = useState([]);
-
+  // console.log(gameplay_history);
   useEffect(async () => {
     try {
       const res = await axios.post(
@@ -32,9 +32,9 @@ export default function Account() {
   }, []);
 
   const submit = async () => {
-    console.log(new_avatar[0]);
+    // console.log(new_avatar[0]);
     const formData = new FormData();
-    formData.append("new_avatar", new_avatar[0]);
+    formData.append("new_avatar", images[0].file);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER}/user/update_avatar`,
@@ -42,14 +42,14 @@ export default function Account() {
         authorization()
       );
       setAvatar(res.data);
+      setImages([]);
     } catch (err) {
       console.log(err);
     }
   };
 
   const onImageSelectChange = (imageList) => {
-    console.log(imageList);
-    // setImages(imageList);
+    setImages(imageList);
   };
 
   return (
@@ -61,27 +61,72 @@ export default function Account() {
             <div className="position-relative">
               <div className="info d-flex flex-column">
                 <div className="d-flex justify-content-center align-items-center">
-                  <div
-                    style={{ backgroundImage: `url(${avatar}` }}
-                    className="accountAvtContainer"
+                  <ImageUploading
+                    value={images}
+                    onChange={onImageSelectChange}
+                    maxNumber={1}
+                    dataURLKey="data_url"
                   >
-                    {/* <img className="accountAvatar" src={avatar} alt="" /> */}
-                  </div>
-                </div>
-                <div>
-                  <input
-                    type="file"
-                    id="file"
-                    onChange={(e) => {
-                      setNewAvatar(e.target.files);
-                    }}
-                  />
-                  <button className="btn btn-warning" onClick={submit}>
-                    Save
-                  </button>
+                    {({
+                      imageList,
+                      onImageUpload,
+                      onImageUpdate,
+                      isDragging,
+                      dragProps,
+                    }) => (
+                      <div
+                        style={{ backgroundImage: `url(${avatar}` }}
+                        className="accountAvtContainer"
+                        onClick={() => {
+                          if (!imageList.length) onImageUpdate();
+                        }}
+                      >
+                        {imageList.length ? (
+                          <div>
+                            {imageList.map((image, index) => (
+                              <div key={index} className="flex">
+                                <div className=" overflow-hidden rounded-md shadow relative">
+                                  {/* <img
+                                    style={{ width: 200, height: 200 }}
+                                    src={`${image["data_url"]}`}
+                                    alt=""
+                                  /> */}
+                                  <div
+                                    style={{
+                                      backgroundImage: `url(${`${image["data_url"]}`}`,
+                                      borderRadius: "unset",
+                                    }}
+                                    className="accountAvtContainer"
+                                  ></div>
+                                  <div className="absolute flex items-center top-3 right-1">
+                                    <span
+                                      onClick={() => onImageUpdate(index)}
+                                      className=" cursor-pointer px-1.5 py-1.5 mr-2 bg-white shadow-md text-lg rounded-full transition-all hover:bg-gray-200"
+                                    >
+                                      <FiEdit />
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                            <button
+                              onClick={submit}
+                              className="outline-none w-36 focus:outline-none bg-primary text-white flex mb-6 items-center justify-center py-1 rounded font-medium  shadow hover:bg-primary-dark transition-all"
+                            >
+                              Save
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    )}
+                  </ImageUploading>
                 </div>
 
-                <p className="name">{user.first_name + " " + user.last_name}</p>
+                <p className="name mt-5">
+                  {user.first_name + " " + user.last_name}
+                </p>
                 <p className="content">
                   <strong>Email:</strong> {user.email}
                 </p>

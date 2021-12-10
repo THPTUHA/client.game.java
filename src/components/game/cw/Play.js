@@ -166,7 +166,7 @@ function Play({ data }) {
       <div className="row">
         {you && opponent ? (
           <>
-            <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
+            <div className="col-12 col-lg-6 ">
               <Player
                 player={you}
                 match_id={data.match_id}

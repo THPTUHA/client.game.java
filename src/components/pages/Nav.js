@@ -44,7 +44,7 @@ export default function Nav() {
           <EditNews />
         </Route>
         <Route exact path="/gameplay">
-          {user === "unload" ? <Redirect to="/login" /> : <Game />}
+          <Game />
         </Route>
         <Route exact path="/challenge/create">
           <Create />
@@ -54,7 +54,7 @@ export default function Nav() {
         </Route>
         {/* {console.log(user)} */}
         <Route path="/gameplay/xo">
-          {!user ? <Redirect to="/login" /> : <GameXO />}
+          <GameXO />
         </Route>
         <Route path="/challenge">
           <Challlenge />
