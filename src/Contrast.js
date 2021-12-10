@@ -17,7 +17,9 @@
    UNCHECK :-1,
    LOSE:13,
    ERROR:14,
-   SUCCESS:15
+   SUCCESS:15,
+   UP:1,
+   DOWN:2
   
  }
 

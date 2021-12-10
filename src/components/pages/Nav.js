@@ -23,6 +23,8 @@ import GameXO from "../game/xo/GameXO";
 import ConcatedWord from "../game/cw/ConcatedWord";
 import EditNews from "../../components/admin/EditNews";
 import Challlenge from "../challenge/Challenge";
+import Create from "../challenge/Create";
+import ChallengItem from "../../components/challenge/ChallengeItem"
 import DownLoad from "../game/download/DownLoad";
 
 export default function Nav() {
@@ -44,7 +46,12 @@ export default function Nav() {
         <Route exact path="/gameplay">
           {user === "unload" || !user ? <Redirect to="/login" /> : <Game />}
         </Route>
-
+        <Route exact path="/challenge/create">
+          <Create />
+        </Route>
+        <Route exact path="/challenge/:id">
+          <ChallengItem />
+        </Route>
         <Route path="/gameplay/xo">
           {user === "unload" || !user ? <Redirect to="/login" /> : <GameXO />}
         </Route>
