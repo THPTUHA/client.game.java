@@ -34,6 +34,7 @@ export default function PostNews() {
   const { id } = useParams();
   const [content, setContent] = useState("");
   const [images,setImages]= useState([]);
+  const [imagex,setImagex]= useState([]);
   const quillRef =useRef();
   const [title,setTitle]= useState("");
   const [describes,setDescribes]= useState("");
@@ -51,7 +52,7 @@ export default function PostNews() {
           setContent(data.content);
           setDescribes(data.describes);
           setTitle(data.title);
-          setImages([data.background_image]);
+          setImagex([data.background_image]);
           setLoading(true);
        }
       } catch (err) {
@@ -62,6 +63,7 @@ export default function PostNews() {
   const onImageSelectChange = (
     imageList
 ) => {
+  console.log(imageList);
     setImages(imageList);
 };
 
@@ -103,6 +105,7 @@ export default function PostNews() {
           ],
           ["link", "image", "video"],
           ["clean"],
+          [{'color': ["#000000", "#e60000", "#ff9900", "#ffff00", "#008a00", "#0066cc", "#9933ff", "#ffffff", "#facccc", "#ffebcc", "#ffffcc", "#cce8cc", "#cce0f5", "#ebd6ff", "#bbbbbb", "#f06666", "#ffc266", "#ffff66", "#66b966", "#66a3e0", "#c285ff", "#888888", "#a10000", "#b26b00", "#b2b200", "#006100", "#0047b2", "#6b24b2", "#444444", "#5c0000", "#663d00", "#666600", "#003700", "#002966", "#3d1466", 'custom-color']}]
         ],
         handlers: {  
          image: imageHandler  
@@ -134,6 +137,7 @@ export default function PostNews() {
       setContent("");
       setTitle("");
       setImages([]);
+      setImagex([]);
       setDescribes("");
       if(data.status === Contrast.ERROR)Toast.error(data.message);
       else Toast.success(data.message);
@@ -188,8 +192,8 @@ export default function PostNews() {
                             onClick={onImageUpload}
                             {...dragProps}
                         >
-                            {images ? <>
-                                  <img src={`${images[0]}`} alt="" />
+                            {imagex ? <>
+                                  <img src={`${imagex[0]}`} alt="" />
                               </> : "Upload"}
                         </button>
                         {imageList.map((image, index) => (

@@ -29,9 +29,9 @@ export default function Account() {
   }, []);
 
   const submit = async () => {
-    console.log(new_avatar[0]);
+    // console.log(new_avatar[0]);
     const formData = new FormData();
-    formData.append("new_avatar", new_avatar[0]);
+    formData.append("new_avatar", images[0].file);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER}/user/update_avatar`,
@@ -39,6 +39,7 @@ export default function Account() {
         authorization()
       );
       setAvatar(res.data);
+      setImages([]);
     } catch (err) {
       console.log(err);
     }
@@ -47,8 +48,7 @@ export default function Account() {
   const onImageSelectChange = (
     imageList
 ) => {
-  console.log(imageList);
-    // setImages(imageList);
+    setImages(imageList);
 };
 
   return (
@@ -76,8 +76,29 @@ export default function Account() {
                     <div 
                       style={{ backgroundImage: `url(${avatar}` }}
                       className="accountAvtContainer"
-                      onClick={() => onImageUpdate()}>
+                      onClick={() => {if(!imageList.length)onImageUpdate()}}>
+                       {
+                        imageList.length?(
+                          <div>
+                              {imageList.map((image, index) => (
+                                <div key={index} className="flex">
+                                    <div
+                                        className=" overflow-hidden rounded-md shadow relative">
+                                        <img src={`${image['data_url']}`} alt="" />
+                                        <div className="absolute flex items-center top-3 right-1">
+                                            <span onClick={() => onImageUpdate(index)} className=" cursor-pointer px-1.5 py-1.5 mr-2 bg-white shadow-md text-lg rounded-full transition-all hover:bg-gray-200">
+                                                <FiEdit />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                            <button onClick={submit} className="outline-none w-36 focus:outline-none bg-primary text-white flex mb-6 items-center justify-center py-1 rounded font-medium  shadow hover:bg-primary-dark transition-all">Save</button>
+                          </div>
+                        ):""
+                       }
                     </div>
+                    
                 )}
             </ImageUploading>
                 </div>

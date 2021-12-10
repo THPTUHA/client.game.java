@@ -67,7 +67,7 @@ export default function NewsDetail() {
   return detail ? (
     <div>
       <NavBar />
-      <div className="container">
+      <div  className="container ml-10 mb-5 inline-block shadow hover:shadow-md  transition-all cursor-pointer rounded-md px-3 py-2  mt-5 ">
         <div className="col-sm-12">
           <div className="grid newsDetail">
             <div dangerouslySetInnerHTML={{ __html: detail }} />
